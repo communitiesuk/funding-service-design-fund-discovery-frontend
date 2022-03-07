@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+
+
+
+{% block content %}    
+  <div>
+    <form method="POST" action="/">
+        {{ form.csrf_token }}
+        {{ govukInput({
+          'label': {
+            'text': "Fund Search",
+            'classes': "govuk-label--l",
+            'isPageHeading': true
+          },
+          'id': form.search.id,
+          'name': form.search.id,    
+        })
+     }}
+     {{ govukButton({
+     
+      "text": 'Search', 'preventDoubleClick': True
+    }) }}
+    </form>  
+  </div>
+
+   <dl class="govuk-summary-list">
+      {% for funds in fund_results %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Fund name
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <a href="{{url_for('discovery_bp.fund_rounds', id=funds['fund_id']) }}"> {{funds['fund_name']}}</a>  
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Description
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{funds['fund_description']}}
+      </dd>
+    </div>
+    {% endfor %}
+  </dl>
+ 
+  {% endblock %}
