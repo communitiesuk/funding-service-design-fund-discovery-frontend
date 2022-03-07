@@ -12,3 +12,5 @@ def not_found(error):
 @default_bp.errorhandler(500)
 def internal_server_error(error):
     return render_template("500.html"), 500
+
+    
