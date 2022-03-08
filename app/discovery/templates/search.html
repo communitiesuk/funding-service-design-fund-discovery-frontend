@@ -19,38 +19,26 @@
           'name': form.search.id,    
         })
      }}
-     {{ govukButton({
-     
-      "text": 'Search', 'preventDoubleClick': True
-    }) }}
+     <button type="submit" formnovalidate="formnovalidate" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-prevent-double-click="true">
+      Search
+    </button>
     </form>  
   </div>
 
-   <dl class="govuk-summary-list govuk-!-margin-top-4" >
-      {% for funds in fund_results %}
-
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Fund name
-      </dt>
-      <dd class="govuk-summary-list__value">
-        <a href="{{url_for('discovery_bp.fund_rounds', id=funds['fund_id']) }}"> {{funds['fund_name']}}</a>  
-      </dd>
-    </div>
-
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-       Description
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{funds['fund_description']}}
-      </dd>
-    </div>
-    <div class ="govuk-!-margin-top-8"></div>
-    
-    {% endfor %}
-  </dl>
- 
-  {% endblock %}
-
   
+  {% for funds in fund_results %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-m govuk-!-margin-top-4">
+        <a href="{{url_for('discovery_bp.fund_rounds', id=funds['fund_id']) }}"> {{funds['fund_name']}}</a>  
+      </h1> 
+  
+      <p>  {{funds['fund_description']}}
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.  
+      </p>
+    </div>
+    </div>
+
+
+  {% endfor %}
+  {% endblock %}
