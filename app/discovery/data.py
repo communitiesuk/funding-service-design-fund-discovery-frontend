@@ -15,14 +15,15 @@ def rounds_search(endpoint):
         fund_rounds_data = response.json()
         fund_details = []
         if fund_rounds_data:
-            for f in fund_rounds_data:
+            for fund_rounds in fund_rounds_data:
+                print(fund_rounds)
                 rounds_data = model.RoundStoreModel(
-                    fund_id=f['fund_id'],
-                    round_title=f['round_title'],
-                    round_id=f['round_id'],
-                    eligibility_criteria=f['eligibility_criteria'],
-                    opens= f['opens'],
-                    deadline= f['deadline']
+                    fund_id=fund_rounds['fund_id'],
+                    round_title=fund_rounds['round_title'],
+                    round_id=fund_rounds['round_id'],
+                    eligibility_criteria=fund_rounds['eligibility_criteria'],
+                    opens= fund_rounds['opens'],
+                    deadline= fund_rounds['deadline']
                     )
         
                 # -format the datetime string for opens & deadline
@@ -30,7 +31,7 @@ def rounds_search(endpoint):
                 rounds_data.format_deadline(rounds_data.deadline)
                 fund_details.append(rounds_data)
     else:
-        message = "No rounds available"
+        message = "No rounds exist for this fund"
         return render_template("fund.html", 
                         message = message
                         )
