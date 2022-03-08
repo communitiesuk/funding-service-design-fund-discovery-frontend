@@ -23,7 +23,6 @@ def search_form():
     if form.validate_on_submit():
         query = form.search.data.split(" ")
         fund_results = model.query_fund(query, FUND_SEARCH_ENDPOINT)
-        print(fund_results)
         return render_template("search.html", query =query, 
                               fund_results = fund_results,
                               form=form)
