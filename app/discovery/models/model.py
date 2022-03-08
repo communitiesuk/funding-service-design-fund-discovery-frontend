@@ -2,8 +2,6 @@
 model.py contains classes & functions to be called
 in for data processing & data alteration
 """
-
-from wsgiref.util import application_uri
 import requests
 from datetime import datetime
 from dataclasses import dataclass
