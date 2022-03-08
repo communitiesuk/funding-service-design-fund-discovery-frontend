@@ -23,7 +23,8 @@ def rounds_search(endpoint):
                     round_id=fund_rounds['round_id'],
                     eligibility_criteria=fund_rounds['eligibility_criteria'],
                     opens= fund_rounds['opens'],
-                    deadline= fund_rounds['deadline']
+                    deadline= fund_rounds['deadline'],
+                    application_url=fund_rounds['application_url']
                     )
         
                 # -format the datetime string for opens & deadline
@@ -35,7 +36,7 @@ def rounds_search(endpoint):
         return render_template("fund.html", 
                         message = message
                         )
-    return render_template("fund.html", 
+    return render_template("fund.html",
                             fund_rounds_data = fund_rounds_data,
                             fund_details = fund_details,
                             rounds_data = rounds_data
