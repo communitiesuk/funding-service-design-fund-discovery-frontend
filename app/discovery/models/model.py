@@ -3,6 +3,7 @@ model.py contains classes & functions to be called
 in for data processing & data alteration
 """
 
+from wsgiref.util import application_uri
 import requests
 from datetime import datetime
 from dataclasses import dataclass
@@ -20,6 +21,7 @@ class RoundStoreModel:
     eligibility_criteria :dict
     opens: datetime
     deadline: datetime    
+    application_url: str
 
     def format_opens(self, start):
         """
