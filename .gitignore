@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# fs-641-frontend-fund-discovery
+# FS-641-frontend-fund-discovery
 app/static
+
