@@ -12,7 +12,7 @@ def search_fund():
     Given function creates a text field for search box &
     renders on index.html then 
     retrives input data from the user, run that data through 
-    function query_fund from models to grab the fund 
+    function query_fund from data.py to grab the fund 
     & renders back onto index.html 
     """
     form = SearchForm()
