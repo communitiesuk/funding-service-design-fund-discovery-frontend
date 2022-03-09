@@ -15,10 +15,10 @@
       {% endif %}
   </div>
   
-
-
    {% for fund in fund_details %}
-   <table class="govuk-table govuk-!-margin-top-9">
+   <table class="govuk-table govuk-!-margin-top-9 role="banner">
+
+    <caption class="govuk-table__caption govuk-table__caption--l">{{fund.round_title|upper }}</caption>
 
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
@@ -27,8 +27,6 @@
       </tr>
     </thead>
 
-
-    <caption class="govuk-table__caption govuk-table__caption--l">{{fund.round_title|upper }}</caption>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Eligibility criteria</th>
