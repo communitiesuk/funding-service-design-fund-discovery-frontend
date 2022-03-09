@@ -1,5 +1,5 @@
 
-from app.discovery.models import model
+from app.discovery.models import rounds
 import requests
 from flask import render_template
 
@@ -16,7 +16,7 @@ def rounds_search(endpoint):
         fund_details = []
         if fund_rounds_data:
             for fund_rounds in fund_rounds_data:
-                rounds_data = model.RoundStoreModel(
+                rounds_data = rounds.RoundStore(
                     fund_id=fund_rounds['fund_id'],
                     round_title=fund_rounds['round_title'],
                     round_id=fund_rounds['round_id'],
@@ -25,10 +25,6 @@ def rounds_search(endpoint):
                     deadline= fund_rounds['deadline'],
                     application_url=fund_rounds['application_url']
                     )
-        
-                # -format the datetime string for opens & deadline
-                rounds_data.format_opens(rounds_data.opens)
-                rounds_data.format_deadline(rounds_data.deadline)
                 fund_details.append(rounds_data)
     else:
         message = "No rounds exist for this fund"
@@ -40,6 +36,18 @@ def rounds_search(endpoint):
                             fund_details = fund_details,
                             rounds_data = rounds_data
                             )
+
+def query_fund(keyword, endpoint):
+    """
+    GIVEN function is called to query the funds.
+    WHEN a query searched by the user, this function runs 
+    to retrive the query results from fund store
+    """
+    query_results = requests.post(endpoint, 
+    params={'search_items':",".join(keyword)}).json()
+    return query_results
+
+
                             
             
 
