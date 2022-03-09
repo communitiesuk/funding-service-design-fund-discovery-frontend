@@ -16,4 +16,13 @@ TEST_FUND_SEARCH_ENDPOINT_RESPONSE = "https://funding-service-design-fund-store-
 
 TEST_ROUND_SEARCH_ENDPOINT_RESPONSE = "https://funding-service-design-round-store-dev.london.cloudapps.digital"
 
+TEST_ACCESSIBILITY_ENDPOINTS = [   
+
+     "http://127.0.0.1:5000/"
+]
+
+
+
+
+
 
