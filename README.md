@@ -1,9 +1,9 @@
-# funding-service-design-fund-store
+# funding-service-design-fund-discovery
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Code style : black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Repo for the funding service design fund store.
+Repo for the funding service design fund discovery.
 
 Built with Flask.
 
@@ -46,15 +46,21 @@ Place brief descriptions of Pipelines here
 
 * Deploy to Gov PaaS - This is a simple pipeline to demonstrate capabilities.  Builds, tests and deploys a simple python application to the PaaS for evaluation in Dev and Test Only.
 
-# Testing
+Testing
 
-## Unit
+Unit & Accessibility Testing
+To run all tests including aXe accessibility tests (using Chrome driver for Selenium) in a development environment run:
 
-To run all tests in a development environment run:
+...on macOS
 
-    pytest
+pytest --driver Chrome --driver-path .venv/lib/python3.10/site-packages/chromedriver_py/chromedriver_mac64
+...on linux64
 
-# Extras
+pytest --driver Chrome --driver-path .venv/lib/python3.10/site-packages/chromedriver_py/chromedriver_linux64
+...on win32
+
+pytest --driver Chrome --driver-path .venv/lib/python3.10/site-packages/chromedriver_py/chromedriver_win32.exe
+The aXe reports are printed at /axe_reports
 
 This repo comes with a .pre-commit-config.yaml, if you wish to use this do
 the following while in your virtual enviroment:
