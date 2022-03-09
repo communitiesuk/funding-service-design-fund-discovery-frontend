@@ -1,5 +1,5 @@
 import requests
-from app.discovery.models.model import query_fund
+from app.discovery.data import query_fund
 from app.discovery.models._endpoints import (FUND_SEARCH_ENDPOINT, 
                                              TEST_FUND_SEARCH_ENDPOINT_RESPONSE)
 
