@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.options import Options
 import pytest
 
 
-@pytest.mark.accessibility
 @pytest.fixture()
 def test_setup():
     global driver
@@ -18,6 +17,7 @@ def test_setup():
 
 
 
+@pytest.mark.accessibility
 def test_run_axe(test_setup):
     for URL in TEST_ACCESSIBILITY_ENDPOINTS:
         driver.get(URL)
