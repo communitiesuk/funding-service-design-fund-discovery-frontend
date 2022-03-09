@@ -16,7 +16,6 @@ def rounds_search(endpoint):
         fund_details = []
         if fund_rounds_data:
             for fund_rounds in fund_rounds_data:
-                print(fund_rounds)
                 rounds_data = model.RoundStoreModel(
                     fund_id=fund_rounds['fund_id'],
                     round_title=fund_rounds['round_title'],
