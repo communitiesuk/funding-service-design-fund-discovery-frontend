@@ -16,6 +16,8 @@ def test_setup():
     yield 
     driver.close()
 
+
+
 def test_run_axe(test_setup):
     for URL in TEST_ACCESSIBILITY_ENDPOINTS:
         driver.get(URL)
@@ -32,6 +34,9 @@ def test_run_axe(test_setup):
             len(results["violations"]) == 0
             or results["violations"][0]["impact"] == "minor"
         ), axe.report(results["violations"])
+
+
+
 
 
 
