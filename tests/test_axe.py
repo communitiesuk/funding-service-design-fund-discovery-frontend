@@ -11,7 +11,9 @@ def test_setup():
     global driver
     CHROME_DRIVER_PATH = "/Users/ram/Downloads/CHROME-DRIVER/chromedriver"
     service = Service(CHROME_DRIVER_PATH)
-    driver = webdriver.Chrome(service=service) 
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(service=service, options=options) 
     yield 
     driver.close()
 
