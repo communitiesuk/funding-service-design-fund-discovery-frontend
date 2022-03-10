@@ -25,7 +25,7 @@ def test_funds_store_data():
     funds checked against expected contents.
     """
 
-    funds = query_fund("fund", f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/")
+    funds = query_fund("fund", f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
     assert funds == expected_contents
     
 
