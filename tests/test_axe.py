@@ -3,7 +3,7 @@ import chromedriver_autoinstaller
 from axe_selenium_python import Axe
 from selenium.webdriver.chrome.options import Options
 import pytest
-from app.config import  TEST_ACCESSIBILITY_ENDPOINTS
+from app.config import ACCESSIBILITY_ENDPOINTS
 
 @pytest.fixture()
 def test_setup():
@@ -17,7 +17,7 @@ def test_setup():
 
 @pytest.mark.accessibility
 def test_run_axe(test_setup):
-    for URL in TEST_ACCESSIBILITY_ENDPOINTS:
+    for URL in ACCESSIBILITY_ENDPOINTS:
         driver.get(URL)
         axe = Axe(driver)
         # Inject axe-core javascript into page.
@@ -25,7 +25,7 @@ def test_run_axe(test_setup):
         # Run axe accessibility checks.
         results = axe.run()
         # Write results to file
-        axe.write_results(results, 'tests/accessibility_test_report.json')
+        axe.write_results(results, 'tests/accessibility_report.json')
         # Assert no of violations are found
         assert len(results["violations"]) <= 1
         assert (
