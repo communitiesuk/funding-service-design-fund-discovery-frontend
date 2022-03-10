@@ -1,29 +1,22 @@
 from selenium import webdriver
-import chromedriver_autoinstaller
 from axe_selenium_python import Axe
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.options import Options
 import pytest
 from app.config import ACCESSIBILITY_ENDPOINTS
 from selenium.webdriver.chrome.service import Service
-
-
-from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
 
 
 
 @pytest.fixture()
 def test_setup():
     global driver
-    # chromedriver_autoinstaller.install()
     service_object = Service(binary_path)
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    # driver = webdriver.Chrome(executable_path=binary_path,service=service_object, options=options)
     yield 
     driver.close()
 
