@@ -26,9 +26,9 @@
   {% for funds in fund_results %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-m govuk-!-margin-top-4">
-        <a href="{{url_for('discovery_bp.fund_rounds', id=funds['fund_id']) }}"> {{funds['fund_name']}}</a>  
-      </h1> 
+        <h1 class="govuk-heading-m govuk-!-margin-top-4">
+          <a href="{{url_for('discovery_bp.fund_rounds', id=funds['fund_id']) }}"> {{funds['fund_name']}}</a>  
+        </h1> 
   
       <p class="govuk-body">  {{funds['fund_description']}}
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.  
