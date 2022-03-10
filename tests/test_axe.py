@@ -16,7 +16,7 @@ def test_setup():
     service_object = Service(binary_path)
     options = Options()
     options.add_argument("--headless")
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
     yield 
     driver.close()
 
