@@ -18,3 +18,15 @@ host api doesn't not work/respond
 FUND_STORE_API_HOST="https://funding-service-design-fund-store-dev.london.cloudapps.digital"
 
 ROUND_STORE_API_HOST="https://funding-service-design-round-store-dev.london.cloudapps.digital"
+
+FUND_ENDPOINT = 'funds/search'
+ROUND_ENDPOINT = 'fund'
+ROUND_ID = "funding-service-design"
+
+
+TEST_ACCESSIBILITY_ENDPOINTS = [   
+    "http://127.0.0.1:5000/round/funding-service-design", 
+    "http://127.0.0.1:5000/",
+    "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design", 
+    "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital"
+]
