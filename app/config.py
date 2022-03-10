@@ -24,7 +24,7 @@ ROUND_ENDPOINT = 'fund'
 ROUND_ID = "funding-service-design"
 
 
-TEST_ACCESSIBILITY_ENDPOINTS = [   
+ACCESSIBILITY_ENDPOINTS = [   
     "http://127.0.0.1:5000/round/funding-service-design", 
     "http://127.0.0.1:5000/",
     "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design", 
