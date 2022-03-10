@@ -19,7 +19,7 @@ FUND_STORE_API_HOST="https://funding-service-design-fund-store-dev.london.clouda
 
 ROUND_STORE_API_HOST="https://funding-service-design-round-store-dev.london.cloudapps.digital"
 
-FUND_ENDPOINT = 'funds/search'
+FUND_ENDPOINT = 'funds/search/'
 ROUND_ENDPOINT = 'fund'
 ROUND_ID = "funding-service-design"
 
