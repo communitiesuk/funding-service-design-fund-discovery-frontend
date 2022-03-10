@@ -1,4 +1,5 @@
 
+from urllib import response
 from app.discovery.models import rounds
 import requests
 from flask import render_template
@@ -43,10 +44,11 @@ def query_fund(keyword, endpoint):
     WHEN a query searched by the user, this function runs 
     to retrive the query results from fund store
     """
-    query_results = requests.post(endpoint, 
-    params={'search_items':",".join(keyword)}).json()
-    return query_results
-
+    response = requests.post(endpoint, 
+    params={'search_items':",".join(keyword)})
+    if response.status_code == 200:
+        query_results = response.json()
+        return query_results
 
 def get_data(endpoint):
     if endpoint[:8] == 'https://':
