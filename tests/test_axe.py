@@ -2,10 +2,10 @@ from selenium import webdriver
 from axe_selenium_python import Axe
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.options import Options
-import pytest
 from app.config import ACCESSIBILITY_ENDPOINTS
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+import pytest
 
 
 
@@ -16,7 +16,10 @@ def test_setup():
     service_object = Service(binary_path)
     options = Options()
     options.add_argument("--headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+    driver = webdriver.Chrome(
+        service=service_object, options=options
+    )
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
     yield 
     driver.close()
 
