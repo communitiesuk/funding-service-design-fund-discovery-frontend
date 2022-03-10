@@ -13,11 +13,8 @@ import pytest
 @pytest.fixture()
 def test_setup():
     global driver
-    service = Service(binary_path)
     options = Options()
-    options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     yield 
     driver.close()
 
