@@ -1,11 +1,9 @@
 from selenium import webdriver
 import chromedriver_autoinstaller
 from axe_selenium_python import Axe
-from app.discovery.models._endpoints import TEST_ACCESSIBILITY_ENDPOINTS
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import pytest
-
+from app.config import  TEST_ACCESSIBILITY_ENDPOINTS
 
 @pytest.fixture()
 def test_setup():
