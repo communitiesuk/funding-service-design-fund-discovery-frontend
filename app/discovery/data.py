@@ -48,6 +48,26 @@ def query_fund(keyword, endpoint):
     return query_results
 
 
-                            
-            
+def get_data(endpoint):
+    if endpoint[:8] == 'https://':
+        response = requests.get(endpoint)
+        # print(response)
+        if response.status_code ==200:
+            endpoint_data = response.json()
+            return endpoint_data
+        else:
+            return None
+
+    else:
+        get_local_data("tests/api_data/local_endpoint_data.json")
+
+
+def get_local_data(endpoint):
+    with open(endpoint, 'r') as local_data:
+         local_data_read = local_data.read()
+         print("local data")
+         return local_data_read
+         
+
+       
 
