@@ -19,21 +19,6 @@ def test_setup(request):
     yield 
     driver.close()
 
-
-
-# @pytest.fixture()
-# def test_setup():
-#     global driver
-#     service_object = Service(binary_path)
-#     options = Options()
-#     options.add_argument("--headless")
-#     driver = webdriver.Chrome(
-#         service=service_object, options=options
-#     )
-#     driver = driver
-#     yield
-#     driver.close()
-
 @pytest.mark.accessibility
 def test_run_axe(test_setup):
     for URL in ACCESSIBILITY_ENDPOINTS:
