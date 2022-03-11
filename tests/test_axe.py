@@ -22,7 +22,7 @@ import pytest
 
 
 @pytest.fixture()
-def test_setup(request):
+def test_setup():
     global driver
     service_object = Service(binary_path)
     options = Options()
@@ -30,9 +30,9 @@ def test_setup(request):
     driver = webdriver.Chrome(
         service=service_object, options=options
     )
-    request.cls.driver = driver
+    driver = driver
     yield
-    request.cls.driver.close()
+    driver.close()
 
 @pytest.mark.accessibility
 def test_run_axe(test_setup):
