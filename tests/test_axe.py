@@ -10,14 +10,31 @@ import pytest
 
 
 
-@pytest.fixture()
-def test_setup():
-    global driver
-    options = Options()
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    yield 
-    driver.close()
+# @pytest.fixture()
+# def test_setup(request):
+#     global driver
+#     options = Options()
+#     options.add_argument("--headless")
+#     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+#     yield 
+#     driver.close()
 
+
+
+@pytest.fixture()
+def test_setup(request):
+    global driver
+    service_object = Service(binary_path)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    # TODO: set chrome_options.binary_location = ...
+    #  (if setting to run in container or on GitHub)
+    driver = webdriver.Chrome(
+        service=service_object, options=chrome_options
+    )
+    request.cls.driver = driver
+    yield
+    request.cls.driver.close()
 
 @pytest.mark.accessibility
 def test_run_axe(test_setup):
