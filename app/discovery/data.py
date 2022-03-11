@@ -2,7 +2,10 @@
 from urllib import response
 from app.discovery.models import rounds
 import requests
+import os
+import json
 from flask import render_template
+from app.config import FLASK_ROOT
 
 def rounds_search(endpoint):
     """ 
@@ -50,10 +53,11 @@ def query_fund(keyword, endpoint):
         query_results = response.json()
         return query_results
 
+
+
 def get_data(endpoint):
     if endpoint[:8] == 'https://':
         response = requests.get(endpoint)
-        # print(response)
         if response.status_code ==200:
             endpoint_data = response.json()
             return endpoint_data
@@ -64,12 +68,22 @@ def get_data(endpoint):
         get_local_data("tests/api_data/local_endpoint_data.json")
 
 
-def get_local_data(endpoint):
-    with open(endpoint, 'r') as local_data:
-         local_data_read = local_data.read()
-         print("local data")
-         return local_data_read
+# def get_local_data(endpoint):
+#     with open(endpoint, 'r') as local_data:
+#          local_data_read = local_data.read()
+#          print("local data")
+#          return local_data_read
          
 
        
 
+def get_local_data(endpoint: str):
+    api_data_json = os.path.join(
+        FLASK_ROOT, "tests", "api_data",
+         "local_endpoint_data.json"
+    )
+    fp = open(api_data_json)
+    api_data = json.load(fp)
+    fp.close()
+    if endpoint in api_data:
+        return api_data.get(endpoint)
