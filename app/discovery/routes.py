@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+import os
 from app.discovery.forms import SearchForm
 from app.discovery.data import query_fund
 from app.discovery.data import rounds_search
@@ -35,6 +36,4 @@ def fund_rounds(id):
     """
     rounds = rounds_search(f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{id}")
     return rounds
-
-
 
