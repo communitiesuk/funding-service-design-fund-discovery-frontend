@@ -8,6 +8,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY") or "dev"
 SESSION_COOKIE_NAME = os.environ.get("SESSION_COOKIE_NAME") or "session_cookie"
 STATIC_FOLDER = "static"
 TEMPLATES_FOLDER = "templates"
+FLASK_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+FLASK_ENV = os.environ.get("FLASK_ENV")
+
 
 """
 APIs Config: contains api host imported from manifest.yml.
@@ -30,3 +33,18 @@ ACCESSIBILITY_ENDPOINTS = [
 ]
 
 
+
+def get_endpoints():
+    print(FLASK_ENV)
+    if FLASK_ENV =="development":
+        return (
+            'http://127.0.0.1:5000/'
+            'http://127.0.0.1:5000/round/funding-service-design'
+        )
+    else:
+        return  (
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design", 
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital"
+        )
+
+get_endpoints()        
