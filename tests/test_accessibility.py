@@ -8,8 +8,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
 
-@pytest.fixture()
-def test_setup():
+@pytest.fixture(scope="class")
+def selenium_chrome_driver():
     global driver
     options = Options()
     options.add_argument("--headless")
@@ -17,8 +17,9 @@ def test_setup():
     yield 
     driver.close()
 
+@pytest.mark.usefixtures("selenium_chrome_driver")
 @pytest.mark.accessibility
-def test_run_axe(test_setup):
+def test_run_axe():
     for URL in ACCESSIBILITY_ENDPOINTS:
         driver.get(URL)
         axe = Axe(driver)
@@ -34,6 +35,7 @@ def test_run_axe(test_setup):
             len(results["violations"]) == 0
             or results["violations"][0]["impact"] == "minor"
         ), axe.report(results["violations"])
+
 
 
 
