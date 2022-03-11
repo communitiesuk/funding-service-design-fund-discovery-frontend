@@ -25,12 +25,10 @@ import pytest
 def test_setup(request):
     global driver
     service_object = Service(binary_path)
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    # TODO: set chrome_options.binary_location = ...
-    #  (if setting to run in container or on GitHub)
+    options = Options()
+    options.add_argument("--headless")
     driver = webdriver.Chrome(
-        service=service_object, options=chrome_options
+        service=service_object, options=options
     )
     request.cls.driver = driver
     yield
