@@ -8,10 +8,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
 
-
-
 @pytest.fixture()
-def test_setup(request):
+def test_setup():
     global driver
     options = Options()
     options.add_argument("--headless")
