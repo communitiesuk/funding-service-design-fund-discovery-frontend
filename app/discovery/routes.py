@@ -7,6 +7,7 @@ from app.config import (
     FUND_STORE_API_HOST, ROUND_STORE_API_HOST, FUND_ENDPOINT, ROUND_ENDPOINT
 )
 
+from json import JSONEncoder
 discovery_bp = Blueprint("discovery_bp", __name__,  template_folder="templates")
 
 @discovery_bp.route('/', methods=['GET', 'POST'])
@@ -25,8 +26,10 @@ def search_fund():
         return render_template("search.html", query =query, 
                               fund_results = fund_results,
                               form=form)
+    else:
+        render_template("404.html")                          
     return render_template("search.html", form=form)    
-
+ 
 
 @discovery_bp.route('/round/<id>', methods=['GET', 'POST'])
 def fund_rounds(id):
@@ -36,4 +39,3 @@ def fund_rounds(id):
     """
     rounds = rounds_search(f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{id}")
     return rounds
-
