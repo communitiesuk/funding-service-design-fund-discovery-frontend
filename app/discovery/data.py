@@ -55,35 +55,4 @@ def query_fund(keyword, endpoint):
 
 
 
-def get_data(endpoint):
-    if endpoint[:8] == 'https://':
-        response = requests.get(endpoint)
-        if response.status_code ==200:
-            endpoint_data = response.json()
-            return endpoint_data
-        else:
-            return None
 
-    else:
-        get_local_data("tests/api_data/local_endpoint_data.json")
-
-
-# def get_local_data(endpoint):
-#     with open(endpoint, 'r') as local_data:
-#          local_data_read = local_data.read()
-#          print("local data")
-#          return local_data_read
-         
-
-       
-
-def get_local_data(endpoint: str):
-    api_data_json = os.path.join(
-        FLASK_ROOT, "tests", "api_data",
-         "local_endpoint_data.json"
-    )
-    fp = open(api_data_json)
-    api_data = json.load(fp)
-    fp.close()
-    if endpoint in api_data:
-        return api_data.get(endpoint)
