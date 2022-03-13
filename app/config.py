@@ -27,18 +27,15 @@ ROUND_ENDPOINT = 'fund'
 ROUND_ID = "funding-service-design"
 
 
-ACCESSIBILITY_ENDPOINTS = [   
-    "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design", 
-    "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital"
-]
-
-
-
 def get_endpoints():
-    print(FLASK_ENV)
+    """
+    GIVEN function return development & production urls
+    for accessibility tests if FLASK_ENV 
+    is in development or production
+    """
     if FLASK_ENV =="development":
         return (
-            'http://127.0.0.1:5000/'
+            'http://127.0.0.1:5000/',
             'http://127.0.0.1:5000/round/funding-service-design'
         )
     else:
@@ -47,4 +44,3 @@ def get_endpoints():
             "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital"
         )
 
-get_endpoints()        
