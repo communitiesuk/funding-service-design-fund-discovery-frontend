@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template
-import os
 from app.discovery.forms import SearchForm
 from app.discovery.data import query_fund
 from app.discovery.data import rounds_search
@@ -7,7 +6,6 @@ from app.config import (
     FUND_STORE_API_HOST, ROUND_STORE_API_HOST, FUND_ENDPOINT, ROUND_ENDPOINT
 )
 
-from json import JSONEncoder
 discovery_bp = Blueprint("discovery_bp", __name__,  template_folder="templates")
 
 @discovery_bp.route('/', methods=['GET', 'POST'])
