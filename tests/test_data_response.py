@@ -78,20 +78,40 @@ class TestLiveServer:
 
 
 
+# @pytest.fixture(scope="class")
+# def selenium_chrome_driver():
+#     """
+#     GIVEN function  returns a Selenium Chrome driver 
+#     as a fixture for testing.
+#     """
+#     global chrome_driver
+#     options = Options()
+#     options.add_argument("--headless")
+#     chrome_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+#     yield 
+#     chrome_driver.close()
+
 
 @pytest.fixture(scope="class")
 def selenium_chrome_driver():
-    """
-    GIVEN function  returns a Selenium Chrome driver 
-    as a fixture for testing.
-    """
     global chrome_driver
-    options = Options()
-    options.add_argument("--headless")
-    chrome_driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    yield 
+    """
+    Returns a Selenium Chrome driver as a fixture for testing.
+    using an installed Chromedriver from the .venv chromedriver_py package
+    install location. Accessible with the
+    @pytest.mark.uses_fixture('selenium_chrome_driver')
+    :return: A selenium chrome driver.
+    """
+    service_object = Service(binary_path)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    # TODO: set chrome_options.binary_location = ...
+    #  (if setting to run in container or on GitHub)
+    chrome_driver = webdriver.Chrome(
+        service=service_object, options=chrome_options
+    )
+    yield
     chrome_driver.close()
-
 
 @pytest.mark.usefixtures("selenium_chrome_driver")
 @pytest.mark.usefixtures('live_server')
@@ -104,8 +124,8 @@ def test_post_data_response():
     checks the response 
     """
     search_response = SearchSeleniumElements(
-        search_page=urlopen(url_for('discovery_bp.search_fund', _external=True)),
-        response_page=urlopen(url_for('discovery_bp.fund_rounds', id = 'fund', _external=True)),
+        search_page=SEARCH_PAGE,
+        response_page=RESPONSE_PAGE,
         selenium_id=SEARCH_BOX_ID,
         selenium_class=SUBMIT_BUTTON_CLASS,
         selenium_Xpath= ROUND_STORE_XPATH,
