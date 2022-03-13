@@ -2,7 +2,7 @@ from selenium import webdriver
 from axe_selenium_python import Axe
 from chromedriver_py import binary_path
 from selenium.webdriver.chrome.options import Options
-from app.config import ACCESSIBILITY_ENDPOINTS
+from app.config import get_endpoints
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import pytest
@@ -20,7 +20,7 @@ def selenium_chrome_driver():
 @pytest.mark.usefixtures("selenium_chrome_driver")
 @pytest.mark.accessibility
 def test_run_axe():
-    for URL in ACCESSIBILITY_ENDPOINTS:
+    for URL in get_endpoints():
         driver.get(URL)
         axe = Axe(driver)
         # Inject axe-core javascript into page.
