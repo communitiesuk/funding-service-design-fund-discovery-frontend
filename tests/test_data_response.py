@@ -124,8 +124,8 @@ def test_post_data_response():
     checks the response 
     """
     search_response = SearchSeleniumElements(
-        search_page=SEARCH_PAGE,
-        response_page=RESPONSE_PAGE,
+        search_page=urlopen(url_for('discovery_bp.search_fund', _external=True)),
+        response_page=urlopen(url_for('discovery_bp.fund_rounds', _external=True)),
         selenium_id=SEARCH_BOX_ID,
         selenium_class=SUBMIT_BUTTON_CLASS,
         selenium_Xpath= ROUND_STORE_XPATH,
