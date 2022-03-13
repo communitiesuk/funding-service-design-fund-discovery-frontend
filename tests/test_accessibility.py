@@ -7,7 +7,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
-
 @pytest.fixture(scope="class")
 def selenium_chrome_driver():
     global driver
