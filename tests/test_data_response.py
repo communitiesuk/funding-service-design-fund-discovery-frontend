@@ -8,10 +8,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from app.create_app import create_app
 from flask import Response
-from tests.data import (
+from tests.model import (
     SearchSeleniumElements, SEARCH_PAGE, RESPONSE_PAGE,
     SEARCH_BOX_ID, SUBMIT_BUTTON_CLASS, ROUND_STORE_XPATH, SEARCH_KEYWORD)
-
 
 class MyResponse(Response):
     '''Implements custom de-serialization method for response objects.'''
@@ -25,14 +24,10 @@ def app():
     app.response_class = MyResponse
     return app
 
-
-
-    #--- OR ------#
-
 @pytest.mark.usefixtures('live_server')
 class TestLiveServer:
     """
-    GIVEN class is to check if given routes are up & running
+    GIVEN class checks if routes are up & running
     """
 
     def test_server_is_up_and_running(self):
@@ -47,7 +42,10 @@ class TestLiveServer:
     #     assert res.code == 200
 
 
-    
+
+
+
+
 # def test_add_endpoint_to_live_server(live_server):
 #     @live_server.app.route('/round/')
 #     def test_endpoint():
@@ -56,7 +54,6 @@ class TestLiveServer:
 #     res = urlopen(url_for('discovery_bp.fund_rounds',id = 'fund'
 #     , _external=True))
 #     assert res.code == 200
-
 
 
 # def test_get_request(client, live_server):
@@ -78,6 +75,9 @@ class TestLiveServer:
 
 #     res = client.get(url_for('discovery_bp.fund_rounds', id = 'fund'))
 #     assert res.status_code == 200
+
+
+
 
 @pytest.fixture(scope="class")
 def selenium_chrome_driver():
@@ -104,8 +104,8 @@ def test_post_data_response():
     checks the response 
     """
     search_response = SearchSeleniumElements(
-        search_page=SEARCH_PAGE,
-        response_page=RESPONSE_PAGE,
+        search_page=urlopen(url_for('discovery_bp.search_fund', _external=True)),
+        response_page=urlopen(url_for('discovery_bp.fund_rounds', id = 'fund', _external=True)),
         selenium_id=SEARCH_BOX_ID,
         selenium_class=SUBMIT_BUTTON_CLASS,
         selenium_Xpath= ROUND_STORE_XPATH,
@@ -114,22 +114,13 @@ def test_post_data_response():
     search_response.get_data()
 
 
-
-
-
-
-    
-
 # urlopen(url_for('discovery_bp.search_fund', _external=True))
 # urlopen(url_for('discovery_bp.fund_rounds', _external=True))
-
-
 
 
 # def test_my_json_response(client):
 #     res = client.get(url_for('discovery_bp.search_fund'))
 #     assert res.json == 42
-
 
 # @pytest.fixture()
 # def flask_test_client():
@@ -141,15 +132,10 @@ def test_post_data_response():
 #     with create_app().test_client() as test_client:
 #         yield test_client
 
-
-
-
-
 # @pytest.mark.usefixtures("app")
 # def test_search_fund__response(client):
 #     res = client.get(url_for('discovery_bp.search_fund'))
 #     assert res.json == 42
-
 
 # @pytest.mark.usefixtures("app")
 # def test_fund_store__response(client):
