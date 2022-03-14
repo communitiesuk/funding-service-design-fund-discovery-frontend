@@ -27,6 +27,7 @@ ROUND_ENDPOINT = 'fund'
 ROUND_ID = "funding-service-design"
 
 
+
 def get_endpoints():
     """
     GIVEN function return development & production urls
@@ -36,8 +37,9 @@ def get_endpoints():
     if FLASK_ENV =="development":
         return (
             'http://127.0.0.1:5000/',
-            'http://127.0.0.1:5000/round/funding-service-design'
+             'http://127.0.0.1:5000/round/funding-service-design'
         )
+        
     else:
         return  (
             "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design", 
