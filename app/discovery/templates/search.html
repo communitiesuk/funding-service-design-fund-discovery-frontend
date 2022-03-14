@@ -23,6 +23,16 @@
     </form>  
   </div>
 
+<div class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2" >
+    {% if query %}
+    {% if fund_results|length > 1%}
+    {{fund_results|length}} results 
+    {% else %}
+    {{fund_results|length}} result
+   {% endif %}
+   {% endif %}
+</div>
+  
   {% for funds in fund_results %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
