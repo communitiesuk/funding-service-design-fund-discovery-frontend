@@ -2,7 +2,6 @@
 model.py contains classes & functions to be called
 in for data processing & data alteration
 """
-import requests
 from datetime import datetime
 from dataclasses import dataclass
 
