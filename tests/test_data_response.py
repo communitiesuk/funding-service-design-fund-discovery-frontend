@@ -9,8 +9,6 @@ import pytest
 from app.config import get_endpoints
 from app.create_app import create_app
 
-
-
 @pytest.fixture(scope="session")
 def app():
     app = create_app()
