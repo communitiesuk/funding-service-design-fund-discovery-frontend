@@ -27,18 +27,17 @@ def search_fund():
     & renders back onto index.html 
     """
     form = SearchForm()
-    if form.validate_on_submit():
+    if not form.validate_on_submit():
+        return render_template("search.html", form=form)    
+    else:
         global QUERY
         QUERY = form.search.data.split(" ")
         fund_results = query_fund(
             QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
         return render_template("search.html", query =QUERY, 
                               fund_results = fund_results,
-                              form=form)
-    else:
-        render_template("404.html")                          
-    return render_template("search.html", form=form)    
-
+                              form=form)                          
+    
 
 @discovery_bp.route('/round/<id>', methods=['GET', 'POST'])
 def fund_rounds(id):
