@@ -1,4 +1,3 @@
-
 import requests
 
 def query_fund(keyword, endpoint):
@@ -12,5 +11,4 @@ def query_fund(keyword, endpoint):
     if response.status_code == 200:
         query_results = response.json()
         return query_results
-
 
