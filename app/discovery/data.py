@@ -1,4 +1,5 @@
 import requests
+from app.discovery.models.rounds import RoundStore
 
 def query_fund(keyword, endpoint):
     """
@@ -12,3 +13,21 @@ def query_fund(keyword, endpoint):
         query_results = response.json()
         return query_results
 
+
+def query_fund_rounds(fund_rounds):
+    """
+    GIVEN function is a data class from app/models/rounds.py
+     & is called in app/discovery/routes fund_rounds
+      to retrive the data from round store
+    """
+    rounds_data = RoundStore(
+                    fund_id=fund_rounds['fund_id'],
+                    round_title=fund_rounds['round_title'],
+                    round_id=fund_rounds['round_id'],
+                    eligibility_criteria=fund_rounds['eligibility_criteria'],
+                    opens= fund_rounds['opens'],
+                    deadline= fund_rounds['deadline'],
+                    application_url=fund_rounds['application_url']
+                    )
+    return rounds_data
+    
