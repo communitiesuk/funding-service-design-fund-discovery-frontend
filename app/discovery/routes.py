@@ -49,11 +49,8 @@ def fund_rounds(id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    fund_results = query_fund(
-        QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
     response  = requests.get(
         f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{id}")
-    print(response.content)
     if response.status_code == 200:
         fund_rounds_data = response.json()
         fund_details = []
@@ -74,6 +71,10 @@ def fund_rounds(id):
         return render_template("fund.html", 
                         message = message
                         )
+    
+    fund_results = query_fund(
+        QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
+
     return render_template("fund.html", 
                             fund_details = fund_details, 
                             fund_results = fund_results    
