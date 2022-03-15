@@ -34,3 +34,6 @@ class RoundStore:
         """     
         return datetime.strptime(self.deadline, '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')
 
+    @property
+    def eligibility_criteria_formatted(self):
+        return "{:,}".format(self.eligibility_criteria['max_project_cost'])
