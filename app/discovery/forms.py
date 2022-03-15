@@ -8,4 +8,4 @@ class SearchForm(FlaskForm):
     """
     search = StringField('Search fund', validators=[DataRequired()])
 
-    
+   
