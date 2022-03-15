@@ -20,7 +20,7 @@ def query_fund_rounds(fund_rounds):
      & is called in app/discovery/routes fund_rounds
       to retrive the data from round store
     """
-    rounds_data = RoundStore(
+    store_rounds_data = RoundStore(
                     fund_id=fund_rounds['fund_id'],
                     round_title=fund_rounds['round_title'],
                     round_id=fund_rounds['round_id'],
@@ -29,5 +29,5 @@ def query_fund_rounds(fund_rounds):
                     deadline= fund_rounds['deadline'],
                     application_url=fund_rounds['application_url']
                     )
-    return rounds_data
+    return store_rounds_data
     
