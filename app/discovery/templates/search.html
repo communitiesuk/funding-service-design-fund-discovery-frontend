@@ -20,6 +20,14 @@
      <button type="submit" formnovalidate="formnovalidate" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-prevent-double-click="true">
       Search
     </button>
+
+      {% for error in form.search.errors %}
+         <div>
+         <p class="govuk-error-message">
+           <span class="govuk-visually-hidden">Error:</span> Enter search keyword
+         </p>
+       </div>
+      {% endfor %}
     </form>  
   </div>
 
