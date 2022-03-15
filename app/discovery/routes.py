@@ -10,7 +10,13 @@ from app.config import (
 discovery_bp = Blueprint("discovery_bp", __name__,
   template_folder="templates")
 
-query = []
+"""
+query is a global variable which is used 
+in both routes to send the query to fund store database
+"""
+QUERY = []
+
+
 @discovery_bp.route('/', methods=['GET', 'POST'])
 def search_fund():
     """ 
@@ -22,11 +28,11 @@ def search_fund():
     """
     form = SearchForm()
     if form.validate_on_submit():
-        global query
-        query = form.search.data.split(" ")
+        global QUERY
+        QUERY = form.search.data.split(" ")
         fund_results = query_fund(
-            query, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
-        return render_template("search.html", query =query, 
+            QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
+        return render_template("search.html", query =QUERY, 
                               fund_results = fund_results,
                               form=form)
     else:
@@ -37,7 +43,7 @@ def search_fund():
 @discovery_bp.route('/round/<id>', methods=['GET', 'POST'])
 def fund_rounds(id):
     fund_results = query_fund(
-        query, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
+        QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
     response  = requests.get(
         f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{id}")
     print(response.content)
