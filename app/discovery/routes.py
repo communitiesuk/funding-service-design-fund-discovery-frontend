@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from app.discovery.forms import SearchForm
-from app.discovery.data import query_fund
+from app.discovery.data import query_fund, query_fund_rounds
 from app.discovery.models.rounds import RoundStore
 import requests
 from app.config import (
@@ -54,23 +54,14 @@ def fund_rounds(id):
         fund_rounds_data = response.json()
         fund_details = []
         if fund_rounds_data:
-            for fund_rounds in fund_rounds_data:
-                rounds_data = RoundStore(
-                    fund_id=fund_rounds['fund_id'],
-                    round_title=fund_rounds['round_title'],
-                    round_id=fund_rounds['round_id'],
-                    eligibility_criteria=fund_rounds['eligibility_criteria'],
-                    opens= fund_rounds['opens'],
-                    deadline= fund_rounds['deadline'],
-                    application_url=fund_rounds['application_url']
-                    )
+            for fund_round in fund_rounds_data:
+                rounds_data = query_fund_rounds(fund_round)
                 fund_details.append(rounds_data)
     else:
         message = "No rounds exist for this fund"
         return render_template("fund.html", 
                         message = message
                         )
-    
     fund_results = query_fund(
         QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
 
