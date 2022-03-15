@@ -42,6 +42,13 @@ def search_fund():
 
 @discovery_bp.route('/round/<id>', methods=['GET', 'POST'])
 def fund_rounds(id):
+    """
+    GIVEN Function calls the RoundStore function 
+    from data model to check rounds with given endpoint
+     & id. 
+     Function query_fund send QUERY to fund store
+     so the fund name can be displayed onto the rounds page.
+    """
     fund_results = query_fund(
         QUERY, f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}")
     response  = requests.get(
