@@ -5,20 +5,19 @@
 
 {% block content %}
 
-  <div>
-    {% for funds in fund_results %}
-    {% if funds['fund_id'] == fund_details[0].fund_id %}
-    <h1 class="govuk-label-wrapper"> <label class="govuk-label govuk-label--l">
-    {{ funds['fund_name']|upper }} </label> </h1>
-      {% endif %}
-      {% endfor %}
 
-      {% if not fund_results %}
+  <div>
+    {% if fund_json_response %}
+
+    <h1 class="govuk-label-wrapper"> <label class="govuk-label govuk-label--l">
+      {{fund_json_response['fund_name']|upper}} </label> </h1>
+
+      {% else %}
         <h1 class="govuk-label-wrapper"> <label class="govuk-label govuk-label--m">
-        {{message}} </label> </h1> 
+        {{error}} </label> </h1>
       {% endif %}
 </div>
-  
+
 
    {% for fund in fund_details %}
    <table class="govuk-table govuk-!-margin-top-9 role="banner">
@@ -35,7 +34,7 @@
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Eligibility criteria</th>
-        <td class="govuk-table__cell"> Maximum cost: 
+        <td class="govuk-table__cell"> Maximum cost:
           £{{ fund.eligibility_criteria_formatted }}
         </td>
       </tr>
@@ -59,8 +58,3 @@
 </div>
 
   {% endblock %}
-
-
-
-
-
