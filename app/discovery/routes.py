@@ -1,14 +1,13 @@
-import requests
 from app.config import FUND_ENDPOINT
 from app.config import FUND_SEARCH_ENDPOINT
 from app.config import FUND_STORE_API_HOST
 from app.config import ROUND_ENDPOINT
 from app.config import ROUND_STORE_API_HOST
-from app.discovery.data import query_fund
+from app.discovery.data import get_data
+from app.discovery.data import query_funds_data
 from app.discovery.forms import SearchForm
 from app.discovery.models.rounds import Rounds
 from flask import Blueprint
-from flask import flash
 from flask import render_template
 
 discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
@@ -28,7 +27,7 @@ def search_fund():
         return render_template("search.html", form=form)
     else:
         QUERY = form.search.data.split(" ")
-        fund_results = query_fund(
+        fund_results = query_funds_data(
             QUERY,
             f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{FUND_SEARCH_ENDPOINT}",
         )
@@ -46,24 +45,22 @@ def funds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    response = requests.get(
+
+    fund_rounds_data = get_data(
         f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{fund_id}"
     )
-    if response.status_code == 200:
-        fund_rounds_data = response.json()
-        fund_details = []
-        if fund_rounds_data:
-            for fund_round in fund_rounds_data:
-                rounds_data = Rounds.fund_rounds(fund_round)
-                fund_details.append(rounds_data)
+    fund_details = []
+    if fund_rounds_data:
+        for fund_round in fund_rounds_data:
+            rounds_data = Rounds.fund_rounds(fund_round)
+            fund_details.append(rounds_data)
     else:
-        flash("No rounds exist for this fund")
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
 
-    response = requests.get(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}")
-    if response.status_code == 200:
-        fund_json_response = response.json()
+    fund_json_response = get_data(
+        f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}"
+    )
 
     return render_template(
         "fund.html",
