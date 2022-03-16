@@ -3,9 +3,10 @@ from app.config import FUND_SEARCH_ENDPOINT
 from app.config import FUND_STORE_API_HOST
 from app.config import ROUND_ENDPOINT
 from app.config import ROUND_STORE_API_HOST
-from app.discovery.data import get_data
-from app.discovery.data import query_funds_data
 from app.discovery.forms import SearchForm
+from app.discovery.models.data import get_data
+from app.discovery.models.data import list_data
+from app.discovery.models.data import query_funds_data
 from app.discovery.models.rounds import Rounds
 from flask import Blueprint
 from flask import render_template
@@ -49,21 +50,12 @@ def funds(fund_id):
     fund_rounds_data = get_data(
         f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{fund_id}"
     )
-    fund_details = []
     if fund_rounds_data:
-        for fund_round in fund_rounds_data:
-            rounds_data = Rounds.fund_rounds(fund_round)
-            fund_details.append(rounds_data)
+        rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
     else:
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
 
-    fund_json_response = get_data(
-        f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}"
-    )
+    fund = get_data(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}")
 
-    return render_template(
-        "fund.html",
-        fund_details=fund_details,
-        fund_json_response=fund_json_response,
-    )
+    return render_template("fund.html", fund=fund, rounds=rounds)
