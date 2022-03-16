@@ -5,6 +5,7 @@
 {%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
 
 {% block content %}
+
   <div>
     <form method="POST" action="/">
         {{ form.csrf_token }}
@@ -24,7 +25,6 @@
       'text': "Search",
       'classes': "govuk-button--secondary",
     }) }}
-
 
       {% for error in form.search.errors %}
          <div>
