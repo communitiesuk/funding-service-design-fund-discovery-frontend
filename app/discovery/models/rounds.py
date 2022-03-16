@@ -62,7 +62,7 @@ class Rounds:
 
     @property
     def eligibility_criteria_formatted(self):
-        """_summary_ Function formats number with comma separated integer
+        """_summary_ Function formats numbers(cost) with comma separated integer
 
         Returns:
             Comma separated integers
