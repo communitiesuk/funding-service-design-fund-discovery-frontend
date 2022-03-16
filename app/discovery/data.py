@@ -1,27 +1,58 @@
+import json
+import os
+
 import requests
+from app.config import FLASK_ROOT
 
 
-def query_fund(keyword, endpoint):
+def query_funds_data(keyword: str, endpoint: str):
+    """Function takes post request to
+    query data from fund store
+    Args:
+        keyword (str): takes user input
+        endpoint (str): takes api_host & endpoint
+    Returns: list of json data
+
     """
-    GIVEN function is called to query the funds.
-    WHEN a query searched by the user, this function runs
-    to retrive the query results from fund store
-    """
-    response = requests.post(
-        endpoint, params={"search_items": ",".join(keyword)}
+    if endpoint[:8] == "https://":
+        response = requests.post(
+            endpoint, params={"search_items": ",".join(keyword)}
+        )
+        if response.status_code == 200:
+            data = response.json()
+        else:
+            return None
+    else:
+        data = get_local_data(endpoint)
+    return data
+
+
+def get_local_data(endpoint: str):
+    api_data_json = os.path.join(
+        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
-    if response.status_code == 200:
-        query_results = response.json()
-        return query_results
+    json_data = open(api_data_json)
+    api_data = json.load(json_data)
+    json_data.close()
+    print(api_data)
+    if endpoint in api_data:
+        return api_data.get(endpoint)
 
 
-def request_json_fund(api_endpoints):
-
-    response = requests.get(api_endpoints)
-
-    if response.status_code == 200:
-        return response.json()
-
-
-def json_funds():
-    pass
+def get_data(endpoint: str):
+    """Function takes get request to
+    get data from fund store
+    Args:
+        endpoint (str): api_endpoint
+    Returns:
+        list of json data
+    """
+    if endpoint[:8] == "https://":
+        response = requests.get(endpoint)
+        if response.status_code == 200:
+            data = response.json()
+        else:
+            return None
+    else:
+        data = get_local_data(endpoint)
+    return data
