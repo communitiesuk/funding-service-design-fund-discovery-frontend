@@ -46,8 +46,6 @@ def get_endpoints():
 
     else:
         return (
-            "https://funding-service-design-fund-discovery-dev.       "
-            " london.cloudapps.digital",
-            "https://funding-service-design-fund-discovery-dev.       "
-            " london.cloudapps.digital/round/funding-service-design",
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital",  # noqa
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design",  # noqa
         )
