@@ -1,10 +1,17 @@
 import pytest
 from app.config import get_endpoints
+from app.create_app import create_app
 from axe_selenium_python import Axe
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
+
+@pytest.fixture(scope="session")
+def app():
+    app = create_app()
+    return app
 
 
 @pytest.fixture(scope="class")
@@ -19,6 +26,7 @@ def selenium_chrome_driver():
     driver.close()
 
 
+@pytest.mark.usefixtures("live_server")
 @pytest.mark.usefixtures("selenium_chrome_driver")
 @pytest.mark.accessibility
 def test_run_axe():
