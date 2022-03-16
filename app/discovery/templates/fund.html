@@ -7,10 +7,10 @@
 
 
   <div>
-    {% if fund_json_response %}
+    {% if fund %}
 
     <h1 class="govuk-label-wrapper"> <label class="govuk-label govuk-label--l">
-      {{fund_json_response['fund_name']|upper}} </label> </h1>
+      {{fund['fund_name']|upper}} </label> </h1>
 
       {% else %}
         <h1 class="govuk-label-wrapper"> <label class="govuk-label govuk-label--m">
@@ -19,15 +19,15 @@
 </div>
 
 
-   {% for fund in fund_details %}
+   {% for round in rounds %}
    <table class="govuk-table govuk-!-margin-top-9 role="banner">
 
-    <caption class="govuk-table__caption govuk-table__caption--l">{{fund.round_title|upper }}</caption>
+    <caption class="govuk-table__caption govuk-table__caption--l">{{round.round_title|upper }}</caption>
 
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header">Round title</th>
-        <th scope="col" class="govuk-table__header">{{fund.round_title|upper }}</th>
+        <th scope="col" class="govuk-table__header">{{round.round_title|upper }}</th>
       </tr>
     </thead>
 
@@ -35,16 +35,16 @@
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Eligibility criteria</th>
         <td class="govuk-table__cell"> Maximum cost:
-          £{{ fund.eligibility_criteria_formatted }}
+          £{{ round.eligibility_criteria_formatted }}
         </td>
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Start date</th>
-        <td class="govuk-table__cell">{{fund.opens_formatted}}</td>
+        <td class="govuk-table__cell">{{round.opens_formatted}}</td>
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">End date</th>
-        <td class="govuk-table__cell">{{fund.deadline_formatted}}</td>
+        <td class="govuk-table__cell">{{round.deadline_formatted}}</td>
       </tr>
     </tbody>
   </table>
