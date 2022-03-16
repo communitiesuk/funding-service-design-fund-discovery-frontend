@@ -6,7 +6,8 @@ from jinja2 import ChoiceLoader
 from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
 
-# Settings as django 
+# Settings as django
+
 
 def create_app() -> Flask:
 
@@ -69,9 +70,12 @@ def create_app() -> Flask:
             service_meta_author="DLUHC",
         )
 
-        
     # import routes
-    from app.default.routes import default_bp, not_found, internal_server_error
+    from app.default.error_routes import (
+        default_bp,
+        not_found,
+        internal_server_error,
+    )
     from app.discovery.routes import discovery_bp
 
     # register routes
