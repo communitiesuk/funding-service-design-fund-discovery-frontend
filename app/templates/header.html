@@ -1,8 +1,7 @@
 {% from "govuk_frontend_jinja/components/header/macro.html" import govukHeader -%}
 
 {{ govukHeader({
-  'homepageUrl': url_for('discovery_bp.search_fund'),
+  'homepageUrl': url_for('discovery_bp.search_funds'),
   'serviceName': service_title,
-  'serviceUrl': url_for('discovery_bp.search_fund')
+  'serviceUrl': url_for('discovery_bp.search_funds')
 }) }}
-

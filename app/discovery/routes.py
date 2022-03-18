@@ -7,15 +7,19 @@ from app.discovery.forms import SearchForm
 from app.discovery.models.data import get_data
 from app.discovery.models.data import list_data
 from app.discovery.models.data import query_funds_data
+from app.discovery.models.data import query_rounds_data
 from app.discovery.models.rounds import Rounds
 from flask import Blueprint
+from flask import redirect
 from flask import render_template
+from flask import request
+from flask import url_for
 
 discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 
 @discovery_bp.route("/", methods=["GET", "POST"])
-def search_fund():
+def search_funds():
     """
     Given function creates a text field for search box &
     renders on index.html then
@@ -24,16 +28,24 @@ def search_fund():
     & renders back onto index.html
     """
     form = SearchForm()
-    if not form.validate_on_submit():
-        return render_template("search.html", form=form)
-    else:
-        QUERY = form.search.data.split(" ")
+    query_keyword = request.args.get("query_fund")
+    if query_keyword is not None:
+        QUERY = request.args.get("query_fund").split(",")
         fund_results = query_funds_data(
             QUERY,
-            f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{FUND_SEARCH_ENDPOINT}",
+            f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{FUND_SEARCH_ENDPOINT}/",
         )
         return render_template(
             "search.html", query=QUERY, fund_results=fund_results, form=form
+        )
+    if not form.validate_on_submit():
+        return render_template("search.html", form=form)
+
+    else:
+        return redirect(
+            url_for("discovery_bp.search_funds")
+            + "/?query_fund="
+            + ",".join(form.search.data.split(" "))
         )
 
 
@@ -46,8 +58,7 @@ def funds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-
-    fund_rounds_data = get_data(
+    fund_rounds_data = query_rounds_data(
         f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{fund_id}"
     )
     if fund_rounds_data:
@@ -57,5 +68,4 @@ def funds(fund_id):
         return render_template("fund.html", error=error)
 
     fund = get_data(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}")
-
     return render_template("fund.html", fund=fund, rounds=rounds)

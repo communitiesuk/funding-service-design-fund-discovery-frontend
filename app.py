@@ -1,1 +1,1 @@
-import app #noqa
+import app  # noqa

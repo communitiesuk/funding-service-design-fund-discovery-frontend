@@ -17,19 +17,23 @@ APIs Config: contains api host imported from manifest.yml.
 host api doesn't not work/respond
 """
 
+TEST_FUND_STORE_API_HOST = "fund_store"
+TEST_ROUND_STORE_API_HOST = "round_store"
+
+
 FUND_STORE_API_HOST = (
-    "https://funding-service-design-fund-store-dev.london.cloudapps.digital"
+    os.environ.get("FUND_STORE_API_HOST") or TEST_FUND_STORE_API_HOST
 )
+
 
 ROUND_STORE_API_HOST = (
-    "https://funding-service-design-round-store-dev.london.cloudapps.digital"
+    os.environ.get("ROUND_STORE_API_HOST") or TEST_ROUND_STORE_API_HOST
 )
 
-FUND_ENDPOINT = "funds"
-FUND_SEARCH_ENDPOINT = "search/"
 
+FUND_ENDPOINT = "funds"
+FUND_SEARCH_ENDPOINT = "search"
 ROUND_ENDPOINT = "fund"
-ROUND_ID = "funding-service-design"
 
 
 def get_endpoints():

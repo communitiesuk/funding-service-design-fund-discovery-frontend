@@ -23,6 +23,3 @@ repos:
       - id: reorder-python-imports
         name: Reorder Python imports (src, tests)
         args: ["--application-directories", "src"]
-
-
-        

@@ -1,22 +1,31 @@
 {
-    "fund_store/funds/": [
-      {
-      "fund_name": "Funding Service Design",
-      "fund_id": "funding-service-design",
-      "fund_description": "An example fund for testing the funding service"
-      }
+    "fund_store/funds/search/": [
+
+      {"fund_name": "Harry's breakfast fund",
+        "fund_id": "harry-s-breakfast-fund",
+         "fund_description": "An example fund designed to supply Harry's endless supply of muesli."
+        },
+
+
+        {"fund_name": "Ram's Get Fit Feb fund",
+        "fund_id": "ram-s-get-fit-feb-fund",
+        "fund_description": "An example fund designed to supply gym memberships to home workers during Feb."
+       },
+       {
+        "fund_name": "Funding Service Design",
+        "fund_id": "funding-service-design",
+        "fund_description": "An example fund for testing the funding service"
+        }
     ],
-    "fund_store/funds/funding-service-design": {
-      "fund_name": "Funding Service Design",
-      "fund_id": "funding-service-design",
-      "fund_description": "An example fund for testing the funding service"
-    },
+
+
+
     "round_store/fund/funding-service-design": [
       {
           "fund_id": "funding-service-design",
           "round_title": "Spring",
           "round_id": "spring",
-          "eligibility_criteria": {"maximum_project_cost": 1000000},
+          "eligibility_criteria": {"max_project_cost": 1000000},
           "opens": "2022-02-01T00:00:01",
           "deadline": "2022-06-01T00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
@@ -26,7 +35,7 @@
           "fund_id": "funding-service-design",
           "round_title": "Summer",
           "round_id": "summer",
-          "eligibility_criteria": {"maximum_project_cost": 1000000},
+          "eligibility_criteria": {"max_project_cost": 1000000},
           "opens": "2022-06-01T00:00:01",
           "deadline": "2022-08-31T00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
@@ -35,7 +44,7 @@
           "fund_id": "funding-service-design",
           "round_title": "Autumn",
           "round_id": "autumn",
-          "eligibility_criteria": {"maximum_project_cost": 10000000},
+          "eligibility_criteria": {"max_project_cost": 10000000},
           "opens": "2022-09-01T00:00:01",
           "deadline": "2022-11-30T00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
