@@ -40,7 +40,7 @@ def get_endpoints():
     """
     GIVEN function return development & production urls
     for accessibility tests if FLASK_ENV
-    is in development or production
+    is in development or production.
     """
     if FLASK_ENV == "development":
         return (
