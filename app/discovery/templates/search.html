@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+{% from "govuk_frontend_jinja/components/input/macro.html" import govukInput %}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+
+{% block content %}
+
+  <div>
+    <form method="POST" action="/">
+        {{ form.csrf_token }}
+
+        {{ govukInput({
+          'label': {
+            'text': "Fund Search",
+            'classes': "govuk-label--l",
+            'isPageHeading': true
+          },
+          'id': form.search.id,
+          'name': form.search.id,
+        })
+     }}
+
+     {{ govukButton({
+      'text': "Search",
+      'classes': "govuk-button--secondary",
+    }) }}
+
+      {% for error in form.search.errors %}
+         <div>
+         <p class="govuk-error-message">
+           <span class="govuk-visually-hidden">Error:</span> Enter search keyword
+         </p>
+       </div>
+      {% endfor %}
+    </form>
+  </div>
+
+<div class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2" >
+    {% if query %}
+    {% if fund_results|length > 1%}
+    {{fund_results|length}} results
+    {% else %}
+    {{fund_results|length}} result
+   {% endif %}
+   {% endif %}
+</div>
+
+  {% for fund in fund_results %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-m govuk-!-margin-top-4">
+          <a class = 'govuk-link' href="{{url_for('discovery_bp.funds', fund_id=fund['fund_id']) }}"> {{fund['fund_name']}}</a>
+        </h1>
+
+      <p class="govuk-body">  {{fund['fund_description']}}
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+      </p>
+    </div>
+    </div>
+
+  {% endfor %}
+  {% endblock %}
