@@ -46,6 +46,12 @@ def test_search_page_found(flask_test_client):
 
 
 @pytest.mark.usefixtures("live_server")
+def test_search_page_response(flask_test_client):
+    response = flask_test_client.get("/rubbish_url", follow_redirects=True)
+    assert response.status_code == 404
+
+
+@pytest.mark.usefixtures("live_server")
 def test_search_page_not_found(flask_test_client):
     response = flask_test_client.get(
         url_for("discovery_bp.search_funds") + "/?search_items=bloolive",
