@@ -3,32 +3,77 @@ import os
 
 import requests
 from app.config import FLASK_ROOT
-from app.discovery.models.local_data import get_test_funds_data
-from app.discovery.models.local_data import get_test_rounds_data
 
 
-def query_funds_data(keyword: str, endpoint: str):
-    """Function takes post request to
-    query data from fund store
-    Args:
-        keyword (str): takes user input
-        endpoint (str): takes api_host & endpoint
-    Returns: list of json data
+def get_funds(endpoint: str):
+    """GIVEN function return funds
+    from fund store endpoint
     """
-    if endpoint[:8] == "https://":
-        response = requests.post(
-            endpoint, params={"search_items": ",".join(keyword)}
-        )
+    if "https://" in endpoint:
+        response = requests.get(endpoint)
         if response.status_code == 200:
             data = response.json()
         else:
             return None
     else:
-        data = get_test_funds_data(keyword, endpoint)
+        data = get_local_funds(endpoint)
+
     return data
 
 
-def query_rounds_data(endpoint: str):
+def get_local_funds(endpoint: str):
+    """
+    GIVEN function return funds from local
+     api_data store during development
+    """
+    api_endpoint = os.path.join(
+        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+    )
+    with open(api_endpoint) as json_data:
+        response = json.load(json_data)
+        if endpoint in response:
+            data = response.get(endpoint)
+            return data
+
+
+def query_funds(queries: str, funds: dict):
+    """Summary:
+    GIVEN function query funds
+     from search homepage.
+
+    Args:
+        queries (str): Takes an query or
+        multiple queries.
+        funds (dict): Takes list of all funds.
+
+    Returns:
+        Returns expected query.
+    """
+    query_results = []
+    query = queries.split()
+    for fund in funds:
+        if query:
+            print(f"FUNCTION - IF QUERY {query}")
+            for q in query:
+                if q in fund["fund_name"] or q in fund["fund_id"]:
+                    query_results.append(fund)
+        else:
+            print(f"FUNCTION - ELSE {query}")
+            return funds
+
+    return query_results
+
+
+def convert_none_to_string(form_data):
+    """GIVEN function return None data to
+    empty string
+    """
+    if form_data is None:
+        return ""
+    return str(form_data)
+
+
+def query_rounds(endpoint: str):
     """Function takes get request to
     get data from fund store
     Args:
@@ -43,8 +88,30 @@ def query_rounds_data(endpoint: str):
         else:
             return None
     else:
-        data = get_test_rounds_data(endpoint)
+        data = query_local_rounds(endpoint)
     return data
+
+
+def query_local_rounds(endpoint: str):
+    """Function grabs the data from local
+    database and covert rounds data into json
+    Args:
+        endpoint (str): takes the api endpoint
+
+    Returns:
+        return local data form tests/api_data in json format
+    """
+    api_data_json = os.path.join(
+        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+    )
+    json_data = open(api_data_json)
+    api_data = json.load(json_data)
+    json_data.close()
+    if endpoint in api_data.keys():
+        rounds = []
+        for data in api_data.get(endpoint):
+            rounds.append(data)
+        return rounds
 
 
 def get_data(endpoint: str):
@@ -62,11 +129,11 @@ def get_data(endpoint: str):
         else:
             return None
     else:
-        data = get_fund_name(endpoint)
+        data = get_local_data(endpoint)
     return data
 
 
-def get_fund_name(endpoint):
+def get_local_data(endpoint):
     """Function makes a get request data
     form fund store to retrieve the data
 
