@@ -1,4 +1,23 @@
 {
+    "fund_store/funds/": [
+
+        {"fund_name": "Harry's breakfast fund",
+          "fund_id": "harry-s-breakfast-fund",
+           "fund_description": "An example fund designed to supply Harry's endless supply of muesli."
+          },
+
+
+          {"fund_name": "Ram's Get Fit Feb fund",
+          "fund_id": "ram-s-get-fit-feb-fund",
+          "fund_description": "An example fund designed to supply gym memberships to home workers during Feb."
+         },
+         {
+          "fund_name": "Funding Service Design",
+          "fund_id": "funding-service-design",
+          "fund_description": "An example fund for testing the funding service"
+          }
+      ],
+
     "fund_store/funds/search/": [
 
       {"fund_name": "Harry's breakfast fund",
