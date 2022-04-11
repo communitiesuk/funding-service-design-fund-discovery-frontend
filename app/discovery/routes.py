@@ -33,11 +33,11 @@ def search_funds():
 
     else:
         if form.validate_on_submit:
-            query_results = query_funds(query, funds)
+            query_response = query_funds(query, funds)
             return render_template(
                 "search.html",
                 query=query,
-                query_results=query_results,
+                query_response=query_response,
                 form=form,
                 funds=funds,
             )

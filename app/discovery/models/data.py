@@ -50,15 +50,13 @@ def query_funds(queries: str, funds: dict):
         Returns expected query.
     """
     query_results = []
-    query = queries.split()
+    format_query = queries.split()
     for fund in funds:
-        if query:
-            print(f"FUNCTION - IF QUERY {query}")
-            for q in query:
-                if q in fund["fund_name"] or q in fund["fund_id"]:
+        if format_query:
+            for query in format_query:
+                if query in fund["fund_name"] or query in fund["fund_id"]:
                     query_results.append(fund)
         else:
-            print(f"FUNCTION - ELSE {query}")
             return funds
 
     return query_results

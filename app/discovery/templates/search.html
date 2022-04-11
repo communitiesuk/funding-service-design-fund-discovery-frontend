@@ -47,10 +47,10 @@
       <span class="govuk-!-margin-left-9">  <a class="govuk-list govuk-body-s"  href="/"> Clear filters</a></span>
     </h2>
     <ul class="govuk-list">
-      <li><a class="govuk-link" href="#">Filter one</a></li>
-      <li><a class="govuk-link" href="#">Filter two</a></li>
-      <li><a class="govuk-link" href="#">Filter three</a></li>
-      <li><a class="govuk-link" href="#">More</a></li>
+      <li><a class="govuk-link" href="/">Filter one</a></li>
+      <li><a class="govuk-link" href="/">Filter two</a></li>
+      <li><a class="govuk-link" href="/">Filter three</a></li>
+      <li><a class="govuk-link" href="/">More</a></li>
     </ul>
   </div>
 
@@ -66,18 +66,18 @@
   <div class="govuk-grid-column-two-thirds govuk-body">
     <div class="govuk-body" >
       {% if query %}
-      <span class="govuk-body govuk-!-font-size-48"><strong>{{query_results|length}} </strong></span>
+      <span class="govuk-body govuk-!-font-size-48"><strong>{{query_response|length}} </strong></span>
        results found containing <strong>{{query}}</strong> in <strong>All funds</strong>
 
        {% else %}
-       <span class="govuk-body govuk-!-font-size-48"><strong>{{query_results|length}} </strong></span>
+       <span class="govuk-body govuk-!-font-size-48"><strong>{{query_response|length}} </strong></span>
        results found in <strong>All funds</strong>
        {% endif %}
 
 
   </div>
 
-    {% for fund in query_results %}
+    {% for fund in query_response %}
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
