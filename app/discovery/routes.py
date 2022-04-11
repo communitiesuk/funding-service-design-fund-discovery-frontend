@@ -3,7 +3,6 @@ from app.config import FUND_STORE_API_HOST
 from app.config import ROUND_ENDPOINT
 from app.config import ROUND_STORE_API_HOST
 from app.discovery.forms import SearchForm
-from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_data
 from app.discovery.models.data import get_funds
 from app.discovery.models.data import list_data
@@ -38,9 +37,11 @@ def search_funds():
             )
 
     else:
-        form_data = convert_none_to_string(form.search.data)
+        # form_data = convert_none_to_string(form.search.data)
         return redirect(
-            url_for("discovery_bp.search_funds") + "/?query=" + form_data
+            url_for("discovery_bp.search_funds")
+            + "/?query="
+            + str(form.search.data)
         )
 
 

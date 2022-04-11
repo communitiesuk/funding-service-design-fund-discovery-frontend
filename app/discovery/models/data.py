@@ -56,8 +56,8 @@ def query_funds(queries: str, funds: dict):
             for query in format_query:
                 if query in fund["fund_name"] or query in fund["fund_id"]:
                     query_results.append(fund)
-        # else:
-        #     return funds
+        else:
+            return funds
 
     return query_results
 
