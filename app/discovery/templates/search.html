@@ -6,58 +6,95 @@
 
 {% block content %}
 
-  <div>
-    <form method="POST" action="/">
-        {{ form.csrf_token }}
 
-        {{ govukInput({
-          'label': {
-            'text': "Fund Search",
-            'classes': "govuk-label--l",
-            'isPageHeading': true
-          },
-          'id': form.search.id,
-          'name': form.search.id,
-        })
-     }}
+<form method="POST" action="/">
+  {{ form.csrf_token }}
+  <div class="govuk-form-group">
+    <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="weight">
+       Fund search
+      </label>
+    </h1>
+    <div class="govuk-input__wrapper">
+      <input class="govuk-input govuk-!-width-three-quarters"  type="text" spellcheck="false" id="{{form.search.id}}" name="{{form.search.id}}" placeholder="search fund with keyword">
 
-     {{ govukButton({
-      'text': "Search",
-      'classes': "govuk-button--secondary",
-    }) }}
+      <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Search
+      </button>
+    </div>
+  </div>
+</form>
 
-      {% for error in form.search.errors %}
-         <div>
-         <p class="govuk-error-message">
-           <span class="govuk-visually-hidden">Error:</span> Enter search keyword
-         </p>
-       </div>
-      {% endfor %}
-    </form>
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-one-third">
+
+    <div>
+    <h2 class="govuk-heading-m">Choose a category</h2>
+    <ul class="govuk-list govuk-body-m govuk-!-margin-top-4">
+    <li aria-current="page">
+      <strong>All categories</strong>
+      <ul class="govuk-list govuk-body-m">
+        <li><a class="govuk-link"  href="/">Category one</a></li>
+        <li><a class="govuk-link"  href="/">Category two</a></li>
+        <li><a class="govuk-link"  href="/">Category three</a></li>
+      </ul>
+    </li>
+    </ul>
   </div>
 
-<div class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2" >
-    {% if query %}
-    {% if fund_results|length > 1%}
-    {{fund_results|length}} results
-    {% else %}
-    {{fund_results|length}} result
-   {% endif %}
-   {% endif %}
+  <div class="govuk-!-margin-top-8">
+    <h2 class="govuk-heading-m">Apply filters
+      <span class="govuk-!-margin-left-9">  <a class="govuk-list govuk-body-s"  href="/"> Clear filters</a></span>
+    </h2>
+    <ul class="govuk-list">
+      <li><a class="govuk-link" href="#">Filter one</a></li>
+      <li><a class="govuk-link" href="#">Filter two</a></li>
+      <li><a class="govuk-link" href="#">Filter three</a></li>
+      <li><a class="govuk-link" href="#">More</a></li>
+    </ul>
+  </div>
+
+  <div class="govuk-!-margin-top-8 govuk-body">
+    <h2 class="govuk-heading-m">Information
+    </h2>
+    <p class="govuk-hint">Sed ut perspiciatis unde omnis istei natus error sit voluptatem accusant doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+  </div>
+
+  </div>
+
+
+  <div class="govuk-grid-column-two-thirds govuk-body">
+    <div class="govuk-body" >
+      {% if query %}
+      <span class="govuk-body govuk-!-font-size-48"><strong>{{query_results|length}} </strong></span>
+       results found containing <strong>{{query}}</strong> in <strong>All funds</strong>
+
+       {% else %}
+       <span class="govuk-body govuk-!-font-size-48"><strong>{{query_results|length}} </strong></span>
+       results found in <strong>All funds</strong>
+       {% endif %}
+
+
+  </div>
+
+    {% for fund in query_results %}
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+          <h1 class="govuk-heading-s govuk-!-margin-top-1">
+            <a class = 'govuk-link' href="{{url_for('discovery_bp.funds', fund_id=fund['fund_id']) }}"> {{fund['fund_name']}}</a>
+          </h1>
+          <ul class="govuk-list govuk-body-s">
+              <strong>Round title : TBU </strong>
+                <li>Deadline : TBU</li>
+            </ul>
+
+        <p class="govuk-body">  {{fund['fund_description']}}</p>
+
+      <hr class="govuk-section-break govuk-section-break--visible">
+    {% endfor %}
+
+  </div>
+
 </div>
-
-  {% for fund in fund_results %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <h1 class="govuk-heading-m govuk-!-margin-top-4">
-          <a class = 'govuk-link' href="{{url_for('discovery_bp.funds', fund_id=fund['fund_id']) }}"> {{fund['fund_name']}}</a>
-        </h1>
-
-      <p class="govuk-body">  {{fund['fund_description']}}
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
-      </p>
-    </div>
-    </div>
-
-  {% endfor %}
   {% endblock %}
