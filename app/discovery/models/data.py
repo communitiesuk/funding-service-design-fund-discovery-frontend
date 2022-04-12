@@ -50,25 +50,28 @@ def query_funds(queries: str, funds: dict):
         Returns expected query.
     """
     query_results = []
-    format_query = queries.split()
+
     for fund in funds:
-        if format_query:
+        if queries:
+            format_query = queries.split()
+            print(f"FUNCTION - IF QUERY: {queries}")
             for query in format_query:
                 if query in fund["fund_name"] or query in fund["fund_id"]:
                     query_results.append(fund)
-        # else:
-        #     return funds
+        else:
+            print("FUNCTION - ELSE")
+            return funds
 
     return query_results
 
 
-def convert_none_to_string(form_data):
+def convert_none_to_string(data):
     """GIVEN function return None data to
     empty string
     """
-    if form_data is None:
+    if data is None:
         return ""
-    return str(form_data)
+    return str(data)
 
 
 def query_rounds(endpoint: str):

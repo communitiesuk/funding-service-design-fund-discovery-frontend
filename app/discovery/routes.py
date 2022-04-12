@@ -3,6 +3,7 @@ from app.config import FUND_STORE_API_HOST
 from app.config import ROUND_ENDPOINT
 from app.config import ROUND_STORE_API_HOST
 from app.discovery.forms import SearchForm
+from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_data
 from app.discovery.models.data import get_funds
 from app.discovery.models.data import list_data
@@ -22,7 +23,6 @@ discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 @discovery_bp.route("/", methods=["GET", "POST"])
 def search_funds():
     form = SearchForm()
-
     query = request.args.get("query")
     if query is not None:
         funds = get_funds(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/")
@@ -37,11 +37,9 @@ def search_funds():
             )
 
     else:
-        # form_data = convert_none_to_string(form.search.data)
+        form_data = convert_none_to_string(form.search.data)
         return redirect(
-            url_for("discovery_bp.search_funds")
-            + "/?query="
-            + str(form.search.data)
+            url_for("discovery_bp.search_funds") + "/?query=" + str(form_data)
         )
 
 
@@ -59,6 +57,7 @@ def funds(fund_id):
     )
     if fund_rounds_data:
         rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
+
     else:
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
