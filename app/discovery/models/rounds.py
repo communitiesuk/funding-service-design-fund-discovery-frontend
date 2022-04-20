@@ -48,7 +48,7 @@ class Rounds:
         GIVEN function is to alter the datetime string object
         for self.opens for human readability.
         """
-        return datetime.strptime(self.opens, "%Y-%m-%dT%H:%M:%S").strftime(
+        return datetime.strptime(self.opens, "%Y-%m-%d%H:%M:%S").strftime(
             "%Y-%m-%d"
         )
 
@@ -58,7 +58,7 @@ class Rounds:
         GIVEN function is to alter the datetime string object
         for self.deadline for human readability.
         """
-        return datetime.strptime(self.deadline, "%Y-%m-%dT%H:%M:%S").strftime(
+        return datetime.strptime(self.deadline, "%Y-%m-%d%H:%M:%S").strftime(
             "%Y-%m-%d"
         )
 
@@ -77,6 +77,6 @@ class Rounds:
         GIVEN function is to alter the datetime string object
         for self.assessment_deadline for human readability.
         """
-        return datetime.strptime(self.deadline, "%Y-%m-%dT%H:%M:%S").strftime(
+        return datetime.strptime(self.deadline, "%Y-%m-%d%H:%M:%S").strftime(
             "%Y-%m-%d"
         )
