@@ -54,7 +54,7 @@ def funds(fund_id):
     """
 
     fund_rounds_data = query_rounds(
-        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, id=fund_id)
+        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
     )
 
     if fund_rounds_data:
