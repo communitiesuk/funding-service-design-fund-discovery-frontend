@@ -1,7 +1,7 @@
 from app.config import FUND_ENDPOINT
 from app.config import FUND_STORE_API_HOST
-from app.config import ROUND_ENDPOINT
 from app.config import ROUND_STORE_API_HOST
+from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_data
@@ -52,9 +52,11 @@ def funds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
+
     fund_rounds_data = query_rounds(
-        f"{ROUND_STORE_API_HOST}/{ROUND_ENDPOINT}/{fund_id}"
+        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, id=fund_id)
     )
+
     if fund_rounds_data:
         rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
 
