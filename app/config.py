@@ -35,6 +35,8 @@ FUND_ENDPOINT = "funds"
 FUND_SEARCH_ENDPOINT = "search"
 ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
 
+FUNDS_SEARCH_URL = "{host}/funds/search/?"
+
 
 def get_endpoints():
     """

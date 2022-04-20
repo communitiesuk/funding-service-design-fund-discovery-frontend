@@ -18,7 +18,7 @@
           }
       ],
 
-    "fund_store/funds/search/": [
+    "fund_store/funds/search/?": [
 
       {"fund_name": "Harry's breakfast fund",
         "fund_id": "harry-s-breakfast-fund",

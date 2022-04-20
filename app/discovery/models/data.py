@@ -5,62 +5,87 @@ import requests
 from app.config import FLASK_ROOT
 
 
-def get_funds(endpoint: str):
-    """GIVEN function return funds
-    from fund store endpoint
-    """
+def query_fund(query, endpoint: str):
+    print(f"HTTPS ENDPOINT: {endpoint}")
     if "https://" in endpoint:
-        response = requests.get(endpoint)
-        if response.status_code == 200:
-            data = response.json()
+        if query:
+            print("HTTPS: IF QUERY FUNCTION ")
+            split_query = query.split()
+            format_query = ",".join(split_query).replace(" ", "")
+            print(format_query)
+            response = requests.post(
+                endpoint, params={"search_items": format_query}
+            )
+            if response.status_code == 200:
+                data = response.json()
+                print(f"HTTPS:IF QUERY DATA: {data}")
+            # else: return None
         else:
-            return None
-    else:
-        data = get_local_funds(endpoint)
+            print("HTTPS: ELSE QUERY  FUNCTION")
+            # if response.status_code == 200:
+            data = requests.post(endpoint).json()
+            print(f"HTTPS: ELSE QUERY DATA: {data}")
 
-    return data
+            # else:
+            #     return None
 
-
-def get_local_funds(endpoint: str):
-    """
-    GIVEN function return funds from local
-     api_data store during development
-    """
-    api_endpoint = os.path.join(
-        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
-    )
-    with open(api_endpoint) as json_data:
-        response = json.load(json_data)
-        if endpoint in response:
-            data = response.get(endpoint)
             return data
 
+    else:
+        print("NOT HTTP: ELSE GET_LOCAL_FUNCTION")
+        data = get_local_fund(query, endpoint)
+        return data
 
-def query_funds(queries: str, funds: dict):
-    """Summary:
-    GIVEN function query funds
-     from search homepage.
 
-    Args:
-        queries (str): Takes an query or
-        multiple queries.
-        funds (dict): Takes list of all funds.
+def get_local_fund(query, endpoint):
+    print("LOCAL FUNCTION ")
+    print(endpoint)
+    api_data_json = os.path.join(
+        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+    )
+    json_data = open(api_data_json)
+    api_data = json.load(json_data)
+    json_data.close()
+    if endpoint in api_data:
+        return query_local_fund(query, endpoint, api_data)
 
-    Returns:
-        Returns expected query.
-    """
-    query_results = []
 
-    for fund in funds:
+def query_local_fund(queries, endpoint, data):
+    fund_results = []
+    for fund in data.get(endpoint):
         if queries:
             format_query = queries.split()
             for query in format_query:
                 if query in fund["fund_name"] or query in fund["fund_id"]:
-                    query_results.append(fund)
+                    fund_results.append(fund)
         else:
-            return funds
+            return data.get(endpoint)
+    return fund_results
 
-    return query_results
+
+# # from app.config import FUND_ENDPOINT
+# from app.config import FUND_STORE_API_HOST
+
+# # from app.config import FUND_SEARCH_ENDPOINT
+# from app.config import FUNDS_SEARCH_URL
+
+# # local_query_fund = query_fund("ram harry",
+# #                 FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
+# #             )
+
+# # print(f"LOCAL: {local_query_fund}")
+
+# api_query_fund = query_fund(
+#     " ",
+#     FUNDS_SEARCH_URL.format(
+#         host="https://funding-service-design-fund-store-dev.london.cloudapps.digital"
+#     ),
+# )
+
+# # print(f"API: {api_query_fund}")
+
+
+# --------------------------- END --------------------------------------#
 
 
 def convert_none_to_string(data):

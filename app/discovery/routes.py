@@ -1,13 +1,13 @@
 from app.config import FUND_ENDPOINT
 from app.config import FUND_STORE_API_HOST
+from app.config import FUNDS_SEARCH_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_data
-from app.discovery.models.data import get_funds
 from app.discovery.models.data import list_data
-from app.discovery.models.data import query_funds
+from app.discovery.models.data import query_fund
 from app.discovery.models.data import query_rounds
 from app.discovery.models.rounds import Rounds
 from flask import Blueprint
@@ -22,24 +22,25 @@ discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 @discovery_bp.route("/", methods=["GET", "POST"])
 def search_funds():
+
     form = SearchForm()
     query = request.args.get("query")
     if query is not None:
-        funds = get_funds(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/")
-        if form.validate_on_submit:
-            query_response = query_funds(query, funds)
+        if not form.validate_on_submit():
+            query_response = query_fund(
+                query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
+            )
             return render_template(
                 "search.html",
                 query=query,
                 query_response=query_response,
                 form=form,
-                funds=funds,
             )
 
     else:
         form_data = convert_none_to_string(form.search.data)
         return redirect(
-            url_for("discovery_bp.search_funds") + "/?query=" + str(form_data)
+            url_for("discovery_bp.search_funds") + "/?query=" + form_data
         )
 
 
@@ -52,6 +53,8 @@ def funds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
+    query = request.args.get("query")
+    print(f"QUERY in ROUNDS: {query}")
 
     fund_rounds_data = query_rounds(
         ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
