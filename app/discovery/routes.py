@@ -22,7 +22,6 @@ discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 @discovery_bp.route("/", methods=["GET", "POST"])
 def search_funds():
-
     form = SearchForm()
     query = request.args.get("query")
     if query is not None:
@@ -45,7 +44,7 @@ def search_funds():
 
 
 @discovery_bp.route("/round/<fund_id>", methods=["GET", "POST"])
-def funds(fund_id):
+def fund_rounds(fund_id):
     """
     GIVEN Function calls the RoundStore function
     from data model to check rounds with given endpoint

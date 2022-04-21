@@ -6,10 +6,8 @@ from app.config import FLASK_ROOT
 
 
 def query_fund(query, endpoint: str):
-    print(f"HTTPS ENDPOINT: {endpoint}")
     if "https://" in endpoint:
         if query:
-            print("HTTPS: IF QUERY FUNCTION ")
             split_query = query.split()
             format_query = ",".join(split_query).replace(" ", "")
             print(format_query)
@@ -18,17 +16,16 @@ def query_fund(query, endpoint: str):
             )
             if response.status_code == 200:
                 data = response.json()
-                print(f"HTTPS:IF QUERY DATA: {data}")
             else:
                 return None
         else:
-            print("HTTPS: ELSE QUERY  FUNCTION")
-            data = requests.post(endpoint).json()
-            print(f"HTTPS: ELSE QUERY DATA: {data}")
-            return data
-
+            print(f"NONE QUERY: {query}")
+            response = requests.post(endpoint)
+            if response.status_code == 200:
+                data = response.json()
+            else:
+                return None
     else:
-        print("NOT HTTP: ELSE GET_LOCAL_FUNCTION")
         data = get_local_fund(query, endpoint)
         return data
 
@@ -36,8 +33,6 @@ def query_fund(query, endpoint: str):
 
 
 def get_local_fund(query, endpoint):
-    print("LOCAL FUNCTION ")
-    print(endpoint)
     api_data_json = os.path.join(
         FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
@@ -56,8 +51,8 @@ def query_local_fund(queries, endpoint, data):
             for query in format_query:
                 if query in fund["fund_name"] or query in fund["fund_id"]:
                     fund_results.append(fund)
-        else:
-            return data.get(endpoint)
+        # else:
+        #     return data.get(endpoint)
     return fund_results
 
 

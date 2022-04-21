@@ -76,26 +76,19 @@
 
 
   </div>
-  {% if query_response %}
-
     {% for fund in query_response %}
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
           <h1 class="govuk-heading-s govuk-!-margin-top-1">
-            <a class = 'govuk-link fund_name' href="{{url_for('discovery_bp.funds', fund_id=fund['fund_id']) }}"> {{fund['fund_name']}}</a>
+            <a class = 'govuk-link fund_name' href="{{url_for('discovery_bp.fund_rounds', fund_id=fund['fund_id']) }}"> {{fund['fund_name']}}</a>
           </h1>
-          <ul class="govuk-list govuk-body-s">
-              <strong>Round title : TBU </strong>
-                <li>Deadline : TBU</li>
-            </ul>
-
-        <p class="govuk-body">  {{fund['fund_description']}}</p>
+        <p class="govuk-body">  {{fund['fund_description']}}.
+          Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras mauris metus, maximus gravida finibus sed, sodales eget lectus. Nunc aliquam a libero ut rhoncus. Proin eu sapien quis nisl hendrerit dapibus sed sit amet dolor.
+        </p>
 
       <hr class="govuk-section-break govuk-section-break--visible">
     {% endfor %}
-    {% endif %}
-
   </div>
 
 </div>
