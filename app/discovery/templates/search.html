@@ -76,7 +76,7 @@
 
 
   </div>
-
+  {% if query_response %}
 
     {% for fund in query_response %}
 
@@ -94,7 +94,7 @@
 
       <hr class="govuk-section-break govuk-section-break--visible">
     {% endfor %}
-
+    {% endif %}
 
   </div>
 
