@@ -19,15 +19,16 @@ def query_fund(query, endpoint: str):
             if response.status_code == 200:
                 data = response.json()
                 print(f"HTTPS:IF QUERY DATA: {data}")
-            # else: return None
+            else:
+                return None
         else:
             print("HTTPS: ELSE QUERY  FUNCTION")
-            # if response.status_code == 200:
-            data = requests.post(endpoint).json()
-            print(f"HTTPS: ELSE QUERY DATA: {data}")
+            if response.status_code == 200:
+                data = requests.post(endpoint).json()
+                print(f"HTTPS: ELSE QUERY DATA: {data}")
 
-            # else:
-            #     return None
+            else:
+                return None
 
             return data
 
@@ -35,6 +36,8 @@ def query_fund(query, endpoint: str):
         print("NOT HTTP: ELSE GET_LOCAL_FUNCTION")
         data = get_local_fund(query, endpoint)
         return data
+
+    return data
 
 
 def get_local_fund(query, endpoint):
@@ -61,31 +64,6 @@ def query_local_fund(queries, endpoint, data):
         else:
             return data.get(endpoint)
     return fund_results
-
-
-# # from app.config import FUND_ENDPOINT
-# from app.config import FUND_STORE_API_HOST
-
-# # from app.config import FUND_SEARCH_ENDPOINT
-# from app.config import FUNDS_SEARCH_URL
-
-# # local_query_fund = query_fund("ram harry",
-# #                 FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
-# #             )
-
-# # print(f"LOCAL: {local_query_fund}")
-
-# api_query_fund = query_fund(
-#     " ",
-#     FUNDS_SEARCH_URL.format(
-#         host="https://funding-service-design-fund-store-dev.london.cloudapps.digital"
-#     ),
-# )
-
-# # print(f"API: {api_query_fund}")
-
-
-# --------------------------- END --------------------------------------#
 
 
 def convert_none_to_string(data):
