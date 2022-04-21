@@ -23,13 +23,8 @@ def query_fund(query, endpoint: str):
                 return None
         else:
             print("HTTPS: ELSE QUERY  FUNCTION")
-            if response.status_code == 200:
-                data = requests.post(endpoint).json()
-                print(f"HTTPS: ELSE QUERY DATA: {data}")
-
-            else:
-                return None
-
+            data = requests.post(endpoint).json()
+            print(f"HTTPS: ELSE QUERY DATA: {data}")
             return data
 
     else:
