@@ -1,6 +1,6 @@
-from app.config import FUND_ENDPOINT
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
+from app.config import FUNDS_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
@@ -22,6 +22,10 @@ discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 @discovery_bp.route("/", methods=["GET", "POST"])
 def search_funds():
+    """GIVEN route takes a search form, retrieves
+    user input/query & return query response
+    from fund store.
+    """
     form = SearchForm()
     query = request.args.get("query")
     if query is not None:
@@ -52,9 +56,6 @@ def fund_rounds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    query = request.args.get("query")
-    print(f"QUERY in ROUNDS: {query}")
-
     fund_rounds_data = query_rounds(
         ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
     )
@@ -66,5 +67,7 @@ def fund_rounds(fund_id):
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
 
-    fund = get_data(f"{FUND_STORE_API_HOST}/{FUND_ENDPOINT}/{fund_id}")
+    fund = get_data(
+        FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
+    )
     return render_template("fund.html", fund=fund, rounds=rounds)
