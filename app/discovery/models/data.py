@@ -6,11 +6,20 @@ from app.config import FLASK_ROOT
 
 
 def query_fund(query, endpoint: str):
+    """GIVEN function return query from
+    the fund store.
+
+    Args:
+        query: takes an query.
+        endpoint (str): takes fund store endpoint.
+
+    Returns:
+        return query response from fund store.
+    """
     if "https://" in endpoint:
         if query:
             split_query = query.split()
             format_query = ",".join(split_query).replace(" ", "")
-            print(format_query)
             response = requests.post(
                 endpoint, params={"search_items": format_query}
             )
@@ -19,7 +28,6 @@ def query_fund(query, endpoint: str):
             else:
                 return None
         else:
-            print(f"NONE QUERY: {query}")
             response = requests.post(endpoint)
             if response.status_code == 200:
                 data = response.json()
@@ -33,6 +41,10 @@ def query_fund(query, endpoint: str):
 
 
 def get_local_fund(query, endpoint):
+    """GIVEN function relates with query_local_fund
+    function, return local funds data  &
+    calls query_local_fund function.
+    """
     api_data_json = os.path.join(
         FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
@@ -44,13 +56,28 @@ def get_local_fund(query, endpoint):
 
 
 def query_local_fund(queries, endpoint, data):
+    """GIVEN function return query from
+    the local fund store.
+
+    Args:
+        query: takes an query.
+        endpoint (str): takes local fund store endpoint.
+
+    Returns:
+        return query response from local fund store.
+    """
     fund_results = []
     for fund in data.get(endpoint):
         if queries:
             format_query = queries.split()
             for query in format_query:
+                query_found = False
                 if query in fund["fund_name"] or query in fund["fund_id"]:
                     fund_results.append(fund)
+                    query_found = True
+                    if query_found:
+                        break
+
         # else:
         #     return data.get(endpoint)
     return fund_results
@@ -66,7 +93,7 @@ def convert_none_to_string(data):
 
 
 def query_rounds(endpoint: str):
-    """Function takes get request to
+    """GIVEN function takes get request to
     get data from fund store
     Args:
         endpoint (str): api_endpoint
@@ -85,7 +112,7 @@ def query_rounds(endpoint: str):
 
 
 def query_local_rounds(endpoint: str):
-    """Function grabs the data from local
+    """GIVEN function grabs the data from local
     database and covert rounds data into json
     Args:
         endpoint (str): takes the api endpoint
@@ -107,7 +134,7 @@ def query_local_rounds(endpoint: str):
 
 
 def get_data(endpoint: str):
-    """Function takes get request to
+    """GIVEN function takes get request to
     get data from fund store
     Args:
         endpoint (str): api_endpoint
@@ -126,7 +153,7 @@ def get_data(endpoint: str):
 
 
 def get_local_data(endpoint):
-    """Function makes a get request data
+    """GIVEN function makes a get request data
     form fund store to retrieve the data
 
     Args:
@@ -150,7 +177,7 @@ def get_local_data(endpoint):
 
 
 def list_data(json_data, data_func):
-    """Function loops through json data &
+    """GIVEN function loops through json data &
     converts to list of dictionary
 
     Args:
