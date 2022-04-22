@@ -31,11 +31,10 @@ ROUND_STORE_API_HOST = (
 )
 
 
-FUND_ENDPOINT = "funds"
-FUND_SEARCH_ENDPOINT = "search"
-ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
-
+FUNDS_URL = "{host}/funds/{fund_id}"
 FUNDS_SEARCH_URL = "{host}/funds/search/?"
+
+ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
 
 
 def get_endpoints():
