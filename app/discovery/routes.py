@@ -29,17 +29,19 @@ def search_funds():
 
     form = SearchForm()
     query = request.args.get("query_fund")
-    if query is not None:
-        if not form.validate_on_submit():
+
+    if form.validate_on_submit:
+        if query is not None:
             query_response = query_fund(
                 query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
             )
-        return render_template(
-            "search.html",
-            query=query,
-            query_response=query_response,
-            form=form,
-        )
+            return render_template(
+                "search.html",
+                query=query,
+                query_response=query_response,
+                form=form,
+            )
+
     if not form.validate_on_submit():
         return render_template("search.html", form=form)
 
