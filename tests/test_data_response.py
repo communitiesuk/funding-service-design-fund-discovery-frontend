@@ -51,13 +51,13 @@ def test_search_page_response(flask_test_client):
     assert response.status_code == 404
 
 
-# @pytest.mark.usefixtures("live_server")
-# def test_search_page_not_found(flask_test_client):
-#     response = flask_test_client.get(
-#         url_for("discovery_bp.search_funds") + "/?query_fund=bloolive",
-#         follow_redirects=True,
-#     )
-#     assert b"bloolive" not in response.data
+@pytest.mark.usefixtures("live_server")
+def test_search_page_not_found(flask_test_client):
+    response = flask_test_client.get(
+        url_for("discovery_bp.search_funds") + "/?query_fund=blloolive",
+        follow_redirects=True,
+    )
+    assert b"bloolive" not in response.data
 
 
 @pytest.mark.usefixtures("live_server")
