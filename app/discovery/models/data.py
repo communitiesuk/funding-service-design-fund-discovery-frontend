@@ -78,8 +78,8 @@ def query_local_fund(queries, endpoint, data):
                 if query_found:
                     break
 
-        # else:
-        #     return data.get(endpoint)
+        else:
+            return data.get(endpoint)
     return fund_results
 
 
