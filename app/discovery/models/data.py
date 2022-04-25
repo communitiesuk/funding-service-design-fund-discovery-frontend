@@ -28,7 +28,7 @@ def query_fund(query, endpoint: str):
             else:
                 return None
         else:
-            response = requests.post(endpoint)
+            response = requests.post(endpoint, params={"search_items": " "})
             if response.status_code == 200:
                 data = response.json()
             else:
@@ -75,8 +75,8 @@ def query_local_fund(queries, endpoint, data):
                 if query in fund["fund_name"] or query in fund["fund_id"]:
                     fund_results.append(fund)
                     query_found = True
-                    if query_found:
-                        break
+                if query_found:
+                    break
 
         # else:
         #     return data.get(endpoint)
