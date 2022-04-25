@@ -54,10 +54,10 @@ def test_search_page_response(flask_test_client):
 @pytest.mark.usefixtures("live_server")
 def test_search_page_not_found(flask_test_client):
     response = flask_test_client.get(
-        url_for("discovery_bp.search_funds") + "/?query_fund=blloolive",
+        url_for("discovery_bp.search_funds") + "/?query_fund=fund",
         follow_redirects=True,
     )
-    assert b"bloolive" not in response.data
+    assert b"blloobllaalive" not in response.data
 
 
 @pytest.mark.usefixtures("live_server")
