@@ -40,17 +40,11 @@ def search_funds():
                 query_response=query_response,
                 form=form,
             )
-
-        elif not form.validate_on_submit():
-            query_response = query_fund(
-                query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
-            )
-            return render_template(
-                "search.html",
-                query=query,
-                query_response=query_response,
-                form=form,
-            )
+    if not form.validate_on_submit:
+        return render_template(
+            "search.html",
+            form=form,
+        )
 
     else:
         form_data = convert_none_to_string(form.search.data)
