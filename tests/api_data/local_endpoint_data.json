@@ -6,21 +6,9 @@
         "fund_id": "harry-s-breakfast-fund",
          "fund_description": "An example fund designed to supply Harry's endless supply of muesli."
         },
-        {"fund_name": "Harry's lunch fund",
-            "fund_id": "harry-s-lunch-fund",
-             "fund_description": "An example fund designed to supply Harry's endless supply of lunch."
-            },
-        {"fund_name": "Jack's breakfast fund",
-            "fund_id": "jack-s-breakfast-fund",
-             "fund_description": "An example fund designed to supply Jack's endless supply of coffee of his choice."
-            },
         {"fund_name": "Ram's Get Fit Feb fund",
         "fund_id": "ram-s-get-fit-feb-fund",
         "fund_description": "An example fund designed to supply gym memberships to home workers during Feb."
-       },
-       {"fund_name": "Ram's Get Fit March fund",
-        "fund_id": "ram-s-get-fit-march-fund",
-        "fund_description": "An example fund designed to supply gym memberships to home workers during March."
        },
        {
         "fund_name": "Funding Service Design",
