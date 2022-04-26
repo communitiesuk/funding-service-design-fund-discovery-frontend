@@ -61,7 +61,7 @@ def test_route_response_404(flask_test_client):
 
 
 @pytest.mark.usefixtures("live_server")
-def test_fund_rounds_exist(flask_test_client):
+def test_rounds_exist(flask_test_client):
     response = flask_test_client.get(
         url_for("discovery_bp.fund_rounds", fund_id="funding-service-design"),
         follow_redirects=True,
