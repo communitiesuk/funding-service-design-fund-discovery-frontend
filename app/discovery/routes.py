@@ -5,7 +5,7 @@ from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import convert_none_to_string
-from app.discovery.models.data import get_data
+from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
 from app.discovery.models.data import query_fund
 from app.discovery.models.data import query_rounds
@@ -72,7 +72,7 @@ def fund_rounds(fund_id):
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
 
-    fund = get_data(
+    fund = get_fund_name(
         FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
     return render_template("fund.html", fund=fund, rounds=rounds)

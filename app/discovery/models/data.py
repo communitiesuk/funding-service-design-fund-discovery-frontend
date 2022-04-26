@@ -134,7 +134,7 @@ def query_local_rounds(endpoint: str):
         return rounds
 
 
-def get_data(endpoint: str):
+def get_fund_name(endpoint: str):
     """Function takes get request to
     get data from fund store
     Args:
@@ -149,16 +149,16 @@ def get_data(endpoint: str):
         else:
             return None
     else:
-        data = get_local_data(endpoint)
+        data = get_local_fund_name(endpoint)
     return data
 
 
-def get_local_data(endpoint):
+def get_local_fund_name(endpoint):
     """Function makes a get request data
     form fund store to retrieve the data
 
     Args:
-        endpoint: Takes an fundstore endpoint_
+        endpoint: Takes an fundstore endpoint
 
     Returns:
         Fund name to dispaly on the rounds page
@@ -170,11 +170,12 @@ def get_local_data(endpoint):
     json_data = open(api_data_json)
     api_data = json.load(json_data)
     json_data.close()
-    endpoint_fund_id = endpoint.split("/")[2]
+    endpoint_fund_id = endpoint.split("/")
     for data_values in api_data.values():
         for fund in data_values:
-            if endpoint_fund_id in fund.values():
-                return fund
+            for fund_id in endpoint_fund_id:
+                if fund_id in fund.values():
+                    return fund
 
 
 def list_data(json_data, data_func):
