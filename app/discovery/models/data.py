@@ -6,7 +6,7 @@ from app.config import FLASK_ROOT
 
 
 def query_fund(query, endpoint: str):
-    """GIVEN function return query from
+    """Function return query from
     the fund store.
 
     Args:
@@ -16,7 +16,7 @@ def query_fund(query, endpoint: str):
     Returns:
         return query response from fund store.
     """
-    if "https://" in endpoint:
+    if endpoint.startswith("https://"):
         if query:
             split_query = query.split()
             format_query = ",".join(split_query).replace(" ", "")
@@ -41,7 +41,7 @@ def query_fund(query, endpoint: str):
 
 
 def get_local_fund(query, endpoint):
-    """GIVEN function relates with query_local_fund
+    """Function relates with query_local_fund
     function, return local funds data  &
     calls query_local_fund function.
     """
@@ -56,7 +56,7 @@ def get_local_fund(query, endpoint):
 
 
 def query_local_fund(queries, endpoint, data):
-    """GIVEN function return query from
+    """Function return query from
     the local fund store.
 
     Args:
@@ -84,7 +84,7 @@ def query_local_fund(queries, endpoint, data):
 
 
 def convert_none_to_string(data):
-    """GIVEN function return None data to
+    """Function return None data to
     empty string
     """
     if data is None:
@@ -93,7 +93,7 @@ def convert_none_to_string(data):
 
 
 def query_rounds(endpoint: str):
-    """GIVEN function takes get request to
+    """Function takes get request to
     get data from fund store
     Args:
         endpoint (str): api_endpoint
@@ -112,7 +112,7 @@ def query_rounds(endpoint: str):
 
 
 def query_local_rounds(endpoint: str):
-    """GIVEN function grabs the data from local
+    """Function grabs the data from local
     database and covert rounds data into json
     Args:
         endpoint (str): takes the api endpoint
@@ -134,7 +134,7 @@ def query_local_rounds(endpoint: str):
 
 
 def get_data(endpoint: str):
-    """GIVEN function takes get request to
+    """Function takes get request to
     get data from fund store
     Args:
         endpoint (str): api_endpoint
@@ -153,7 +153,7 @@ def get_data(endpoint: str):
 
 
 def get_local_data(endpoint):
-    """GIVEN function makes a get request data
+    """Function makes a get request data
     form fund store to retrieve the data
 
     Args:
@@ -177,7 +177,7 @@ def get_local_data(endpoint):
 
 
 def list_data(json_data, data_func):
-    """GIVEN function loops through json data &
+    """Function loops through json data &
     converts to list of dictionary
 
     Args:

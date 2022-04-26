@@ -37,7 +37,7 @@ def flask_test_client():
 
 
 @pytest.mark.usefixtures("live_server")
-def test_search_page_found(flask_test_client):
+def test_fund_exist(flask_test_client):
     response = flask_test_client.get(
         url_for("discovery_bp.search_funds") + "/?query_fund=fund",
         follow_redirects=True,
@@ -46,13 +46,7 @@ def test_search_page_found(flask_test_client):
 
 
 @pytest.mark.usefixtures("live_server")
-def test_search_page_response(flask_test_client):
-    response = flask_test_client.get("/rubbish_url", follow_redirects=True)
-    assert response.status_code == 404
-
-
-@pytest.mark.usefixtures("live_server")
-def test_search_page_not_found(flask_test_client):
+def test_fund_not_found(flask_test_client):
     response = flask_test_client.get(
         url_for("discovery_bp.search_funds") + "/?query_fund=fund",
         follow_redirects=True,
@@ -61,7 +55,13 @@ def test_search_page_not_found(flask_test_client):
 
 
 @pytest.mark.usefixtures("live_server")
-def test_round_page_found(flask_test_client):
+def test_route_response_404(flask_test_client):
+    response = flask_test_client.get("/rubbish_url", follow_redirects=True)
+    assert response.status_code == 404
+
+
+@pytest.mark.usefixtures("live_server")
+def test_fund_rounds_exist(flask_test_client):
     response = flask_test_client.get(
         url_for("discovery_bp.fund_rounds", fund_id="funding-service-design"),
         follow_redirects=True,
