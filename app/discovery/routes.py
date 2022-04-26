@@ -39,7 +39,7 @@ def search_funds():
             query_response=query_response,
             form=form,
         )
-    if not form.validate_on_submit:
+    if not form.validate_on_submit():
         return render_template(
             "search.html",
             form=form,
