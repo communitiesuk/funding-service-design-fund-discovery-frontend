@@ -4,6 +4,7 @@ from app.config import FUNDS_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
+from app.discovery.forms import EmailForm
 from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
@@ -77,8 +78,8 @@ def fund_rounds(fund_id):
     )
     return render_template("fund.html", fund=fund, rounds=rounds)
 
-@discovery_bp.route("/round/<fund_id>/email", methods=["GET", "POST"])
-def email_route(fund_id):
+@discovery_bp.route("/email", methods=["GET", "POST"])
+def email_route():
     """
     GIVEN Function calls the RoundStore function
     from data model to check rounds with given endpoint
@@ -86,18 +87,10 @@ def email_route(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    fund_rounds_data = query_rounds(
-        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
-    )
+    form = EmailForm()
 
-    if fund_rounds_data:
-        rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
+    if form.validate_on_submit():
 
-    else:
-        error = "No rounds exist for this fund"
-        return render_template("fund.html", error=error)
+        print(form.email.data)
 
-    fund = get_fund_name(
-        FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
-    )
-    return render_template("fund.html", fund=fund, rounds=rounds)
+    return render_template("email.html", form=form)
