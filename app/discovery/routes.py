@@ -76,3 +76,28 @@ def fund_rounds(fund_id):
         FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
     return render_template("fund.html", fund=fund, rounds=rounds)
+
+@discovery_bp.route("/round/<fund_id>/email", methods=["GET", "POST"])
+def email_route(fund_id):
+    """
+    GIVEN Function calls the RoundStore function
+    from data model to check rounds with given endpoint
+     & id.
+     Function query_fund send QUERY to fund store
+     so the fund name can be displayed onto the rounds page.
+    """
+    fund_rounds_data = query_rounds(
+        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
+    )
+
+    if fund_rounds_data:
+        rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
+
+    else:
+        error = "No rounds exist for this fund"
+        return render_template("fund.html", error=error)
+
+    fund = get_fund_name(
+        FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
+    )
+    return render_template("fund.html", fund=fund, rounds=rounds)
