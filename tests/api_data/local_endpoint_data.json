@@ -1,12 +1,11 @@
 {
-    "fund_store/funds/search/": [
+
+    "fund_store/funds/search/?": [
 
       {"fund_name": "Harry's breakfast fund",
         "fund_id": "harry-s-breakfast-fund",
          "fund_description": "An example fund designed to supply Harry's endless supply of muesli."
         },
-
-
         {"fund_name": "Ram's Get Fit Feb fund",
         "fund_id": "ram-s-get-fit-feb-fund",
         "fund_description": "An example fund designed to supply gym memberships to home workers during Feb."
@@ -20,14 +19,15 @@
 
 
 
-    "round_store/fund/funding-service-design": [
+    "round_store/funds/funding-service-design/rounds": [
       {
           "fund_id": "funding-service-design",
           "round_title": "Spring",
           "round_id": "spring",
           "eligibility_criteria": {"max_project_cost": 1000000},
-          "opens": "2022-02-01T00:00:01",
-          "deadline": "2022-06-01T00:00:00",
+          "opens": "2022-02-01 00:00:01",
+          "deadline": "2022-06-01 00:00:00",
+          "assessment_deadline": "2022-09-30 00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
 
       },
@@ -36,8 +36,9 @@
           "round_title": "Summer",
           "round_id": "summer",
           "eligibility_criteria": {"max_project_cost": 1000000},
-          "opens": "2022-06-01T00:00:01",
-          "deadline": "2022-08-31T00:00:00",
+          "opens": "2022-06-01 00:00:01",
+          "deadline": "2022-08-31 00:00:00",
+          "assessment_deadline": "2023-03-30 00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       },
       {
@@ -45,36 +46,40 @@
           "round_title": "Autumn",
           "round_id": "autumn",
           "eligibility_criteria": {"max_project_cost": 10000000},
-          "opens": "2022-09-01T00:00:01",
-          "deadline": "2022-11-30T00:00:00",
+          "opens": "2022-09-01 00:00:01",
+          "deadline": "2022-11-30 00:00:00",
+          "assessment_deadline": "2023-08-30 00:00:00",
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       }
     ],
-    "round_store/fund/funding-service-design/round/spring": {
+    "round_store/funds/funding-service-design/rounds/spring": {
         "fund_id": "funding-service-design",
         "round_title": "Spring",
         "round_id": "spring",
         "eligibility_criteria": {"maximum_project_cost": 1000000},
-        "opens": "2022-02-01T00:00:01",
-        "deadline": "2022-06-01T00:00:00",
+        "opens": "2022-02-01 00:00:01",
+        "deadline": "2022-06-01 00:00:00",
+        "assessment_deadline": "2022-09-30 00:00:00",
         "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
     },
-    "round_store/fund/funding-service-design/round/summer": {
+    "round_store/funds/funding-service-design/rounds/summer": {
         "fund_id": "funding-service-design",
         "round_title": "Summer",
         "round_id": "summer",
         "eligibility_criteria": {"maximum_project_cost": 1000000},
-        "opens": "2022-06-01T00:00:01",
-        "deadline": "2022-08-31T00:00:00",
+        "opens": "2022-06-01 00:00:01",
+        "deadline": "2022-08-31 00:00:00",
+        "assessment_deadline": "2022-09-30 00:00:00",
         "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       },
-    "round_store/fund/funding-service-design/round/autumn": {
+    "round_store/funds/funding-service-design/rounds/autumn": {
         "fund_id": "funding-service-design",
         "round_title": "Autumn",
         "round_id": "autumn",
         "eligibility_criteria": {"maximum_project_cost": 10000000},
-        "opens": "2022-09-01T00:00:01",
-        "deadline": "2022-11-30T00:00:00",
+        "opens": "2022-09-01 00:00:01",
+        "deadline": "2022-11-30 00:00:00",
+        "assessment_deadline": "2022-09-30 00:00:00",
         "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       },
     "application_store/fund/funding-service-design?datetime_start=2022-02-01T00:00:01&datetime_end=2022-06-01T00:00:00": [

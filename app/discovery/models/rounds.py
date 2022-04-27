@@ -17,6 +17,7 @@ class Rounds:
     eligibility_criteria: dict
     opens: datetime
     deadline: datetime
+    assessment_deadline: datetime
     application_url: str
 
     @staticmethod
@@ -37,6 +38,7 @@ class Rounds:
             eligibility_criteria=fund_round.get("eligibility_criteria"),
             opens=fund_round.get("opens"),
             deadline=fund_round.get("deadline"),
+            assessment_deadline=fund_round.get("assessment_deadline"),
             application_url=fund_round.get("application_url"),
         )
 
@@ -46,7 +48,7 @@ class Rounds:
         GIVEN function is to alter the datetime string object
         for self.opens for human readability.
         """
-        return datetime.strptime(self.opens, "%Y-%m-%dT%H:%M:%S").strftime(
+        return datetime.strptime(self.opens, "%Y-%m-%d %H:%M:%S").strftime(
             "%Y-%m-%d"
         )
 
@@ -56,7 +58,7 @@ class Rounds:
         GIVEN function is to alter the datetime string object
         for self.deadline for human readability.
         """
-        return datetime.strptime(self.deadline, "%Y-%m-%dT%H:%M:%S").strftime(
+        return datetime.strptime(self.deadline, "%Y-%m-%d %H:%M:%S").strftime(
             "%Y-%m-%d"
         )
 
@@ -68,3 +70,13 @@ class Rounds:
             Comma separated integers
         """
         return "{:,}".format(self.eligibility_criteria["max_project_cost"])
+
+    @property
+    def assessment_deadline_formatted(self):
+        """
+        GIVEN function is to alter the datetime string object
+        for self.assessment_deadline for human readability.
+        """
+        return datetime.strptime(self.deadline, "%Y-%m-%d %H:%M:%S").strftime(
+            "%Y-%m-%d"
+        )
