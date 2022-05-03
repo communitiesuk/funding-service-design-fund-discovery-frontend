@@ -1,0 +1,23 @@
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+{{if account_exists}}
+<h2 class="govuk-heading-m">This account exists! Here's the data chief: </h2>
+<p class="govuk-body">{{account_data}}</p>
+{{endif}}
+
+{{if account_exists == false}}
+<h2 class="govuk-heading-m">This account has just been made - how exciting...</h2>
+{{endif}}
+
+{{ govukButton({
+  text: "Start application",
+  href: continue_url,
+  isStartButton: true
+}) }}
+
+{% endblock %}

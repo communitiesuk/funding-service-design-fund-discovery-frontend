@@ -3,6 +3,7 @@ from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
+import urllib.parse
 from app.discovery.forms import SearchForm
 from app.discovery.forms import EmailForm
 from app.discovery.models.data import convert_none_to_string
@@ -76,6 +77,7 @@ def fund_rounds(fund_id):
     fund = get_fund_name(
         FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
+
     return render_template("fund.html", fund=fund, rounds=rounds)
 
 @discovery_bp.route("/email", methods=["GET", "POST"])
@@ -89,8 +91,12 @@ def email_route():
     """
     form = EmailForm()
 
+    continue_url = request.args.get("application_url")
+
+    print(continue_url)
+
     if form.validate_on_submit():
 
-        print(form.email.data)
+        return render_template("debug_continue.html", account_exists=False,  continue_url=continue_url)
 
     return render_template("email.html", form=form)
