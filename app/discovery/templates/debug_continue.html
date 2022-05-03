@@ -5,14 +5,14 @@
 
 {% block content %}
 
-{{if account_exists}}
+{% if account_exists == True%}
 <h2 class="govuk-heading-m">This account exists! Here's the data chief: </h2>
 <p class="govuk-body">{{account_data}}</p>
-{{endif}}
+{%endif%}
 
-{{if account_exists == false}}
+{% if account_exists == False %}
 <h2 class="govuk-heading-m">This account has just been made - how exciting...</h2>
-{{endif}}
+{% endif %}
 
 {{ govukButton({
   text: "Start application",
