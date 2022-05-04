@@ -132,4 +132,4 @@ def account_info_route():
         _ , response_data = post_account(email)
 
     return render_template("debug_continue.html", account_exists=account_exists,  application_url=application_url,
-        account_data=response_data)
+        account_data=response_data.decode("utf-8"))
