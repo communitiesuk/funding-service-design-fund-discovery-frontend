@@ -7,17 +7,18 @@
 
 {% if account_exists == True%}
 <h2 class="govuk-heading-m">This account exists! Here's the data chief: </h2>
-<p class="govuk-body">{{account_data}}</p>
+<p class="govuk-body">{{account_data|string}}</p>
 {%endif%}
 
 {% if account_exists == False %}
 <h2 class="govuk-heading-m">This account has just been made - how exciting...</h2>
+<p class="govuk-body">{{account_data|string}}</p>
 {% endif %}
 
 {{ govukButton({
-  text: "Start application",
-  href: continue_url,
-  isStartButton: true
+  "text": "Start application",
+  "href": application_url,
+  "isStartButton": true
 }) }}
 
 {% endblock %}

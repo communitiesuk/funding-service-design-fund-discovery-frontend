@@ -1,9 +1,10 @@
+from requests import PreparedRequest
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
-import urllib.parse
+from app.discovery.models.data import get_account, post_account
 from app.discovery.forms import SearchForm
 from app.discovery.forms import EmailForm
 from app.discovery.models.data import convert_none_to_string
@@ -83,20 +84,52 @@ def fund_rounds(fund_id):
 @discovery_bp.route("/email", methods=["GET", "POST"])
 def email_route():
     """
+    Returns a page containing a single question requesting the
+    users email address.
+    """
+    form = EmailForm()
+
+    application_url = request.args.get("application_url")
+
+    if form.validate() and form.is_submitted():
+
+        params = { "application_url" : application_url, "email" : form.email.data}
+
+        req = PreparedRequest()
+
+        root_url = request.root_url
+
+        url = root_url + url_for("discovery_bp.account_info_route")
+
+        req.prepare_url(url, params)
+
+        return redirect(req.url)
+
+    return render_template("email.html", form=form)
+
+@discovery_bp.route("/email/confirm", methods=["GET", "POST"])
+def account_info_route():
+    """
     GIVEN Function calls the RoundStore function
     from data model to check rounds with given endpoint
      & id.
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    form = EmailForm()
+    application_url = request.args.get("application_url")
+    email = request.args.get("email")
 
-    continue_url = request.args.get("application_url")
+    status_code, response_data = get_account(email)
 
-    print(continue_url)
+    if status_code == 200:
 
-    if form.validate_on_submit():
+        account_exists = True
 
-        return render_template("debug_continue.html", account_exists=False,  continue_url=continue_url)
+    if status_code == 204:
 
-    return render_template("email.html", form=form)
+        account_exists = False
+
+        _ , response_data = post_account(email)
+
+    return render_template("debug_continue.html", account_exists=account_exists,  application_url=application_url,
+        account_data=response_data)

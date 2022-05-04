@@ -1,8 +1,9 @@
+from http.client import NO_CONTENT
 import json
 import os
 
 import requests
-from app.config import FLASK_ROOT
+from app.config import ACCOUNT_STORE_API_HOST, FLASK_ROOT
 
 
 def query_fund(query, endpoint: str):
@@ -193,3 +194,47 @@ def list_data(json_data, data_func):
     for data in json_data:
         listed_data.append(data_func(data))
     return listed_data
+
+def get_account(email_address=None, account_id=None):
+
+    if email_address is None and account_id is None:
+
+        raise TypeError("Requires an email address or account_id")
+
+    req = requests.PreparedRequest()
+
+    url = ACCOUNT_STORE_API_HOST + "/account"
+
+    params = {"email_address" : email_address, "account_id" : account_id}
+
+    req.prepare_url(url, params)
+
+    response = requests.get(req.url)
+
+    print(req.url)
+
+    if response.status_code == 204:
+        return 204, ""
+    if response.status_code == 200:
+        return 200, response.content
+    else: 
+        return 400, ""
+
+def post_account(email_address):
+
+    req = requests.PreparedRequest()
+
+    url = ACCOUNT_STORE_API_HOST + "/account"
+
+    params = {"email_address" : email_address}
+
+    req.prepare_url(url, params)
+
+    response = requests.post(req.url)
+
+    print(req.url)
+
+    if response.status_code == 409:
+        return 409, ""
+    if response.status_code == 200:
+        return 200, response.content
