@@ -19,7 +19,9 @@ crayons==0.4.0
 cryptography==36.0.1
 dill==0.3.4
 distlib==0.3.4
+dnspython==2.2.1
 dparse==0.5.1
+email-validator==1.2.0
 execnet==1.9.0
 Faker==13.3.1
 filelock==3.4.2
@@ -57,6 +59,7 @@ pyfiglet==0.8.post1
 pyOpenSSL==22.0.0
 pyparsing==3.0.6
 pyrsistent==0.18.1
+PySocks==1.7.1
 pytest==6.2.5
 pytest-base-url==1.4.2
 pytest-flask==1.2.0
