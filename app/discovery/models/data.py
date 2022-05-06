@@ -211,8 +211,6 @@ def get_account(email_address=None, account_id=None):
 
     response = requests.get(req.url)
 
-    print(req.url)
-
     if response.status_code == 204:
         return 204, ""
     if response.status_code == 200:
@@ -231,8 +229,6 @@ def post_account(email_address):
     req.prepare_url(url, params)
 
     response = requests.post(req.url)
-
-    print(req.url)
 
     if response.status_code == 409:
         return 409, ""

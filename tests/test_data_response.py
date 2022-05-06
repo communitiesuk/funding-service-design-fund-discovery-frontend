@@ -1,8 +1,14 @@
+import random
+import string
 from urllib.request import urlopen
 
 import pytest
+from requests import PreparedRequest
+import requests
 from app.create_app import create_app
-from flask import url_for
+from flask import url_for, request
+
+from app.discovery.models.data import get_account, post_account
 
 
 @pytest.fixture(scope="session")
@@ -69,3 +75,24 @@ def test_rounds_exist(flask_test_client):
     assert b"SUMMER" in response.data
     assert b"SPRING" in response.data
     assert b"AUTUMN" in response.data
+
+@pytest.mark.usefixtures("live_server")
+def test_page_creates_email():
+
+    random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+
+    created_email = f"{random_string}@delete_me.com"
+
+    params = { "application_url" : "www.google.com", "email" : created_email}
+
+    req = PreparedRequest()
+
+    url = request.root_url + url_for("discovery_bp.account_info_route")
+
+    req.prepare_url(url, params)
+
+    response = requests.get(req.url)
+
+    status_code, response = get_account(email_address=created_email)
+
+    assert status_code == 200
