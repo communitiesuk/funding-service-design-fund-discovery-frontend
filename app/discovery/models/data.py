@@ -1,6 +1,7 @@
 from http.client import NO_CONTENT
 import json
 import os
+from typing import Tuple
 
 import requests
 from app.config import ACCOUNT_STORE_API_HOST, FLASK_ROOT
@@ -195,7 +196,23 @@ def list_data(json_data, data_func):
         listed_data.append(data_func(data))
     return listed_data
 
-def get_account(email_address=None, account_id=None):
+def get_account(email_address : str=None, account_id : str =None):
+    """get_account Using either an email address or account_id we 
+    grab the corresponding account from the account store.
+
+    Args:
+        email_address (str, optional): The account email address
+        Defaults to None.
+        account_id (str, optional): The account id. Defaults to None.
+
+    Raises:
+        TypeError: If both an email address or account id is given,
+        a TypeError is raised.
+
+    Returns:
+        Tuple[int, Optional Response] Returns the status code
+        and possible content in a tuple.
+    """
 
     if email_address is None and account_id is None:
 
@@ -218,7 +235,20 @@ def get_account(email_address=None, account_id=None):
     else: 
         return 400, ""
 
-def post_account(email_address):
+def post_account(email_address : str) -> Tuple[int, str]:
+    """post_account An email address is used to 
+    (possibly) create a new account in the account
+    store.
+
+    Args:
+        email_address (str): The email address we wish
+        to create a new account with.
+
+    Returns:
+        Tuple[int, response data]: A tuple containing
+        the status code and the  response data as a str
+        - if successful.
+    """
 
     req = requests.PreparedRequest()
 

@@ -78,6 +78,13 @@ def test_rounds_exist(flask_test_client):
 
 @pytest.mark.usefixtures("live_server")
 def test_page_creates_email():
+    """
+    GIVEN The flask test client
+    WHEN we make a get request to the email confirmation page
+    containing a random  email address.
+    THEN we expect an account with the corresponding email
+    address to exist in the account store.
+    """
 
     random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
 
