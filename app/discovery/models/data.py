@@ -231,7 +231,6 @@ def get_account(email_address: str = None, account_id: str = None):
 
     response = requests.get(req.url)
 
-    print(response.status_code)
 
     if response.status_code == 204:
         return 204, ""
