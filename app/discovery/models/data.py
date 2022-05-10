@@ -1,10 +1,10 @@
-from http.client import NO_CONTENT
 import json
 import os
 from typing import Tuple
 
 import requests
-from app.config import ACCOUNT_STORE_API_HOST, FLASK_ROOT
+from app.config import ACCOUNT_STORE_API_HOST
+from app.config import FLASK_ROOT
 
 
 def query_fund(query, endpoint: str):
@@ -196,8 +196,9 @@ def list_data(json_data, data_func):
         listed_data.append(data_func(data))
     return listed_data
 
-def get_account(email_address : str=None, account_id : str =None):
-    """get_account Using either an email address or account_id we 
+
+def get_account(email_address: str = None, account_id: str = None):
+    """get_account Using either an email address or account_id we
     grab the corresponding account from the account store.
 
     Args:
@@ -222,7 +223,7 @@ def get_account(email_address : str=None, account_id : str =None):
 
     url = ACCOUNT_STORE_API_HOST + "/account"
 
-    params = {"email_address" : email_address, "account_id" : account_id}
+    params = {"email_address": email_address, "account_id": account_id}
 
     req.prepare_url(url, params)
 
@@ -232,11 +233,12 @@ def get_account(email_address : str=None, account_id : str =None):
         return 204, ""
     if response.status_code == 200:
         return 200, response.content
-    else: 
+    else:
         return 400, ""
 
-def post_account(email_address : str) -> Tuple[int, str]:
-    """post_account An email address is used to 
+
+def post_account(email_address: str) -> Tuple[int, str]:
+    """post_account An email address is used to
     (possibly) create a new account in the account
     store.
 
@@ -254,7 +256,7 @@ def post_account(email_address : str) -> Tuple[int, str]:
 
     url = ACCOUNT_STORE_API_HOST + "/account"
 
-    params = {"email_address" : email_address}
+    params = {"email_address": email_address}
 
     req.prepare_url(url, params)
 

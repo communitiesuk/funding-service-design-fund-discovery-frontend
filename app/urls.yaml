@@ -1,6 +1,6 @@
 urls:
 
-  development: 
+  development:
 
     account-store: localhost:6794
 
