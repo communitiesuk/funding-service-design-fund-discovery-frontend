@@ -223,7 +223,9 @@ def get_account(email_address: str = None, account_id: str = None):
 
     url = ACCOUNT_STORE_API_HOST + "/account"
 
-    params = {"email_address": email_address, "account_id": account_id}
+    raw_params = {"email_address": email_address, "account_id": account_id}
+
+    params = {k: v for k, v in raw_params.items() if v is not None}
 
     req.prepare_url(url, params)
 
