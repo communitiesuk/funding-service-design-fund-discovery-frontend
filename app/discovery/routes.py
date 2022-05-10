@@ -118,8 +118,9 @@ def account_info_route():
     """
     application_url = request.args.get("application_url")
     email = request.args.get("email")
-    status_code, response_data = get_account(email)
+    status_code, response_data = get_account(email_address=email)
     account_exists = False
+
 
     if status_code == 200:
 
