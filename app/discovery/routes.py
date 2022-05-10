@@ -133,5 +133,5 @@ def account_info_route():
         "debug_continue.html",
         account_exists=account_exists,
         application_url=application_url,
-        account_data=response_data.decode("utf-8"),
+        account_data=response_data,
     )
