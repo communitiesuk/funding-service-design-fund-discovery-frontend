@@ -119,6 +119,7 @@ def account_info_route():
     application_url = request.args.get("application_url")
     email = request.args.get("email")
     status_code, response_data = get_account(email)
+    account_exists = False
 
     if status_code == 200:
 
@@ -126,7 +127,6 @@ def account_info_route():
 
     if status_code == 204:
 
-        account_exists = False
         _, response_data = post_account(email)
 
     return render_template(
