@@ -96,11 +96,8 @@ def email_route():
         params = { "application_url" : application_url, "email" : form.email.data}
 
         req = PreparedRequest()
-
         root_url = request.root_url
-
         url = root_url + url_for("discovery_bp.account_info_route")
-
         req.prepare_url(url, params)
 
         return redirect(req.url)
@@ -118,17 +115,15 @@ def account_info_route():
     """
     application_url = request.args.get("application_url")
     email = request.args.get("email")
-
     status_code, response_data = get_account(email)
 
     if status_code == 200:
-
+        
         account_exists = True
 
     if status_code == 204:
 
         account_exists = False
-
         _ , response_data = post_account(email)
 
     return render_template("debug_continue.html", account_exists=account_exists,  application_url=application_url,

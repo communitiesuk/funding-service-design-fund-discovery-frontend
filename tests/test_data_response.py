@@ -87,17 +87,11 @@ def test_page_creates_email():
     """
 
     random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-
     created_email = f"{random_string}@delete_me.com"
-
     params = { "application_url" : "www.google.com", "email" : created_email}
-
     req = PreparedRequest()
-
     url = request.root_url + url_for("discovery_bp.account_info_route")
-
     req.prepare_url(url, params)
-
     response = requests.get(req.url)
 
     status_code, response = get_account(email_address=created_email)
