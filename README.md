@@ -34,6 +34,7 @@ Clone the repository
 From the top-level directory enter the command to install pip and the dependencies of the project
 
     python3 -m pip install --upgrade pip && pip install -r requirements.txt
+    python3 ./build.py
 
 ## How to use
 Enter the virtual environment as described above, then:
