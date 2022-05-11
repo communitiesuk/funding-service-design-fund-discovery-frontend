@@ -95,6 +95,9 @@ def email_route():
 
     if form.validate() and form.is_submitted():
 
+        # TODO : Remove passed though state when
+        # the redirected page is finished. 
+
         params = {"application_url": application_url, "email": form.email.data}
 
         req = PreparedRequest()
