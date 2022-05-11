@@ -95,8 +95,8 @@ def test_page_creates_email():
     req = PreparedRequest()
     url = request.root_url + url_for("discovery_bp.account_info_route")
     req.prepare_url(url, params)
-    response = requests.get(req.url)
+    _ = requests.get(req.url)
 
-    status_code, response = get_account(email_address=created_email)
+    response = get_account(email_address=created_email)
 
-    assert status_code == 200
+    assert response.status_code == 200

@@ -113,30 +113,23 @@ def email_route():
 
 @discovery_bp.route("/email/confirm", methods=["GET", "POST"])
 def account_info_route():
-    """
-    GIVEN Function calls the RoundStore function
-    from data model to check rounds with given endpoint
-     & id.
-     Function query_fund send QUERY to fund store
-     so the fund name can be displayed onto the rounds page.
-    """
     application_url = request.args.get("application_url")
     email = request.args.get("email")
-    status_code, response_data = get_account(email_address=email)
+    response = get_account(email_address=email)
     account_exists = False
 
 
-    if status_code == 200:
+    if response.status_code == 200:
 
         account_exists = True
 
-    if status_code == 204:
+    if response.status_code == 404:
 
-        _, response_data = post_account(email)
+        response = post_account(email)
 
     return render_template(
         "debug_continue.html",
         account_exists=account_exists,
         application_url=application_url,
-        account_data=response_data,
+        account_data=response.json(),
     )

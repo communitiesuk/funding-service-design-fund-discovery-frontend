@@ -231,13 +231,7 @@ def get_account(email_address: str = None, account_id: str = None):
 
     response = requests.get(req.url)
 
-
-    if response.status_code == 204:
-        return 204, ""
-    if response.status_code == 200:
-        return 200, response.content
-    else:
-        return 400, ""
+    return response
 
 
 def post_account(email_address: str) -> Tuple[int, str]:
@@ -265,7 +259,4 @@ def post_account(email_address: str) -> Tuple[int, str]:
 
     response = requests.post(req.url)
 
-    if response.status_code == 409:
-        return 409, ""
-    if response.status_code == 200:
-        return 200, response.content
+    return response
