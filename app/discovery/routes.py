@@ -98,7 +98,8 @@ def email_route():
         params = {"application_url": application_url, "email": form.email.data}
 
         req = PreparedRequest()
-        root_url = request.root_url
+        # Removes slash at end.
+        root_url = request.root_url[:-1] 
         url = root_url + url_for("discovery_bp.account_info_route")
         req.prepare_url(url, params)
 
