@@ -13,13 +13,17 @@ cfgv==3.3.1
 charset-normalizer==2.0.11
 chromedriver-py==99.0.4844.51
 click==8.0.3
+clickclick==20.10.2
 colorama==0.4.4
 configparser==5.2.0
+connexion==2.13.1
 crayons==0.4.0
 cryptography==36.0.1
 dill==0.3.4
 distlib==0.3.4
+dnspython==2.2.1
 dparse==0.5.1
+email-validator==1.2.1
 execnet==1.9.0
 Faker==13.3.1
 filelock==3.4.2
@@ -35,6 +39,7 @@ govuk-frontend-jinja==2.0.0
 h11==0.13.0
 identify==2.4.2
 idna==3.3
+inflection==0.5.1
 iniconfig==1.1.1
 itsdangerous==2.0.1
 Jinja2==3.0.3
@@ -57,6 +62,7 @@ pyfiglet==0.8.post1
 pyOpenSSL==22.0.0
 pyparsing==3.0.6
 pyrsistent==0.18.1
+PySocks==1.7.1
 pytest==6.2.5
 pytest-base-url==1.4.2
 pytest-flask==1.2.0
@@ -83,6 +89,7 @@ smmap==5.0.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
 stevedore==3.5.0
+swagger-ui-bundle==0.0.9
 tblib==1.7.0
 tenacity==6.3.1
 termcolor==1.1.0
