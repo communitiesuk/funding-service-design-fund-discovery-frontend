@@ -17,7 +17,7 @@ certifi==2021.10.8
 cffi==1.15.0
 cfgv==3.3.1
 charset-normalizer==2.0.12
-chromedriver-py==102.0.5005.27
+chromedriver-py==98.0.4758.102
 click==8.1.3
 constantly==15.1.0
 cryptography==37.0.2
