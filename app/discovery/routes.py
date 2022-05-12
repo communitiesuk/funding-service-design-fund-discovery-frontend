@@ -6,10 +6,9 @@ from app.config import ROUNDS_URL
 from app.discovery.forms import EmailForm
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import convert_none_to_string
-from app.discovery.models.data import get_account
 from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
-from app.discovery.models.data import post_account
+from app.discovery.models.data import account_methods
 from app.discovery.models.data import query_fund
 from app.discovery.models.data import query_rounds
 from app.discovery.models.rounds import Rounds
@@ -113,14 +112,13 @@ def email_route():
 def account_info_route():
     application_url = request.args.get("application_url")
     email = request.args.get("email")
-    response = get_account(email_address=email)
+    response = account_methods.get_account(email_address=email)
     account_exists = False
-
 
     if response.status_code == 200:
         account_exists = True
     if response.status_code == 404:
-        response = post_account(email)
+        response = account_methods.post_account(email)
 
     return render_template(
         "debug_continue.html",

@@ -196,57 +196,59 @@ def list_data(json_data, data_func):
         listed_data.append(data_func(data))
     return listed_data
 
+class account_methods():
 
-def get_account(email_address: str = None, account_id: str = None):
-    """get_account Using either an email address or account_id we
-    grab the corresponding account from the account store.
+    @staticmethod
+    def get_account(email_address: str = None, account_id: str = None):
+        """get_account Using either an email address or account_id we
+        grab the corresponding account from the account store.
 
-    Args:
-        email_address (str, optional): The account email address
-        Defaults to None.
-        account_id (str, optional): The account id. Defaults to None.
+        Args:
+            email_address (str, optional): The account email address
+            Defaults to None.
+            account_id (str, optional): The account id. Defaults to None.
 
-    Raises:
-        TypeError: If both an email address or account id is given,
-        a TypeError is raised.
+        Raises:
+            TypeError: If both an email address or account id is given,
+            a TypeError is raised.
 
-    Returns:
-        Tuple[int, Optional Response] Returns the status code
-        and possible content in a tuple.
-    """
+        Returns:
+            Tuple[int, Optional Response] Returns the status code
+            and possible content in a tuple.
+        """
 
-    if email_address is None and account_id is None:
-        raise TypeError("Requires an email address or account_id")
+        if email_address is None and account_id is None:
+            raise TypeError("Requires an email address or account_id")
 
-    req = requests.PreparedRequest()
-    url = ACCOUNT_STORE_API_HOST + "/account"
-    raw_params = {"email_address": email_address, "account_id": account_id}
-    params = {k: v for k, v in raw_params.items() if v is not None}
-    req.prepare_url(url, params)
-    response = requests.get(req.url)
+        req = requests.PreparedRequest()
+        url = ACCOUNT_STORE_API_HOST + "/account"
+        raw_params = {"email_address": email_address, "account_id": account_id}
+        params = {k: v for k, v in raw_params.items() if v is not None}
+        req.prepare_url(url, params)
+        response = requests.get(req.url)
 
-    return response
+        return response
 
+    @staticmethod
+    def post_account(email_address: str) -> Tuple[int, str]:
+        """post_account An email address is used to
+        (possibly) create a new account in the account
+        store.
 
-def post_account(email_address: str) -> Tuple[int, str]:
-    """post_account An email address is used to
-    (possibly) create a new account in the account
-    store.
+        Args:
+            email_address (str): The email address we wish
+            to create a new account with.
 
-    Args:
-        email_address (str): The email address we wish
-        to create a new account with.
+        Returns:
+            Tuple[int, response data]: A tuple containing
+            the status code and the  response data as a str
+            - if successful.
+        """
 
-    Returns:
-        Tuple[int, response data]: A tuple containing
-        the status code and the  response data as a str
-        - if successful.
-    """
+        req = requests.PreparedRequest()
+        url = ACCOUNT_STORE_API_HOST + "/account"
+        params = {"email_address": email_address}
+        req.prepare_url(url, params)
+        response = requests.post(req.url)
 
-    req = requests.PreparedRequest()
-    url = ACCOUNT_STORE_API_HOST + "/account"
-    params = {"email_address": email_address}
-    req.prepare_url(url, params)
-    response = requests.post(req.url)
-
-    return response
+        return response
