@@ -216,19 +216,13 @@ def get_account(email_address: str = None, account_id: str = None):
     """
 
     if email_address is None and account_id is None:
-
         raise TypeError("Requires an email address or account_id")
 
     req = requests.PreparedRequest()
-
     url = ACCOUNT_STORE_API_HOST + "/account"
-
     raw_params = {"email_address": email_address, "account_id": account_id}
-
     params = {k: v for k, v in raw_params.items() if v is not None}
-
     req.prepare_url(url, params)
-
     response = requests.get(req.url)
 
     return response
@@ -250,13 +244,9 @@ def post_account(email_address: str) -> Tuple[int, str]:
     """
 
     req = requests.PreparedRequest()
-
     url = ACCOUNT_STORE_API_HOST + "/account"
-
     params = {"email_address": email_address}
-
     req.prepare_url(url, params)
-
     response = requests.post(req.url)
 
     return response

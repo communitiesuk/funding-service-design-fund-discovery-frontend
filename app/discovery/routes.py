@@ -30,9 +30,9 @@ def search_funds():
     user input/query & return query response
     from fund store.
     """
-
     form = SearchForm()
     query = request.args.get("query_fund")
+
     if query is not None:
         query_response = query_fund(
             query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
@@ -43,12 +43,12 @@ def search_funds():
             query_response=query_response,
             form=form,
         )
+
     if not form.validate_on_submit():
         return render_template(
             "search.html",
             form=form,
         )
-
     else:
         form_data = convert_none_to_string(form.search.data)
         return redirect(
@@ -71,7 +71,6 @@ def fund_rounds(fund_id):
 
     if fund_rounds_data:
         rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
-
     else:
         error = "No rounds exist for this fund"
         return render_template("fund.html", error=error)
@@ -99,7 +98,6 @@ def email_route():
         # the redirected page is finished. 
 
         params = {"application_url": application_url, "email": form.email.data}
-
         req = PreparedRequest()
         # Removes slash at end.
         root_url = request.root_url[:-1] 
@@ -121,7 +119,6 @@ def account_info_route():
 
     if response.status_code == 200:
         account_exists = True
-
     if response.status_code == 404:
         response = post_account(email)
 

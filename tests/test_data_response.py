@@ -23,7 +23,6 @@ class TestSearchPage:
     GIVEN class checks if route for search_fund
     is up & running
     """
-
     def test_search_page_response(self):
         url = url_for("discovery_bp.search_funds", _external=True)
         res = urlopen(url)
