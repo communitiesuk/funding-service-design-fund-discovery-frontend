@@ -9,7 +9,6 @@ class SearchForm(FlaskForm):
     """
     Given class is a form class model for search fund
     """
-
     search = StringField("Search fund", validators=[DataRequired()])
 
 
@@ -19,5 +18,4 @@ class EmailForm(FlaskForm):
     A FlaskForm combined with some logic for handling the email address
     submission.
     """
-
     email = EmailField("email field", validators=[Email()])

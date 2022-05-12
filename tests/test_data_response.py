@@ -86,7 +86,6 @@ def test_page_creates_email():
     THEN we expect an account with the corresponding email
     address to exist in the account store.
     """
-
     random_string = "".join(
         random.choices(string.ascii_uppercase + string.digits, k=10)
     )
@@ -95,7 +94,7 @@ def test_page_creates_email():
     req = PreparedRequest()
     url = request.root_url + url_for("discovery_bp.account_info_route")
     req.prepare_url(url, params)
-    _ = requests.get(req.url)
+    requests.get(req.url)
 
     response = get_account(email_address=created_email)
 

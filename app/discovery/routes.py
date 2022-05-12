@@ -120,11 +120,9 @@ def account_info_route():
 
 
     if response.status_code == 200:
-
         account_exists = True
 
     if response.status_code == 404:
-
         response = post_account(email)
 
     return render_template(
