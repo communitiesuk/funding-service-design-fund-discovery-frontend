@@ -1,0 +1,23 @@
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if account_exists == True%}
+<h2 class="govuk-heading-m">This account exists! Here's the data: </h2>
+<p class="govuk-body">{{account_data|string}}</p>
+
+{% else %}
+<h2 class="govuk-heading-m">This account has just been made:</h2>
+<p class="govuk-body">{{account_data|string}}</p>
+{% endif %}
+
+{{ govukButton({
+  "text": "Start application",
+  "href": application_url,
+  "isStartButton": true
+}) }}
+
+{% endblock %}

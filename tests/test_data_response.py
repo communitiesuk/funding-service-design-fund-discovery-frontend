@@ -1,29 +1,17 @@
+import os
+from pickle import PickleBuffer
+import random
+import string
 from urllib.request import urlopen
+from tests.mocks.account_data_mocks import account_methods_mock
 
 import pytest
+import requests
 from app.create_app import create_app
+from app.discovery.models.data import account_methods
+from flask import request
 from flask import url_for
-
-
-@pytest.fixture(scope="session")
-def app():
-    app = create_app()
-    return app
-
-
-@pytest.mark.usefixtures("live_server")
-class TestSearchPage:
-    """
-    GIVEN class checks if route for search_fund
-    is up & running
-    """
-
-    def test_search_page_response(self):
-        url = url_for("discovery_bp.search_funds", _external=True)
-        res = urlopen(url)
-        assert b"search" in res.read()
-        assert res.code == 200
-
+import pickledb
 
 @pytest.fixture()
 def flask_test_client():
@@ -34,6 +22,17 @@ def flask_test_client():
     """
     with create_app().test_client() as test_client:
         yield test_client
+        
+@pytest.mark.usefixtures("live_server")
+def test_search_page_response(flask_test_client):
+    """
+    GIVEN class checks if route for search_fund
+    is up & running
+    """
+    url = url_for("discovery_bp.search_funds")
+    response = flask_test_client.get(url, follow_redirects=True)
+    assert b"search" in response.data
+    assert response.status_code == 200
 
 
 @pytest.mark.usefixtures("live_server")
@@ -69,3 +68,30 @@ def test_rounds_exist(flask_test_client):
     assert b"SUMMER" in response.data
     assert b"SPRING" in response.data
     assert b"AUTUMN" in response.data
+
+def test_page_creates_email(live_server):
+    """
+    GIVEN The flask test client
+    WHEN we make a get request to the email confirmation page
+    containing a random  email address.
+    THEN we expect an account with the corresponding email
+    address to exist in the account store.
+    """
+
+    live_server.start()
+
+    random_string = "".join(
+        random.choices(string.ascii_uppercase + string.digits, k=10)
+    )
+    created_email = f"{random_string}@delete_me.com"
+    url = request.root_url + url_for("discovery_bp.account_info_route", application_url = "www.google.com", email =created_email)
+    requests.get(url)
+
+    db = pickledb.load("./tests/mock_db.db", True)
+
+    emailed_created = db.exists(created_email)
+
+    # deletes temp fake db.
+    os.remove("./tests/mock_db.db")
+
+    assert emailed_created

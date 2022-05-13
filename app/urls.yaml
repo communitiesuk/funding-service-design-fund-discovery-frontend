@@ -1,0 +1,9 @@
+urls:
+
+  development:
+
+    account-store: localhost:6794
+
+  production:
+
+    account-store: https://funding-service-design-account-store-dev.london.cloudapps.digital/

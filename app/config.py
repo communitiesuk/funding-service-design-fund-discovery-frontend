@@ -19,6 +19,7 @@ host api doesn't not work/respond
 
 TEST_FUND_STORE_API_HOST = "fund_store"
 TEST_ROUND_STORE_API_HOST = "round_store"
+TEST_ACCOUNT_STORE_API_HOST = 'http://localhost:6794'
 
 
 FUND_STORE_API_HOST = (
@@ -28,6 +29,10 @@ FUND_STORE_API_HOST = (
 
 ROUND_STORE_API_HOST = (
     os.environ.get("ROUND_STORE_API_HOST") or TEST_ROUND_STORE_API_HOST
+)
+
+ACCOUNT_STORE_API_HOST = (
+    os.environ.get("ACCOUNT_STORE_API_HOST") or TEST_ACCOUNT_STORE_API_HOST
 )
 
 
@@ -45,7 +50,7 @@ def get_endpoints():
     """
     if FLASK_ENV == "development":
         return (
-            "http://127.0.0.1:5000/",
+            "http://127.0.0.1:5000",
             "http://127.0.0.1:5000/round/funding-service-design",
         )
 

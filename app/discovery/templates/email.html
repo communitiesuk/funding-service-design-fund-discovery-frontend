@@ -1,0 +1,30 @@
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST">
+
+{{ form.csrf_token }}
+
+{{ govukInput({
+  "label": {
+    "text": "Email address"
+  },
+  "id": form.email.id,
+  "name": form.email.id,
+  "type": "email",
+  "autocomplete": "email",
+  "spellcheck": false,
+}) }}
+
+{{ govukButton({
+  "text": "Continue",
+  "preventDoubleClick": true,
+}) }}
+
+</form>
+
+{% endblock %}
