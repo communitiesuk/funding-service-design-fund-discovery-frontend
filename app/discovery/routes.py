@@ -144,4 +144,4 @@ def redirect_to_authenticator(fund_id, round_id):
     if response.status_code == 200:
         return redirect(req.url)
     if response.status_code == 404:
-        return "Check the url requested"
+        return render_template("404.html")
