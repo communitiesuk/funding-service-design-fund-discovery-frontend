@@ -1,3 +1,5 @@
+import requests
+from app.config import AUTHENTICATOR_STORE_API_HOST
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
@@ -126,3 +128,20 @@ def account_info_route():
         application_url=application_url,
         account_data=response.json(),
     )
+
+
+@discovery_bp.route("/<fund_id>/<round_id>", methods=["GET", "POST"])
+def redirect_to_authenticator(fund_id, round_id):
+
+    req = requests.PreparedRequest()
+    auth_host = AUTHENTICATOR_STORE_API_HOST
+    url = auth_host + "/service/magic-links/new"
+    params = {"fund_id": fund_id, "round_id": round_id}
+
+    req.prepare_url(url, params)
+    response = requests.get(req.url)
+    print(response.url)
+    if response.status_code == 200:
+        return redirect(req.url)
+    if response.status_code == 404:
+        return "Check the url requested"
