@@ -196,8 +196,8 @@ def list_data(json_data, data_func):
         listed_data.append(data_func(data))
     return listed_data
 
-class account_methods():
 
+class account_methods:
     @staticmethod
     def get_account(email_address: str = None, account_id: str = None):
         """get_account Using either an email address or account_id we

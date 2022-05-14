@@ -19,7 +19,7 @@ host api doesn't not work/respond
 
 TEST_FUND_STORE_API_HOST = "fund_store"
 TEST_ROUND_STORE_API_HOST = "round_store"
-TEST_ACCOUNT_STORE_API_HOST = 'http://localhost:6794'
+TEST_ACCOUNT_STORE_API_HOST = "http://localhost:6794"
 
 
 FUND_STORE_API_HOST = (

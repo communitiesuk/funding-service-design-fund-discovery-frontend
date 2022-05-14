@@ -5,10 +5,10 @@ from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import EmailForm
 from app.discovery.forms import SearchForm
+from app.discovery.models.data import account_methods
 from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
-from app.discovery.models.data import account_methods
 from app.discovery.models.data import query_fund
 from app.discovery.models.data import query_rounds
 from app.discovery.models.rounds import Rounds
@@ -94,12 +94,12 @@ def email_route():
     if form.validate() and form.is_submitted():
 
         # TODO : Remove passed though state when
-        # the redirected page is finished. 
+        # the redirected page is finished.
 
         params = {"application_url": application_url, "email": form.email.data}
         req = PreparedRequest()
         # Removes slash at end.
-        root_url = request.root_url[:-1] 
+        root_url = request.root_url[:-1]
         url = root_url + url_for("discovery_bp.account_info_route")
         req.prepare_url(url, params)
 

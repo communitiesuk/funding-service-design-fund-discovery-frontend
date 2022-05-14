@@ -2,19 +2,21 @@
 Contains the test fixtures for mocking get_account and post_account.
 """
 from dataclasses import dataclass
+
 import pickledb
 
 db = pickledb.load("./tests/mock_db.db", True)
 
+
 @dataclass
 class dummy_response:
-    status_code : int
+    status_code: int
 
     def json(self):
         return "mock_json"
 
-class account_methods_mock():
 
+class account_methods_mock:
     @staticmethod
     def get_account(email_address: str = None, account_id: str = None):
         """get_account
@@ -25,7 +27,7 @@ class account_methods_mock():
             if db.exists(account_id):
                 return dummy_response(status_code=200)
             else:
-                return dummy_response(status_code = 404)
+                return dummy_response(status_code=404)
         if email_address:
             if db.exists(email_address):
                 return dummy_response(status_code=200)
@@ -33,7 +35,7 @@ class account_methods_mock():
                 return dummy_response(status_code=404)
 
     @staticmethod
-    def post_account(email_address : str):
+    def post_account(email_address: str):
         """post_account
         Creates a entry in the mock store for use
         by get_account.

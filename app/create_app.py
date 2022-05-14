@@ -10,8 +10,7 @@ from jinja2 import PrefixLoader
 
 
 def create_app() -> Flask:
-    """Returns the initialised flask app.
-    """
+    """Returns the initialised flask app."""
     flask_app = Flask(__name__, static_url_path="/assets")
 
     flask_app.config.from_pyfile("config.py")
