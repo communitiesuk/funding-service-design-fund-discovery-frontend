@@ -13,14 +13,13 @@ FLASK_ENV = os.environ.get("FLASK_ENV")
 
 """
 APIs Config: contains api host imported from manifest.yml.
-& string variables set for test_fund & test_round in the event of
+& string variables in the event of
 host api doesn't not work/respond
 """
 
 TEST_FUND_STORE_API_HOST = "fund_store"
 TEST_ROUND_STORE_API_HOST = "round_store"
-TEST_ACCOUNT_STORE_API_HOST = "http://localhost:6794"
-TEST_AUTHENTICATOR_API_HOST = "http://localhost:6700"
+TEST_AUTHENTICATOR_API_HOST = "http://localhost:6794"
 
 
 FUND_STORE_API_HOST = (
