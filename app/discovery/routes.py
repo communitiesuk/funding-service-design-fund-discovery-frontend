@@ -5,9 +5,7 @@ from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
 from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
-from app.discovery.forms import EmailForm
 from app.discovery.forms import SearchForm
-from app.discovery.models.data import account_methods
 from app.discovery.models.data import convert_none_to_string
 from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
@@ -19,7 +17,6 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
-from requests import PreparedRequest
 
 
 discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
@@ -81,53 +78,6 @@ def fund_rounds(fund_id):
     )
 
     return render_template("fund.html", fund=fund, rounds=rounds)
-
-
-@discovery_bp.route("/email", methods=["GET", "POST"])
-def email_route():
-    """
-    Returns a page containing a single question requesting the
-    users email address.
-    """
-    form = EmailForm()
-
-    application_url = request.args.get("application_url")
-
-    if form.validate() and form.is_submitted():
-
-        # TODO : Remove passed though state when
-        # the redirected page is finished.
-
-        params = {"application_url": application_url, "email": form.email.data}
-        req = PreparedRequest()
-        # Removes slash at end.
-        root_url = request.root_url[:-1]
-        url = root_url + url_for("discovery_bp.account_info_route")
-        req.prepare_url(url, params)
-
-        return redirect(req.url)
-
-    return render_template("email.html", form=form)
-
-
-@discovery_bp.route("/email/confirm", methods=["GET", "POST"])
-def account_info_route():
-    application_url = request.args.get("application_url")
-    email = request.args.get("email")
-    response = account_methods.get_account(email_address=email)
-    account_exists = False
-
-    if response.status_code == 200:
-        account_exists = True
-    if response.status_code == 404:
-        response = account_methods.post_account(email)
-
-    return render_template(
-        "debug_continue.html",
-        account_exists=account_exists,
-        application_url=application_url,
-        account_data=response.json(),
-    )
 
 
 @discovery_bp.route("/<fund_id>/<round_id>", methods=["GET", "POST"])
