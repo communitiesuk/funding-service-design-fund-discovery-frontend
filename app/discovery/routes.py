@@ -90,7 +90,6 @@ def redirect_to_authenticator(fund_id, round_id):
 
     req.prepare_url(url, params)
     response = requests.get(req.url)
-    print(response.url)
     if response.status_code == 200:
         return redirect(req.url)
     if response.status_code == 404:
