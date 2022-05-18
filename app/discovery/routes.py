@@ -1,5 +1,5 @@
 import requests
-from app.config import AUTHENTICATOR_STORE_API_HOST
+from app.config import AUTHENTICATOR_API_HOST
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
@@ -84,7 +84,7 @@ def fund_rounds(fund_id):
 def redirect_to_authenticator(fund_id, round_id):
 
     req = requests.PreparedRequest()
-    auth_host = AUTHENTICATOR_STORE_API_HOST
+    auth_host = AUTHENTICATOR_API_HOST
     url = auth_host + "/service/magic-links/new"
     params = {"fund_id": fund_id, "round_id": round_id}
 
