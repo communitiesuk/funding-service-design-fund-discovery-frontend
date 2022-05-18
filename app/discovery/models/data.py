@@ -28,12 +28,6 @@ def query_fund(query, endpoint: str):
                 return data
             else:
                 return None
-        # else:
-        #     response = requests.post(endpoint, params={"search_items": " "})
-        #     if response.status_code == 200:
-        #         data = response.json()
-        #     else:
-        #         return None
     else:
         data = get_local_fund(query, endpoint)
         return data
