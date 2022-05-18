@@ -1,4 +1,4 @@
-from app.config import authenticator_magic_link_url
+from app.config import AUTHENTICATOR_MAGIC_LINK_URL
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
@@ -80,5 +80,5 @@ def fund_rounds(fund_id):
         "fund.html",
         fund=fund,
         rounds=rounds,
-        authenticator_magic_link_url=authenticator_magic_link_url,
+        authenticator_magic_link_url=AUTHENTICATOR_MAGIC_LINK_URL,
     )

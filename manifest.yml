@@ -8,7 +8,7 @@ applications:
   env:
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-dev.london.cloudapps.digital
     ROUND_STORE_API_HOST: https://funding-service-design-round-store-dev.london.cloudapps.digital
-    AUTHENTICATOR_STORE_API_HOST: https://funding-service-design-authenticator-dev.london.cloudapps.digital
+    AUTHENTICATOR_API_HOST: https://funding-service-design-authenticator-dev.london.cloudapps.digital
 
 - name: funding-service-design-fund-discovery-frontend-test
   memory: 64M
@@ -18,4 +18,4 @@ applications:
   env:
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-test.london.cloudapps.digital
     ROUND_STORE_API_HOST: https://funding-service-design-round-store-test.london.cloudapps.digital
-    AUTHENTICATOR_STORE_API_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digital
+    AUTHENTICATOR_API_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digital
