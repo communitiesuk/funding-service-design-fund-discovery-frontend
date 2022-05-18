@@ -17,7 +17,6 @@ from flask import render_template
 from flask import request
 from flask import url_for
 
-
 discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 
