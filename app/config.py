@@ -34,7 +34,6 @@ ROUND_STORE_API_HOST = (
 
 AUTHENTICATOR_HOST = (
     os.environ.get("AUTHENTICATOR_STORE_API_HOST")
-    or os.environ.get("TEST_AUTHENTICATOR_STORE_API_HOST")
     or TEST_AUTHENTICATOR_API_HOST
 )
 
@@ -42,6 +41,10 @@ FUNDS_URL = "{host}/funds/{fund_id}"
 FUNDS_SEARCH_URL = "{host}/funds/search/?"
 
 ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
+authenticator_magic_link_url = (
+    AUTHENTICATOR_HOST + "/service/magic-links/new/{fund_id}/{round_id}"
+)
+print(authenticator_magic_link_url)
 
 
 def get_endpoints():
