@@ -40,8 +40,10 @@ FUNDS_URL = "{host}/funds/{fund_id}"
 FUNDS_SEARCH_URL = "{host}/funds/search/?"
 
 ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
+
 AUTHENTICATOR_MAGIC_LINK_URL = (
-    AUTHENTICATOR_HOST + "/service/magic-links/new?{fund_id}/{round_id}"
+    AUTHENTICATOR_HOST
+    + "/service/magic-links/new?fund_id={fund_id}&round_id={round_id}"
 )
 
 
