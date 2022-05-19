@@ -14,7 +14,6 @@ from flask import Blueprint
 from flask import render_template
 from flask import request
 
-
 discovery_bp = Blueprint("discovery_bp", __name__, template_folder="templates")
 
 
