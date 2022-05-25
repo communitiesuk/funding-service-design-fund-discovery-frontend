@@ -3,18 +3,20 @@ Contains test configuration.
 """
 import pytest
 from app.create_app import create_app
-from tests.mocks.account_data_mocks import account_methods_mock
 
-@pytest.fixture(autouse=True)
-def mock_account_store(monkeypatch):
 
-    import app.discovery.models.data
+@pytest.fixture()
+def flask_test_client():
+    """
+    Creates the test client we will be using to test the responses
+    from our app, this is a test fixture.
+    :return: A flask test client.
+    """
+    with create_app().test_client() as test_client:
+        yield test_client
 
-    monkeypatch.setattr(app.discovery.models.data.account_methods, "get_account", account_methods_mock.get_account)
-    monkeypatch.setattr(app.discovery.models.data.account_methods, "post_account", account_methods_mock.post_account)
 
 @pytest.fixture(scope="session")
 def app():
-    
     app = create_app()
     yield app

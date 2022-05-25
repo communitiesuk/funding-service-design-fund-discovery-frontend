@@ -7,15 +7,14 @@
 {% block content %}
 
 
-<form method="POST" action="/">
-  {{ form.csrf_token }}
+<form method="GET" action="/">
   <div class="govuk-form-group">
     <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="weight">
        Fund search
       </label>
     </h1>
     <div class="govuk-input__wrapper">
-      <input class="govuk-input govuk-!-width-three-quarters"  type="text" spellcheck="false" id="{{form.search.id}}" name="{{form.search.id}}" placeholder="search fund with keyword">
+      <input class="govuk-input govuk-!-width-three-quarters"  type="text" spellcheck="false" id="{{form.search.id}}" name="{{form.search.id}}" value="{{request.args.get('search', '')}}" placeholder="search fund with keyword">
 
       <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
         Search
