@@ -18,4 +18,4 @@ applications:
   env:
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-test.london.cloudapps.digital
     ROUND_STORE_API_HOST: https://funding-service-design-round-store-test.london.cloudapps.digital
-    AUTHENTICATOR_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digita
+    AUTHENTICATOR_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digital
