@@ -47,7 +47,7 @@ def fund_rounds(fund_id):
      so the fund name can be displayed onto the rounds page.
     """
     fund_rounds_data = query_rounds(
-        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
+        ROUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
 
     if fund_rounds_data:
