@@ -22,11 +22,8 @@ TEST_AUTHENTICATOR_HOST = "authenticator_host"
 
 
 FUND_STORE_API_HOST = (
-    os.environ.get("FUND_STORE_API_HOST") or "http://localhost:4202"
+    os.environ.get("FUND_STORE_API_HOST") or "https://funding-service-design-fund-store-dev.london.cloudapps.digital"
 )
-
-
-ROUND_STORE_API_HOST = FUND_STORE_API_HOST
 
 
 AUTHENTICATOR_HOST = (

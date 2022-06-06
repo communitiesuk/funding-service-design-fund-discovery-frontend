@@ -98,6 +98,7 @@ def query_rounds(endpoint: str):
             data = response.json()
         else:
             return None
+        print(response.url)
     else:
         data = query_local_rounds(endpoint)
     return data
