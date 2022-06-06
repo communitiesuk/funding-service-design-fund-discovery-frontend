@@ -18,7 +18,6 @@ host api doesn't not work/respond
 """
 
 TEST_FUND_STORE_API_HOST = "fund_store"
-TEST_ROUND_STORE_API_HOST = "round_store"
 TEST_AUTHENTICATOR_HOST = "authenticator_host"
 
 
@@ -27,9 +26,7 @@ FUND_STORE_API_HOST = (
 )
 
 
-ROUND_STORE_API_HOST = (
-    os.environ.get("ROUND_STORE_API_HOST") or TEST_ROUND_STORE_API_HOST
-)
+ROUND_STORE_API_HOST = FUND_STORE_API_HOST
 
 
 AUTHENTICATOR_HOST = (
@@ -37,7 +34,7 @@ AUTHENTICATOR_HOST = (
 )
 
 FUNDS_URL = "{host}/funds/{fund_id}"
-FUNDS_SEARCH_URL = "{host}/funds/search/?"
+FUNDS_SEARCH_URL = "{host}/funds/?"
 
 ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
 
