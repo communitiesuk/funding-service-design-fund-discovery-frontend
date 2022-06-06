@@ -22,7 +22,7 @@ TEST_AUTHENTICATOR_HOST = "authenticator_host"
 
 
 FUND_STORE_API_HOST = (
-    os.environ.get("FUND_STORE_API_HOST") or TEST_FUND_STORE_API_HOST
+    os.environ.get("FUND_STORE_API_HOST") or "http://localhost:4202"
 )
 
 
@@ -34,7 +34,7 @@ AUTHENTICATOR_HOST = (
 )
 
 FUNDS_URL = "{host}/funds/{fund_id}"
-FUNDS_SEARCH_URL = "{host}/funds/?"
+FUNDS_SEARCH_URL = "{host}/funds"
 
 ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
 

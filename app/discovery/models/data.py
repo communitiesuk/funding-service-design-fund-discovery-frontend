@@ -16,10 +16,11 @@ def query_fund(query, endpoint: str):
     Returns:
         return query response from fund store.
     """
-    if endpoint.startswith("https://"):
+
+    if endpoint.startswith("http"):
         split_query = query.split()
         format_query = ",".join(split_query).replace(" ", "")
-        response = requests.post(
+        response = requests.get(
             endpoint, params={"search_items": format_query}
         )
         if response.status_code == 200:
@@ -91,7 +92,7 @@ def query_rounds(endpoint: str):
     Returns:
         list of json data
     """
-    if endpoint[:8] == "https://":
+    if endpoint.startswith("http"):
         response = requests.get(endpoint)
         if response.status_code == 200:
             data = response.json()
