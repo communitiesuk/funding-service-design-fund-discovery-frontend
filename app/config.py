@@ -22,7 +22,7 @@ TEST_AUTHENTICATOR_HOST = "authenticator_host"
 
 
 FUND_STORE_API_HOST = (
-    os.environ.get("FUND_STORE_API_HOST") or "https://funding-service-design-fund-store-dev.london.cloudapps.digital"
+    os.environ.get("FUND_STORE_API_HOST") or TEST_FUND_STORE_API_HOST
 )
 
 
