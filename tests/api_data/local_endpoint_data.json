@@ -1,6 +1,6 @@
 {
 
-    "fund_store/funds/search/?": [
+    "fund_store/funds": [
 
       {"fund_name": "Harry's breakfast fund",
         "fund_id": "harry-s-breakfast-fund",
@@ -19,7 +19,7 @@
 
 
 
-    "round_store/funds/funding-service-design/rounds": [
+    "fund_store/funds/funding-service-design/rounds": [
       {
           "fund_id": "funding-service-design",
           "round_title": "Spring",
@@ -52,7 +52,7 @@
           "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       }
     ],
-    "round_store/funds/funding-service-design/rounds/spring": {
+    "fund_store/funds/funding-service-design/rounds/spring": {
         "fund_id": "funding-service-design",
         "round_title": "Spring",
         "round_id": "spring",
@@ -62,7 +62,7 @@
         "assessment_deadline": "2022-09-30 00:00:00",
         "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
     },
-    "round_store/funds/funding-service-design/rounds/summer": {
+    "fund_store/funds/funding-service-design/rounds/summer": {
         "fund_id": "funding-service-design",
         "round_title": "Summer",
         "round_id": "summer",
@@ -72,7 +72,7 @@
         "assessment_deadline": "2022-09-30 00:00:00",
         "application_url": "https://funding-service-design-form-runner.london.cloudapps.digital/funding-application"
       },
-    "round_store/funds/funding-service-design/rounds/autumn": {
+    "fund_store/funds/funding-service-design/rounds/autumn": {
         "fund_id": "funding-service-design",
         "round_title": "Autumn",
         "round_id": "autumn",

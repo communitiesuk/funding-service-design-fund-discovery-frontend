@@ -2,7 +2,6 @@ from app.config import AUTHENTICATOR_MAGIC_LINK_URL
 from app.config import FUND_STORE_API_HOST
 from app.config import FUNDS_SEARCH_URL
 from app.config import FUNDS_URL
-from app.config import ROUND_STORE_API_HOST
 from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import get_fund_name
@@ -47,7 +46,7 @@ def fund_rounds(fund_id):
      so the fund name can be displayed onto the rounds page.
     """
     fund_rounds_data = query_rounds(
-        ROUNDS_URL.format(host=ROUND_STORE_API_HOST, fund_id=fund_id)
+        ROUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
 
     if fund_rounds_data:
@@ -58,7 +57,7 @@ def fund_rounds(fund_id):
 
     fund = get_fund_name(
         FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
-    )
+    )       
 
     return render_template(
         "fund.html",

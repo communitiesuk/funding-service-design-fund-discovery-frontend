@@ -17,7 +17,7 @@ def test_search_page_response(flask_test_client):
 @pytest.mark.usefixtures("live_server")
 def test_fund_exist(flask_test_client):
     response = flask_test_client.get(
-        url_for("discovery_bp.search_funds") + "/?query_fund=fund",
+        url_for("discovery_bp.search_funds") + "?query_fund=fund",
         follow_redirects=True,
     )
     assert b"fund" in response.data
