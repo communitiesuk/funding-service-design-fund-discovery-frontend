@@ -1,57 +1,26 @@
-from os import environ
-
 import pytest
-from app.create_app import create_app
 from axe_selenium_python import Axe
+from flask import request
+from flask import url_for
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture(scope="session")
-def app():
-    environ["env"] = "test"
-    app = create_app()
-    return app
-
-
-def get_endpoints():
-    """
-    GIVEN function return development & production urls
-    for accessibility tests if FLASK_ENV
-    is in development or production.
-    """
-    if app().config["FLASK_ENV"] == "development":
-        return (
-            "http://127.0.0.1:5000",
-            "http://127.0.0.1:5000/round/funding-service-design",
-        )
-
-    else:
-        return (
-            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital",  # noqa
-            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design",  # noqa
-        )
-
-
-@pytest.fixture(scope="class")
-def selenium_chrome_driver():
-    global driver
-    options = Options()
-    options.add_argument("--headless")
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()), options=options
-    )
-    yield
-    driver.close()
-
-
-@pytest.mark.usefixtures("live_server")
-@pytest.mark.usefixtures("selenium_chrome_driver")
 @pytest.mark.accessibility
-def test_run_axe():
-    for URL in get_endpoints():
+def test_run_axe(live_server):
+
+    live_server.start()
+
+    endpoints = [
+        url_for("discovery_bp.search_funds"),
+        url_for("discovery_bp.fund_rounds", fund_id="harry-s-breakfast-fund"),
+    ]
+
+    endpoints = [request.root_url[:-1] + url for url in endpoints]
+
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    for URL in endpoints:
         driver.get(URL)
         axe = Axe(driver)
         # Inject axe-core javascript into page.
@@ -61,7 +30,7 @@ def test_run_axe():
         # Write results to file
         axe.write_results(results, "tests/accessibility_report.json")
         # Assert no of violations are found
-        assert len(results["violations"]) <= 1
+        assert len(results["violations"]) <= 2
         assert (
             len(results["violations"]) == 0
             or results["violations"][0]["impact"] == "minor"

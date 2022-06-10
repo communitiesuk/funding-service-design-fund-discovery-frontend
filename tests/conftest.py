@@ -20,6 +20,6 @@ def flask_test_client():
 
 @pytest.fixture(scope="session")
 def app():
-    app = create_app()
     environ["env"] = "test"
-    yield app
+    app = create_app()
+    return app
