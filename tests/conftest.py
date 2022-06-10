@@ -1,6 +1,8 @@
 """
 Contains test configuration.
 """
+from os import environ
+
 import pytest
 from app.create_app import create_app
 
@@ -19,4 +21,5 @@ def flask_test_client():
 @pytest.fixture(scope="session")
 def app():
     app = create_app()
+    environ["env"] = "test"
     yield app

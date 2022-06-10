@@ -1,3 +1,5 @@
+from os import environ
+
 import pytest
 from app.create_app import create_app
 from axe_selenium_python import Axe
@@ -9,6 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture(scope="session")
 def app():
+    environ["env"] = "test"
     app = create_app()
     return app
 
