@@ -15,7 +15,7 @@ def create_app() -> Flask:
 
     flask_app = Flask(__name__, static_url_path="/assets")
 
-    current_env = environ["env"]
+    current_env = environ.get("env", "default")
 
     flask_app.config.update(
         **load_venvs(
