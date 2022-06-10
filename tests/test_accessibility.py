@@ -17,11 +17,10 @@ def test_run_axe(live_server):
         url_for("discovery_bp.fund_rounds", fund_id="harry-s-breakfast-fund"),
     ]
 
-    endpoints = [request.root_url[:-1] + url for url in endpoints]
-
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    for URL in endpoints:
-        driver.get(URL)
+    for url in endpoints:
+        url = str(url)
+        driver.get(request.root_url[:-1] + url)
         axe = Axe(driver)
         # Inject axe-core javascript into page.
         axe.inject()
