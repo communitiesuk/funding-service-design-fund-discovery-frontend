@@ -2,7 +2,10 @@ import json
 import os
 
 import requests
-from app.config import FLASK_ROOT
+from utils.definitions import get_project_root
+
+
+FLASK_ROOT = get_project_root()
 
 
 def query_fund(query, endpoint: str):
@@ -17,19 +20,8 @@ def query_fund(query, endpoint: str):
         return query response from fund store.
     """
 
-    if endpoint.startswith("http"):
-        split_query = query.split()
-        format_query = ",".join(split_query).replace(" ", "")
-        response = requests.get(
-            endpoint, params={"search_items": format_query}
-        )
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return None
-    else:
-        data = get_local_fund(query, endpoint)
-        return data
+    data = get_local_fund(query, endpoint)
+    return data
 
 
 def get_local_fund(query, endpoint):
@@ -92,6 +84,7 @@ def query_rounds(endpoint: str):
     Returns:
         list of json data
     """
+    # TODO FIX THIS
     if endpoint.startswith("http"):
         response = requests.get(endpoint)
         if response.status_code == 200:

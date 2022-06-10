@@ -1,3 +1,6 @@
+from os import environ
+
+from config_loader import load_venvs
 from flask import Flask
 from flask_compress import Compress
 from flask_talisman import Talisman
@@ -6,14 +9,19 @@ from jinja2 import ChoiceLoader
 from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
 
-# Settings as django
-
 
 def create_app() -> Flask:
     """Returns the initialised flask app."""
+
     flask_app = Flask(__name__, static_url_path="/assets")
 
-    flask_app.config.from_pyfile("config.py")
+    current_env = environ["env"]
+
+    flask_app.config.update(
+        **load_venvs(
+            "config/.env.default.example", f"config/.env.{current_env}.example"
+        )
+    )
 
     flask_app.jinja_loader = ChoiceLoader(
         [
@@ -70,7 +78,6 @@ def create_app() -> Flask:
             service_meta_author="DLUHC",
         )
 
-    # import routes
     from app.default.error_routes import (
         default_bp,
         not_found,

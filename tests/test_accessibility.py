@@ -1,5 +1,4 @@
 import pytest
-from app.config import get_endpoints
 from app.create_app import create_app
 from axe_selenium_python import Axe
 from selenium import webdriver
@@ -12,6 +11,25 @@ from webdriver_manager.chrome import ChromeDriverManager
 def app():
     app = create_app()
     return app
+
+
+def get_endpoints():
+    """
+    GIVEN function return development & production urls
+    for accessibility tests if FLASK_ENV
+    is in development or production.
+    """
+    if app().config["FLASK_ENV"] == "development":
+        return (
+            "http://127.0.0.1:5000",
+            "http://127.0.0.1:5000/round/funding-service-design",
+        )
+
+    else:
+        return (
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital",  # noqa
+            "https://funding-service-design-fund-discovery-dev.london.cloudapps.digital/round/funding-service-design",  # noqa
+        )
 
 
 @pytest.fixture(scope="class")
