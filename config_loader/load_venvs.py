@@ -120,14 +120,12 @@ if __name__ == "__main__":
 
         config_dict["ROUNDS_URL"] = "WOW"
 
-        config_dict["HELLO"] = "WOW"
+        config_dict["HELLO"] = __name__
 
         return config_dict
 
-    print(
-        load_venvs(
-            "config/.env.default.example",
-            "config/.env.dev.example",
-            post_hook=adds_value,
-        )
+    config = load_venvs(
+        "config/.env.default.example",
+        "config/.env.development.example",
+        post_hook=adds_value,
     )
