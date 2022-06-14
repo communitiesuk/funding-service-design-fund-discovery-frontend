@@ -3,15 +3,15 @@ on:
   workflow_call:
     inputs:
      users:
-        required: false
+        required: true
         default: 1
         type: string
      spawn-rate:
-        required: false
+        required: true
         default: 1
         type: string
      run-time:
-        required: false
+        required: true
         default: 10s
         type: string
   # Allows you to run this workflow manually from the Actions tab
