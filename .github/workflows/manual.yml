@@ -1,4 +1,4 @@
-name: Manual Workflow Trigger to Perform Stress Test on Discovery Frontend
+name: Manual Stress Test on Frontend
 on:
   workflow_call:
     inputs:
