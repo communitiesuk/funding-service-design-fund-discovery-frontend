@@ -1,0 +1,51 @@
+name: Manual Stress Test on Frontend
+on:
+  workflow_call:
+    inputs:
+     users:
+        required: true
+        default: 1
+        type: string
+     spawn-rate:
+        required: true
+        default: 1
+        type: string
+     run-time:
+        required: true
+        default: 10s
+        type: string
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+env:
+  users: 1
+  spawn-rate: 1
+  run-time: 10s
+
+jobs:
+  run_performance_tests:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: checkout code
+        uses: actions/checkout@main
+        with:
+          repository: communitiesuk/funding-service-design-performance-tests
+          path: ./funding-service-design-performance-tests
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.1
+      - name: create python env
+        run: python -m venv .venv
+      - name: install dependencies
+        run: source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r ./funding-service-design-performance-tests/requirements.txt
+
+      - name: Run performance tests
+        run: ls && python -m pip install locust && python -m locust --users ${{inputs.users}} --spawn-rate ${{inputs.spawn-rate}} --run-time ${{inputs.run-time}}
+        working-directory: ./funding-service-design-performance-tests
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-test-report
+          path: ./funding-service-design-performance-tests/locust_html_report.html
+          retention-days: 5
