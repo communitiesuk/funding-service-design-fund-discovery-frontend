@@ -1,7 +1,5 @@
 name: Manual Stress Test on Frontend
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   workflow_call:
     inputs:
       app_name:
@@ -62,7 +60,7 @@ jobs:
       - name: install dependencies
         run: source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r ./funding-service-design-performance-tests/requirements.txt
       - name: Run performance tests
-        run: ls && python -m pip install locust && python -m locust --users ${{inputs.users}} --spawn-rate ${{inputs.spawn-rate}} --run-time ${{inputs.run-time}}
+        run: ls && python -m pip install locust && python -m locust --users ${{env.users}} --spawn-rate ${{env.spawn-rate}} --run-time ${{env.run-time}}
         working-directory: ./funding-service-design-performance-tests
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
