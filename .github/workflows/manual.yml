@@ -1,38 +1,5 @@
 name: Manual Stress Test on Frontend
 on:
-  workflow_call:
-    inputs:
-      app_name:
-        required: true
-        type: string
-      api:
-        required: false
-        default: false
-        type: boolean
-      users:
-        required: false
-        default: 1
-        type: string
-      spawn-rate:
-        required: false
-        default: 1
-        type: string
-      run-time:
-        required: false
-        default: 10s
-        type: string
-
-    secrets:
-      CF_API:
-        required: true
-      CF_ORG:
-        required: true
-      CF_SPACE:
-        required: true
-      CF_USER:
-        required: true
-      CF_PASSWORD:
-        required: true
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
