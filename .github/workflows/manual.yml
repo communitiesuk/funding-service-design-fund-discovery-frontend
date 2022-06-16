@@ -1,10 +1,6 @@
 name: Manual Stress Test on Frontend
 on:
   workflow_dispatch:
-  push:
-    paths-ignore:
-      - '**/README.md'
-
 jobs:
   test_and_deploy:
     uses: communitiesuk/funding-design-service-workflows/.github/workflows/deploy.yml@main
