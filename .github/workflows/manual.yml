@@ -1,50 +1,22 @@
 name: Manual Stress Test on Frontend
 on:
-  workflow_call:
-    inputs:
-     users:
-        required: false
-        default: 1
-        type: number
-     spawn-rate:
-        required: false
-        default: 1
-        type: number
-     run-time:
-        required: false
-        default: 10s
-        type: string
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-env:
-    users: 3
-    spawn-rate: 4
-    run-time: 10s
-jobs:
-  run_performance_tests:
-    runs-on: ubuntu-latest
-    environment: test
-    steps:
-      - name: checkout code
-        uses: actions/checkout@main
-        with:
-          repository: communitiesuk/funding-service-design-performance-tests
-          path: ./funding-service-design-performance-tests
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.10.1
-      - name: create python env
-        run: python -m venv .venv
-      - name: install dependencies
-        run: source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r ./funding-service-design-performance-tests/requirements.txt
+  push:
+    paths-ignore:
+      - '**/README.md'
 
-      - name: Run performance tests
-        run: ls && python -m pip install locust && python -m locust --users ${{inputs.users}} --spawn-rate ${{inputs.spawn-rate}} --run-time ${{inputs.run-time}}
-        working-directory: ./funding-service-design-performance-tests
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
-        with:
-          name: performance-test-report
-          path: ./funding-service-design-performance-tests/locust_html_report.html
-          retention-days: 5
+jobs:
+  test_and_deploy:
+    uses: communitiesuk/funding-design-service-workflows/.github/workflows/deploy.yml@main
+    with:
+      app_name: ${{ github.event.repository.name }}
+      api: true
+      users: 2
+      spawn-rate: 2
+      run-time: 11s
+    secrets:
+      CF_API: ${{secrets.CF_API}}
+      CF_ORG: ${{secrets.CF_ORG}}
+      CF_SPACE: ${{secrets.CF_SPACE}}
+      CF_USER: ${{secrets.CF_USER}}
+      CF_PASSWORD: ${{secrets.CF_PASSWORD}}
