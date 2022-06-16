@@ -15,11 +15,7 @@ on:
         default: 10s
         type: string
   # Allows you to run this workflow manually from the Actions tab
-
-env:
-  users: 1
-  spawn-rate: 1
-  run-time: 10s
+  workflow_dispatch:
 
 jobs:
   run_performance_tests:
