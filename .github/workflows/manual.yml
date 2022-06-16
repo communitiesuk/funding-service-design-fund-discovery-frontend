@@ -5,11 +5,11 @@ on:
      users:
         required: false
         default: 1
-        type: string
+        type: number
      spawn-rate:
         required: false
         default: 1
-        type: string
+        type: number
      run-time:
         required: false
         default: 10s
@@ -40,7 +40,7 @@ jobs:
         run: source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r ./funding-service-design-performance-tests/requirements.txt
 
       - name: Run performance tests
-        run: ls && python -m pip install locust && python -m locust --users --spawn-rate --run-time
+        run: ls && python -m pip install locust && python -m locust --users ${{inputs.users}} --spawn-rate ${{inputs.spawn-rate}} --run-time ${{inputs.run-time}}
         working-directory: ./funding-service-design-performance-tests
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
