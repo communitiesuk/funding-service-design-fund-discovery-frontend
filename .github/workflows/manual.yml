@@ -44,38 +44,7 @@ env:
   run-time: 10s
 
 jobs:
-
-  deploy_test:
-    runs-on: ubuntu-latest
-    environment: test
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.10.1
-      - name: create python env
-        run: python -m venv .venv
-      - name: install dependencies
-        run: source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r requirements.txt
-      # - name: build static assets
-      #   run: python build.py
-      - name: download previous build
-        uses: actions/download-artifact@v2
-      - name: Deploy to Gov PaaS
-        uses: citizen-of-planet-earth/cf-cli-action@v2
-        with:
-          cf_api:      ${{secrets.CF_API}}
-          cf_org:      ${{secrets.CF_ORG}}
-          cf_space:    ${{secrets.CF_SPACE }}
-          cf_username: ${{secrets.CF_USER}}
-          cf_password: ${{secrets.CF_PASSWORD}}
-          command: push ${{inputs.app_name}}-test
-
   run_performance_tests:
-    if:  ${{ always() && (needs.deploy_test.result=='success') }}
-    needs: deploy_test
     runs-on: ubuntu-latest
     environment: test
     steps:
