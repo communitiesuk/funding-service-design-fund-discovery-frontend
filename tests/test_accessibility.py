@@ -2,6 +2,7 @@ import pytest
 from axe_selenium_python import Axe
 from flask import url_for
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -20,7 +21,13 @@ def test_run_axe(live_server):
         ),
     ]
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = Options()
+
+    options.add_argument("--headless")
+
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()), options=options
+    )
     for url in endpoints:
         driver.get(url)
         axe = Axe(driver)
