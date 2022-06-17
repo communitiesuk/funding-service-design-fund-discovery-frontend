@@ -1,6 +1,5 @@
-from os import environ
+import os
 
-from config_loader import load_venvs
 from flask import Flask
 from flask_compress import Compress
 from flask_talisman import Talisman
@@ -10,18 +9,19 @@ from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
 
 
-def create_app() -> Flask:
+def create_app(testing=False) -> Flask:
     """Returns the initialised flask app."""
 
     flask_app = Flask(__name__, static_url_path="/assets")
 
-    current_env = environ.get("env", "default")
+    if (os.environ.get("FLASK_ENV") == "development") | testing:
+        flask_app.config.from_object("config.development.DevelopmentConfig")
+        from config.development import DevelopmentConfig
 
-    flask_app.config.update(
-        **load_venvs(
-            "config/.env.default.example", f"config/.env.{current_env}.example"
-        )
-    )
+        if os.environ.get("PRETTY_PRINT"):
+            DevelopmentConfig.pretty_print()
+    else:
+        flask_app.config.from_object("config.default.DefaultConfig")
 
     flask_app.jinja_loader = ChoiceLoader(
         [
