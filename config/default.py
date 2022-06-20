@@ -23,3 +23,6 @@ class DefaultConfig:
         "cloudapps.digital/service/magic-links/new?fund_id={fund_id}"
         "&round_id={round_id}"
     )
+
+    FUND_STORE_API_HOST = "fund_store"
+    AUTHENTICATOR_HOST = "authenticator_host"
