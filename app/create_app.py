@@ -18,8 +18,7 @@ def create_app(testing=False) -> Flask:
         flask_app.config.from_object("config.development.DevelopmentConfig")
         from config.development import DevelopmentConfig
 
-        if os.environ.get("PRETTY_PRINT"):
-            DevelopmentConfig.pretty_print()
+        DevelopmentConfig.pretty_print()
     else:
         flask_app.config.from_object("config.default.DefaultConfig")
 
