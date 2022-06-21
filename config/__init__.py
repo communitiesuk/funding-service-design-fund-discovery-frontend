@@ -2,15 +2,19 @@ from os import environ
 
 FLASK_ENV = environ.get("FLASK_ENV")
 
-if FLASK_ENV == "development":
-    from config.development import DevelopmentConfig as Config  # noqa
+match FLASK_ENV:
+    case "development":
+        from config.development import DevelopmentConfig as Config  # noqa
+    case "dev":
+        pass
+    case "test":
+        pass
+    case "production":
+        pass
+    case _:
+        from config.default import DefaultConfig as Config  # noqa
 
+try:
     Config.pretty_print()
-elif FLASK_ENV == "dev":
-    pass
-elif FLASK_ENV == "test":
-    pass
-elif FLASK_ENV == "production":
-    pass
-else:
-    from config.default import DefaultConfig as Config  # noqa
+except AttributeError:
+    print({"msg": "Config doesn't have pretty_print function."})
