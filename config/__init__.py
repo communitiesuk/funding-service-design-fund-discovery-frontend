@@ -8,7 +8,7 @@ match FLASK_ENV:
     case "dev":
         pass
     case "test":
-        pass
+        from config.test import TestConfig as Config  # noqa
     case "production":
         pass
     case _:
@@ -18,3 +18,5 @@ try:
     Config.pretty_print()
 except AttributeError:
     print({"msg": "Config doesn't have pretty_print function."})
+
+__all__ = [Config]

@@ -6,7 +6,7 @@ from fsd_tech import configclass
 @configclass
 class DefaultConfig:
 
-    SECRET_KEY = os.environ.get("SECRET_KEY", "dev")
+    SECRET_KEY = os.environ.get("SECRET_KEY", "dev_secret_key")
     SESSION_COOKIE_NAME = os.environ.get(
         "SESSION_COOKIE_NAME", "session_cookie"
     )

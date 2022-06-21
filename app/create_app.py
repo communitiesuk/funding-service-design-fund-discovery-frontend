@@ -7,7 +7,7 @@ from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
 
 
-def create_app(testing=False) -> Flask:
+def create_app() -> Flask:
     """Returns the initialised flask app."""
 
     flask_app = Flask(__name__, static_url_path="/assets")
