@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask
 from flask_compress import Compress
 from flask_talisman import Talisman
@@ -14,13 +12,7 @@ def create_app(testing=False) -> Flask:
 
     flask_app = Flask(__name__, static_url_path="/assets")
 
-    if (os.environ.get("FLASK_ENV") == "development") | testing:
-        flask_app.config.from_object("config.development.DevelopmentConfig")
-        from config.development import DevelopmentConfig
-
-        DevelopmentConfig.pretty_print()
-    else:
-        flask_app.config.from_object("config.default.DefaultConfig")
+    flask_app.config.from_object("config.Config")
 
     flask_app.jinja_loader = ChoiceLoader(
         [
