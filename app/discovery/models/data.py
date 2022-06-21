@@ -2,10 +2,7 @@ import json
 import os
 
 import requests
-from utils.definitions import get_project_root
-
-
-FLASK_ROOT = get_project_root()
+from config import Config
 
 
 def query_fund(query, endpoint: str):
@@ -30,7 +27,7 @@ def get_local_fund(query, endpoint):
     calls query_local_fund function.
     """
     api_data_json = os.path.join(
-        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+        Config.FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
     json_data = open(api_data_json)
     api_data = json.load(json_data)
@@ -106,7 +103,7 @@ def query_local_rounds(endpoint: str):
         return local data form tests/api_data in json format
     """
     api_data_json = os.path.join(
-        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+        Config.FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
     json_data = open(api_data_json)
     api_data = json.load(json_data)
@@ -149,7 +146,7 @@ def get_local_fund_name(endpoint):
     """
 
     api_data_json = os.path.join(
-        FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
+        Config.FLASK_ROOT, "tests", "api_data", "local_endpoint_data.json"
     )
     json_data = open(api_data_json)
     api_data = json.load(json_data)
