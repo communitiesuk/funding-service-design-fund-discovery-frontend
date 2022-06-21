@@ -1,14 +1,10 @@
-from app.config import AUTHENTICATOR_MAGIC_LINK_URL
-from app.config import FUND_STORE_API_HOST
-from app.config import FUNDS_SEARCH_URL
-from app.config import FUNDS_URL
-from app.config import ROUNDS_URL
 from app.discovery.forms import SearchForm
 from app.discovery.models.data import get_fund_name
 from app.discovery.models.data import list_data
 from app.discovery.models.data import query_fund
 from app.discovery.models.data import query_rounds
 from app.discovery.models.rounds import Rounds
+from config import Config
 from flask import Blueprint
 from flask import render_template
 from flask import request
@@ -22,6 +18,9 @@ def search_funds():
     user input/query & return query response
     from fund store.
     """
+    FUNDS_SEARCH_URL = Config.FUNDS_SEARCH_URL
+    FUND_STORE_API_HOST = Config.FUND_STORE_API_HOST
+
     form = SearchForm()
     query = request.args.get("search", "")
 
@@ -45,9 +44,13 @@ def fund_rounds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
+    ROUNDS_URL = Config.ROUNDS_URL
+    FUNDS_URL = Config.FUNDS_URL
+    FUND_STORE_API_HOST = Config.FUND_STORE_API_HOST
     fund_rounds_data = query_rounds(
         ROUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
     )
+    AUTHENTICATOR_MAGIC_LINK_URL = Config.AUTHENTICATOR_MAGIC_LINK_URL
 
     if fund_rounds_data:
         rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
@@ -57,7 +60,7 @@ def fund_rounds(fund_id):
 
     fund = get_fund_name(
         FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
-    )       
+    )
 
     return render_template(
         "fund.html",

@@ -6,14 +6,13 @@ from jinja2 import ChoiceLoader
 from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
 
-# Settings as django
-
 
 def create_app() -> Flask:
     """Returns the initialised flask app."""
+
     flask_app = Flask(__name__, static_url_path="/assets")
 
-    flask_app.config.from_pyfile("config.py")
+    flask_app.config.from_object("config.Config")
 
     flask_app.jinja_loader = ChoiceLoader(
         [
@@ -70,7 +69,6 @@ def create_app() -> Flask:
             service_meta_author="DLUHC",
         )
 
-    # import routes
     from app.default.error_routes import (
         default_bp,
         not_found,

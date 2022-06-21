@@ -6,7 +6,7 @@ from app.create_app import create_app
 
 
 @pytest.fixture()
-def flask_test_client():
+def flask_test_client(mocker):
     """
     Creates the test client we will be using to test the responses
     from our app, this is a test fixture.
