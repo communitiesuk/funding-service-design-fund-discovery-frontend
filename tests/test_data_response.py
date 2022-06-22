@@ -1,4 +1,3 @@
-import config
 import pytest
 from flask import url_for
 
@@ -9,7 +8,6 @@ def test_search_page_response(flask_test_client):
     GIVEN class checks if route for search_fund
     is up & running
     """
-    print(config.Config)
     url = url_for("discovery_bp.search_funds")
     response = flask_test_client.get(url, follow_redirects=True)
     assert b"search" in response.data
