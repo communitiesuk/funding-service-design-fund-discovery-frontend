@@ -17,7 +17,10 @@ def query_fund(query, endpoint: str):
         return query response from fund store.
     """
 
-    if not Config.USE_LOCAL_DATA:
+    if Config.USE_LOCAL_DATA:
+        data = get_local_fund(query, endpoint)
+        return data
+    else:
         split_query = query.split()
         format_query = ",".join(split_query).replace(" ", "")
         response = requests.get(
@@ -27,10 +30,6 @@ def query_fund(query, endpoint: str):
             return response.json()
         else:
             return None
-    else:
-        print(endpoint)
-        data = get_local_fund(query, endpoint)
-        return data
 
 
 def get_local_fund(query, endpoint):
