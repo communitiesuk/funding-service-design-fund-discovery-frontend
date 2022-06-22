@@ -24,6 +24,10 @@ def search_funds():
     form = SearchForm()
     query = request.args.get("search", "")
 
+    query = query.strip()
+
+    print("SADFASFASWFASDFASDAFSD", query, type(query))
+
     query_response = query_fund(
         query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
     )
