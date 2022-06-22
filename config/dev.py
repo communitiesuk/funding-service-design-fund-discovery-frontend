@@ -3,6 +3,6 @@ from fsd_tech import configclass
 
 
 @configclass
-class TestConfig(DefaultConfig):
+class DevConfig(DefaultConfig):
 
     USE_LOCAL_DATA = False
