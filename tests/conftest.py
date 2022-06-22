@@ -2,11 +2,10 @@
 Contains test configuration.
 """
 import os
+from unittest import mock
 
-import config
 import pytest
 from app.create_app import create_app
-from config.unit_test import UnitTestConfig
 
 
 @pytest.fixture()
@@ -16,16 +15,20 @@ def flask_test_client(mocker):
     from our app, this is a test fixture.
     :return: A flask test client.
     """
-    os.environ["FLASK_DEBUG"] = "1"
-    mocker.patch.object(config, "Config", UnitTestConfig)
     with create_app().test_client() as test_client:
         yield test_client
         os.environ["FLASK_DEBUG"] = "0"
 
 
+@pytest.fixture(autouse=True, scope="session")
+def mock_env_vars():
+    with mock.patch.dict(
+        os.environ, {"FLASK_ENV": "unit_test", "FLASK_DEBUG": "1"}
+    ):
+        yield
+
+
 @pytest.fixture(scope="session")
 def app():
-    os.environ["FLASK_DEBUG"] = "1"
     app = create_app()
     yield app
-    os.environ["FLASK_DEBUG"] = "0"

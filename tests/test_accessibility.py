@@ -1,7 +1,5 @@
-import config
 import pytest
 from axe_selenium_python import Axe
-from config.unit_test import UnitTestConfig
 from flask import url_for
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -10,9 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 @pytest.mark.accessibility
-def test_run_axe(live_server, mocker):
-
-    mocker.patch.object(config, "Config", UnitTestConfig)
+def test_run_axe(live_server):
 
     live_server.start()
 
