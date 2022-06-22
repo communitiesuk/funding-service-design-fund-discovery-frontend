@@ -15,6 +15,9 @@ jobs:
   testing:
     runs-on: ubuntu-latest
     environment: Dev
+    env:
+      FLASK_ENV : unit_Test
+      FLASK_DEBUG : 1
     steps:
       - name: checkout code
         uses: actions/checkout@v2
@@ -22,8 +25,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.10.1
-      - name: set unit-test envs.
-        run : export FLASK_ENV=unit_test && export FLASK_DEBUG=1
       - name: install dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
       - name: build static assets
