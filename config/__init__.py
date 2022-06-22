@@ -2,6 +2,8 @@ from os import environ
 
 FLASK_ENV = environ.get("FLASK_ENV")
 
+print(FLASK_ENV)
+
 match FLASK_ENV:
     case "dev":
         from config.dev import DevConfig as Config  # noqa
