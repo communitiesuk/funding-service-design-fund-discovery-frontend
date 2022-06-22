@@ -17,8 +17,19 @@ def query_fund(query, endpoint: str):
         return query response from fund store.
     """
 
-    data = get_local_fund(query, endpoint)
-    return data
+    if endpoint.startswith("http"):
+        split_query = query.split()
+        format_query = ",".join(split_query).replace(" ", "")
+        response = requests.get(
+            endpoint, params={"search_items": format_query}
+        )
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return None
+    else:
+        data = get_local_fund(query, endpoint)
+        return data
 
 
 def get_local_fund(query, endpoint):
