@@ -15,9 +15,6 @@ jobs:
   testing:
     runs-on: ubuntu-latest
     environment: Dev
-    env:
-      FLASK_ENV : unit_test
-      FLASK_DEBUG : 1
     steps:
       - name: checkout code
         uses: actions/checkout@v2
