@@ -24,7 +24,7 @@ class DefaultConfig:
         "https://funding-service-design-"
         "authenticator-dev.london.cloudapps.digital",
     )
-    USE_LOCAL_DATA = True
+    USE_LOCAL_DATA = False
     FUNDS_URL = "{host}/funds/{fund_id}"
     FUNDS_SEARCH_URL = "{host}/funds"
 
