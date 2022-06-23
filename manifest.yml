@@ -6,8 +6,8 @@ applications:
   - https://github.com/cloudfoundry/python-buildpack.git
   command: flask run --host 0.0.0.0 --port 8080
   env:
+    FLASK_ENV : dev
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-dev.london.cloudapps.digital
-    ROUND_STORE_API_HOST: https://funding-service-design-round-store-dev.london.cloudapps.digital
     AUTHENTICATOR_HOST: https://funding-service-design-authenticator-dev.london.cloudapps.digital
 
 - name: funding-service-design-fund-discovery-frontend-test
@@ -16,6 +16,6 @@ applications:
   - https://github.com/cloudfoundry/python-buildpack.git
   command: flask run --host 0.0.0.0 --port 8080
   env:
+    FLASK_ENV : test
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-test.london.cloudapps.digital
-    ROUND_STORE_API_HOST: https://funding-service-design-round-store-test.london.cloudapps.digital
     AUTHENTICATOR_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digital

@@ -142,3 +142,4 @@ app/.DS_Store
 app/static
 .vscode/settings.json
 accessibility_report.json
+.vscode/launch.json

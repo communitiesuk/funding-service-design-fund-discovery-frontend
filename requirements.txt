@@ -11,7 +11,6 @@ certifi==2021.10.8
 cffi==1.15.0
 cfgv==3.3.1
 charset-normalizer==2.0.11
-chromedriver-py==103.0.5060.24
 click==8.0.3
 clickclick==20.10.2
 colorama==0.4.4
@@ -32,9 +31,9 @@ Flask==2.0.2
 Flask-Compress==1.10.1
 flask-restx==0.5.1
 Flask-SeaSurf==0.3.1
-flask-talisman==0.8.1
+flask-talisman==1.0.0
 Flask-WTF==1.0.0
-fsd-tech @ git+https://github.com/communitiesuk/funding-service-design-utils.git@c35a1362832617ca182a7d71683726a37b0fd6f7
+fsd-tech @ git+https://github.com/communitiesuk/funding-service-design-utils/archive/refs/tags/0.0.5.tar.gz
 gitdb==4.0.9
 GitPython==3.1.26
 govuk-frontend-jinja==2.0.0
@@ -69,6 +68,7 @@ pyrsistent==0.18.1
 PySocks==1.7.1
 pytest==6.2.5
 pytest-base-url==1.4.2
+pytest-env==0.6.2
 pytest-flask==1.2.0
 pytest-forked==1.4.0
 pytest-html==3.1.1
