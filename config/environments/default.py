@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from fsd_tech import configclass
+from fsd_utils import configclass
 
 
 @configclass
@@ -11,7 +11,7 @@ class DefaultConfig:
     SESSION_COOKIE_NAME = os.environ.get(
         "SESSION_COOKIE_NAME", "session_cookie"
     )
-    FLASK_ROOT = Path(__file__).parent.parent
+    FLASK_ROOT = str(Path(__file__).parent.parent.parent)
     STATIC_FOLDER = os.environ.get("STATIC_FOLDER", "static")
     TEMPLATES_FOLDER = os.environ.get("TEMPLATES_FOLDER", "templates")
     FUND_STORE_API_HOST = os.environ.get(
