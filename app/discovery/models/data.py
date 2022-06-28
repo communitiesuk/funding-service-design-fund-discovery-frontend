@@ -3,9 +3,11 @@ import os
 
 import requests
 from config import Config
+import logging
 
 
 def query_fund(query, endpoint: str):
+    logging.error("IN QUERY FUND GIDEON")
     """Function return query from
     the fund store.
 
@@ -17,15 +19,20 @@ def query_fund(query, endpoint: str):
         return query response from fund store.
     """
 
+    logging.error("ENDPOINT " + endpoint)
     if Config.USE_LOCAL_DATA:
+        logging.error("IN use local data")
         data = get_local_fund(query, endpoint)
         return data
     else:
+        logging.error("in remote data")
         split_query = query.split()
         format_query = ",".join(split_query).replace(" ", "")
         response = requests.get(
             endpoint, params={"search_items": format_query}
         )
+        logging.error("GIDEON IN HERE")
+        logging.error(response)
         if response.status_code == 200:
             return response.json()
         else:

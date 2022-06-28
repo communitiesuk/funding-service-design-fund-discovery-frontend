@@ -20,7 +20,7 @@ def search_funds():
     """
     FUNDS_SEARCH_URL = Config.FUNDS_SEARCH_URL
     FUND_STORE_API_HOST = Config.FUND_STORE_API_HOST
-
+    
     form = SearchForm()
     query = request.args.get("search", "")
 

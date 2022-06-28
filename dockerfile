@@ -1,6 +1,8 @@
 FROM python:3.10-slim-bullseye
 
 WORKDIR /app
+RUN apt update && apt -yq install git 
+RUN apt -yq install curl 
 COPY requirements.txt requirements.txt
 RUN pip --no-cache-dir install --ignore-installed distlib -r requirements.txt
 RUN pip install gunicorn
