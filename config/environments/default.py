@@ -30,16 +30,7 @@ class DefaultConfig:
 
     ROUNDS_URL = "{host}/funds/{fund_id}/rounds"
 
-    AUTHENTICATOR_MAGIC_LINK_URL = os.environ.get(
-        "AUTHENTICATOR_MAGIC_LINK_URL",
-        (
-            "https://funding-service-design-authenticator-dev.london."
-            "cloudapps.digital/service/magic-links/new?fund_id={fund_id}"
-            "&round_id={round_id}"
-        ),
-    )
-
-    FUND_STORE_API_HOST = os.environ.get("FUND_STORE_API_HOST", "fund_store")
-    AUTHENTICATOR_HOST = os.environ.get(
-        "AUTHENTICATOR_HOST", "authenticator_host"
+    AUTHENTICATOR_MAGIC_LINK_URL = (
+        AUTHENTICATOR_HOST
+        + "/service/magic-links/new?fund_id={fund_id}&round_id={round_id}"
     )
