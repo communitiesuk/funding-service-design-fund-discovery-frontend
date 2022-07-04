@@ -2,6 +2,8 @@ from flask import Flask
 from flask_compress import Compress
 from flask_talisman import Talisman
 from flask_wtf.csrf import CSRFProtect
+from fsd_utils.logging import logging
+from config import Config
 from jinja2 import ChoiceLoader
 from jinja2 import PackageLoader
 from jinja2 import PrefixLoader
@@ -26,32 +28,11 @@ def create_app() -> Flask:
     flask_app.jinja_env.trim_blocks = True
     flask_app.jinja_env.lstrip_blocks = True
 
-    csp = {
-        "default-src": "'self'",
-        "script-src": [
-            "'self'",
-            "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
-            "'sha256-l1eTVSK8DTnK8+yloud7wZUqFrI0atVo6VlC6PJvYaQ='",
-        ],
-        "img-src": ["data:", "'self'"],
-    }
+    # Initialise logging
+    logging.init_app(flask_app)
 
-    hss = {
-        "Strict-Transport-Security": (
-            "max-age=31536000; includeSubDomains; preload"
-        ),
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-XSS-Protection": "1; mode=block",
-        "Feature_Policy": (
-            "microphone 'none'; camera 'none'; geolocation 'none'"
-        ),
-    }
-
-    Compress(flask_app)
-    Talisman(
-        flask_app, content_security_policy=csp, strict_transport_security=hss
-    )
+    # Configure application security with Talisman
+    Talisman(flask_app, **Config.TALISMAN_SETTINGS)
 
     csrf = CSRFProtect()
 
