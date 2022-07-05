@@ -13,7 +13,7 @@ match FLASK_ENV:
     case "unit_test":
         from config.envs.unit_test import UnitTestConfig as Config
     case "production":
-        pass
+        from config.envs.production import ProductionConfig as Config
     case _:
         from config.envs.default import DefaultConfig as Config
 
