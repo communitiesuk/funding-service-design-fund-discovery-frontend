@@ -10,7 +10,7 @@ import logging
 class DefaultConfig:
 
     SECRET_KEY = environ.get("SECRET_KEY")
-    SESSION_COOKIE_NAME = environ.get("SESSION_COOKIE_NAME")
+    SESSION_COOKIE_NAME = environ.get("SESSION_COOKIE_NAME", "session_cookie")
     FLASK_ROOT = str(Path(__file__).parent.parent.parent)
     STATIC_FOLDER = environ.get("STATIC_FOLDER", "static")
     TEMPLATES_FOLDER = environ.get("TEMPLATES_FOLDER", "templates")
