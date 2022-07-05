@@ -6,7 +6,6 @@ from fsd_utils import configclass
 class UnitTestConfig(DefaultConfig):
 
     SECRET_KEY = "dev_secret_key"
-    SESSION_COOKIE_NAME = "session_cookie"
     FUND_STORE_API_HOST = "fund_store"
     AUTHENTICATOR_HOST = "https://funding-service-design-authenticator-dev.london.cloudapps.digital"
 

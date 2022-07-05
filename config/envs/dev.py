@@ -6,4 +6,3 @@ from fsd_utils import configclass
 @configclass
 class DevConfig(DefaultConfig):
     SECRET_KEY = environ.get("SECRET_KEY", "dev_secret_key")
-    SESSION_COOKIE_NAME = environ.get("SESSION_COOKIE_NAME", "session_cookie")
