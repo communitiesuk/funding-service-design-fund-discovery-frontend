@@ -61,7 +61,7 @@ Enter the virtual environment as described above, then:
 
     flask run
 
-# Run with Gunicorn
+### Run with Gunicorn
 
 In deployed environments the service is run with gunicorn. You can run the service locally with gunicorn to test
 
@@ -81,7 +81,7 @@ Place brief descriptions of Pipelines here
 
 ## Testing
 
-# Unit & Accessibility Testing
+### Unit & Accessibility Testing
 To run all tests including aXe accessibility tests (using Chrome driver for Selenium) in a development environment run:
 
 ...on macOS
@@ -98,7 +98,7 @@ To run all tests including aXe accessibility tests (using Chrome driver for Sele
 
 The aXe reports are printed at /axe_reports
 
-# Linting
+### Linting
 This repo comes with a .pre-commit-config.yaml, if you wish to use this do
 the following while in your virtual enviroment:
 
