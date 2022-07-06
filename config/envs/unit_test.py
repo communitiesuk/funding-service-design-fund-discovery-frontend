@@ -1,3 +1,4 @@
+import logging
 from config.envs.default import DefaultConfig
 from fsd_utils import configclass
 
@@ -15,3 +16,6 @@ class UnitTestConfig(DefaultConfig):
                 + "/service/magic-links/new?fund_id={fund_id}&round_id={round_id}"
         )
     USE_LOCAL_DATA = True
+
+    # Logging
+    FSD_LOG_LEVEL = logging.DEBUG
