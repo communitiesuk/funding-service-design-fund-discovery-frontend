@@ -18,14 +18,12 @@ def search_funds():
     user input/query & return query response
     from fund store.
     """
-    FUNDS_SEARCH_URL = Config.FUNDS_SEARCH_URL
-    FUND_STORE_API_HOST = Config.FUND_STORE_API_HOST
 
     form = SearchForm()
     query = request.args.get("search", "")
 
     query_response = query_fund(
-        query, FUNDS_SEARCH_URL.format(host=FUND_STORE_API_HOST)
+        query, Config.FUNDS_SEARCH_URL.format(host=Config.FUND_STORE_API_HOST)
     )
     return render_template(
         "search.html",
@@ -44,13 +42,9 @@ def fund_rounds(fund_id):
      Function query_fund send QUERY to fund store
      so the fund name can be displayed onto the rounds page.
     """
-    ROUNDS_URL = Config.ROUNDS_URL
-    FUNDS_URL = Config.FUNDS_URL
-    FUND_STORE_API_HOST = Config.FUND_STORE_API_HOST
     fund_rounds_data = query_rounds(
-        ROUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
+        Config.ROUNDS_URL.format(host=Config.FUND_STORE_API_HOST, fund_id=fund_id)
     )
-    AUTHENTICATOR_MAGIC_LINK_URL = Config.AUTHENTICATOR_MAGIC_LINK_URL
 
     if fund_rounds_data:
         rounds = list_data(fund_rounds_data, Rounds.fund_rounds)
@@ -59,12 +53,12 @@ def fund_rounds(fund_id):
         return render_template("fund.html", error=error)
 
     fund = get_fund_name(
-        FUNDS_URL.format(host=FUND_STORE_API_HOST, fund_id=fund_id)
+        Config.FUNDS_URL.format(host=Config.FUND_STORE_API_HOST, fund_id=fund_id)
     )
 
     return render_template(
         "fund.html",
         fund=fund,
         rounds=rounds,
-        authenticator_magic_link_url=AUTHENTICATOR_MAGIC_LINK_URL,
+        authenticator_magic_link_url=Config.AUTHENTICATOR_MAGIC_LINK_URL,
     )

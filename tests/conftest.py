@@ -1,7 +1,11 @@
 """
 Contains test configuration.
 """
+import multiprocessing
+
 import pytest
+
+multiprocessing.set_start_method("fork")  # Required on macOSX
 
 
 @pytest.fixture()
