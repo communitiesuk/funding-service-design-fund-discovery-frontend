@@ -12,9 +12,13 @@ from jinja2 import PrefixLoader
 def create_app() -> Flask:
     """Returns the initialised flask app."""
 
-    flask_app = Flask("Fund Discovery Frontend", static_url_path="/assets")
+    flask_app = Flask("Fund Discovery Frontend")
 
     flask_app.config.from_object("config.Config")
+
+    # Configure jinja templates and static files
+    flask_app.static_url_path = flask_app.config.get("STATIC_URL_PATH")
+    flask_app.static_folder = flask_app.config.get("STATIC_FOLDER")
 
     flask_app.jinja_loader = ChoiceLoader(
         [

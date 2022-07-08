@@ -139,7 +139,7 @@ app/.DS_Store
 .vscode/settings.json
 
 # FS-641-frontend-fund-discovery
-app/static
+static
 .vscode/settings.json
 accessibility_report.json
 .vscode/launch.json

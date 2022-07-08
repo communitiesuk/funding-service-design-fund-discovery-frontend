@@ -12,7 +12,8 @@ class DefaultConfig:
     SECRET_KEY = environ.get("SECRET_KEY")
     SESSION_COOKIE_NAME = environ.get("SESSION_COOKIE_NAME", "session_cookie")
     FLASK_ROOT = str(Path(__file__).parent.parent.parent)
-    STATIC_FOLDER = environ.get("STATIC_FOLDER", "static")
+    STATIC_FOLDER = "static/dist/"
+    STATIC_URL_PATH = "/static"
     TEMPLATES_FOLDER = environ.get("TEMPLATES_FOLDER", "templates")
     FUND_STORE_API_HOST = environ.get("FUND_STORE_API_HOST")
     AUTHENTICATOR_HOST = environ.get("AUTHENTICATOR_HOST")
