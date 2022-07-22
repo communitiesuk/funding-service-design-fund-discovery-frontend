@@ -43,7 +43,9 @@ def fund_rounds(fund_id):
      so the fund name can be displayed onto the rounds page.
     """
     fund_rounds_data = query_rounds(
-        Config.ROUNDS_URL.format(host=Config.FUND_STORE_API_HOST, fund_id=fund_id)
+        Config.ROUNDS_URL.format(
+            host=Config.FUND_STORE_API_HOST, fund_id=fund_id
+        )
     )
 
     if fund_rounds_data:
@@ -53,7 +55,9 @@ def fund_rounds(fund_id):
         return render_template("fund.html", error=error)
 
     fund = get_fund_name(
-        Config.FUNDS_URL.format(host=Config.FUND_STORE_API_HOST, fund_id=fund_id)
+        Config.FUNDS_URL.format(
+            host=Config.FUND_STORE_API_HOST, fund_id=fund_id
+        )
     )
 
     return render_template(

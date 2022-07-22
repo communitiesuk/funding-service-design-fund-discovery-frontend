@@ -1,9 +1,8 @@
+import logging
 from os import environ
-from os import path
 from pathlib import Path
 
 from fsd_utils import configclass
-import logging
 
 
 @configclass
@@ -92,4 +91,3 @@ class DefaultConfig:
         "x_content_type_options": True,
         "x_xss_protection": True,
     }
-
