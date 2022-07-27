@@ -94,10 +94,10 @@ jobs:
           allow_issue_writing: False
 
   deploy_test:
-    needs: security
+   # needs: security
     runs-on: ubuntu-latest
     environment: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fs-1163-test-domains'
     steps:
       - name: checkout code
         uses: actions/checkout@v2
