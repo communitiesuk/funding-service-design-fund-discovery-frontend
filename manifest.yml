@@ -22,4 +22,4 @@ applications:
   env:
     FLASK_ENV : test
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-test.london.cloudapps.digital
-    AUTHENTICATOR_HOST: authenticator.test.fundingservice.co.uk
+    AUTHENTICATOR_HOST: https://authenticator.test.fundingservice.co.uk
