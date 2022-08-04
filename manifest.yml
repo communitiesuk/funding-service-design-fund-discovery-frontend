@@ -17,7 +17,9 @@ applications:
   buildpacks:
   - https://github.com/cloudfoundry/python-buildpack.git
   command: gunicorn wsgi:app -c run/gunicorn/devtest.py
+  routes: 
+    - route: discovery-frontend.test.fundingservice.co.uk
   env:
     FLASK_ENV : test
     FUND_STORE_API_HOST: https://funding-service-design-fund-store-test.london.cloudapps.digital
-    AUTHENTICATOR_HOST: https://funding-service-design-authenticator-test.london.cloudapps.digital
+    AUTHENTICATOR_HOST: https://authenticator.test.fundingservice.co.uk
