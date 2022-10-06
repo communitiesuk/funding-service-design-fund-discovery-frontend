@@ -19,7 +19,7 @@ jobs:
           repository: communitiesuk/funding-service-design-performance-tests
           path: ./funding-service-design-performance-tests
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.10.1
       - name: create python env
