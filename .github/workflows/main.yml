@@ -32,7 +32,7 @@ jobs:
           source .venv/bin/activate && python -m pip install --upgrade pip && pip install -r requirements-dev.txt
           pytest
       - name: 'Upload Accessibility Testing reports'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: accessibility-test-report
           path: /home/runner/work/funding-service-design-fund-discovery-frontend/funding-service-design-fund-discovery-frontend/axe_reports/*.html
@@ -137,7 +137,7 @@ jobs:
         run: ls && python -m pip install locust && python -m locust
         working-directory: ./funding-service-design-performance-tests
       - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: performance-test-report
           path: ./funding-service-design-performance-tests/locust_html_report.html
