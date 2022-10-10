@@ -30,7 +30,7 @@ jobs:
         run: ls && python -m pip install locust && python -m locust --users ${{env.users}} --spawn-rate ${{env.spawn-rate}} --run-time ${{env.run-time}}
         working-directory: ./funding-service-design-performance-tests
       - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: performance-test-report
           path: ./funding-service-design-performance-tests/locust_html_report.html
