@@ -28,4 +28,4 @@ govuk-frontend-jinja==2.0.0
 #   Forms
 #-----------------------------------
 Flask-WTF==1.0.0
-email-validator==1.2.1
+email-validator==1.3.0
